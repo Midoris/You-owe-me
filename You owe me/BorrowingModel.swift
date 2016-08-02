@@ -18,7 +18,8 @@ class BorrowingModel {
     // Creste new Borrowed Item
     internal func createNewBorrowedItemWithMessage(message: String, amount: Double) {
         let currentDate = getCurrentDate()
-        borrowedItems.append(Borrowed(borrowingMessage: message, ammount: amount, date: currentDate))
+        let borrowedItem = Borrowed(borrowingMessage: message, ammount: amount, date: currentDate)
+        borrowedItems.append(borrowedItem)
         // Post notofication to update UI
         NSNotificationCenter.defaultCenter().postNotificationName("UpdateUI", object: nil)
     }

@@ -52,7 +52,7 @@ class BorrowingViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func updateUI(notification: NSNotification){
+    @objc private func updateUI(notification: NSNotification){
         self.borrowingHistoryTableView.reloadData()
     }
 
