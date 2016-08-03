@@ -11,6 +11,7 @@ import Foundation
 struct Borrowed {
     
     var borrowingMessage: String
+    var currency: String
     var ammount: Double
     var date: String
     

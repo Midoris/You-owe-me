@@ -11,6 +11,9 @@ import UIKit
 class BorrowingViewController: UIViewController {
     
     // MARK: - Variabels
+    private let name = "Maska"
+    private let currency = "฿"
+    
     // Outlets
     @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
         didSet {
@@ -18,14 +21,24 @@ class BorrowingViewController: UIViewController {
             self.borrowingHistoryTableView.dataSource = self
         }
     }
-    @IBOutlet weak private var borrowMessageLabel: UILabel!
-    @IBOutlet weak private var currencyLabel: UILabel!
+    @IBOutlet weak private var borrowMessageLabel: UILabel! {
+        didSet {
+            // set message label
+            borrowMessageLabel.text = borrowingModel.getMessageWithName(self.name)
+        }
+
+    }
+    @IBOutlet weak private var currencyLabel: UILabel! {
+        didSet {
+            currencyLabel.text = self.currency
+        }
+    }
     @IBOutlet weak private var amountTextField: UITextField!
     @IBOutlet weak private var submitButton: UIButton!
+    @IBOutlet weak private var switchButton: UIButton!
     
     // Model
     let borrowingModel = BorrowingModel()
-    
     
     
     // MARK: - ViewController Life cycle
@@ -38,7 +51,6 @@ class BorrowingViewController: UIViewController {
         
         // Add notofication observer fo updateing UI
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI(_:)), name:"UpdateUI", object: nil)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,13 +72,18 @@ class BorrowingViewController: UIViewController {
     // MARK: - Actions from storyBoard
     // Submit button
     @IBAction private func submittPressed(sender: UIButton) {
-        if self.amountTextField.text != nil {
+        if self.amountTextField.text != "" {
             let amount = Double(self.amountTextField.text!)
-            borrowingModel.createNewBorrowedItemWithMessage(self.borrowMessageLabel.text!, amount: amount!)
+            borrowingModel.createNewBorrowedItemWithMessage(self.borrowMessageLabel.text!, amount: amount!, currency: self.currency)
             self.dismissKeyboard()
             self.amountTextField.text = nil
         }
     }
+    
+    @IBAction private func switchButtonPressed(sender: UIButton) {
+        borrowMessageLabel.text = borrowingModel.getMessageWithName(self.name)
+    }
+        
     
 
 
