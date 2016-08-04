@@ -9,7 +9,6 @@
 import Foundation
 
 struct BorrowingVCConstants {
-    
+    // Cell ID
     static let BorrowingHistoryCellID = "BorrowingHistoryCell"
-    
 }

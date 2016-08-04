@@ -26,7 +26,6 @@ class BorrowingViewController: UIViewController {
             // set message label
             borrowMessageLabel.text = borrowingModel.getMessageWithName(self.name)
         }
-
     }
     @IBOutlet weak private var currencyLabel: UILabel! {
         didSet {
@@ -40,15 +39,12 @@ class BorrowingViewController: UIViewController {
     // Model
     let borrowingModel = BorrowingModel()
     
-    
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
         // Add notofication observer fo updateing UI
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI(_:)), name:"UpdateUI", object: nil)
     }
@@ -83,9 +79,12 @@ class BorrowingViewController: UIViewController {
     @IBAction private func switchButtonPressed(sender: UIButton) {
         borrowMessageLabel.text = borrowingModel.getMessageWithName(self.name)
     }
-        
     
-
-
+    private enum Constants {
+        // Cell ID
+        static let BorrowingHistoryCellID = "BorrowingHistoryCell"
+    }
+    
+   
 }
 

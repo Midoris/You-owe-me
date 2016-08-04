@@ -32,7 +32,6 @@ class BorrowingModel {
         formatter.timeStyle = .ShortStyle
         formatter.dateStyle = .ShortStyle
         let dateString = formatter.stringFromDate(date)
-        
         return dateString
     }
     
@@ -41,20 +40,20 @@ class BorrowingModel {
         case Forward
         case Backward
     }
-    
-    private func swichState(state: BorrowingMessageState) -> BorrowingMessageState {
-        switch state {
-        case .Forward :
-            return .Backward
-        case .Backward :
-            return .Forward
+
+    private func swichState() {
+        switch borrowingState {
+        case .Forward:
+            borrowingState = .Backward
+        case .Backward:
+            borrowingState = .Forward
         }
     }
     
     internal func getMessageWithName(name: String) -> String {
         // switch state before exit the func
         defer {
-            borrowingState =  swichState(borrowingState)
+            swichState()
         }
         switch borrowingState {
         case .Forward:
