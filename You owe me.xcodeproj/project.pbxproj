@@ -19,6 +19,7 @@
 		062808761D50B609008B967C /* BorrovingVCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808751D50B609008B967C /* BorrovingVCConstants.swift */; };
 		0628087B1D50BC12008B967C /* Borrowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087A1D50BC12008B967C /* Borrowed.swift */; };
 		0628087D1D50C0D6008B967C /* BorrowingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087C1D50C0D6008B967C /* BorrowingModel.swift */; };
+		062808811D53044B008B967C /* BorrowingModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808801D53044B008B967C /* BorrowingModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		062808751D50B609008B967C /* BorrovingVCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrovingVCConstants.swift; sourceTree = "<group>"; };
 		0628087A1D50BC12008B967C /* Borrowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borrowed.swift; sourceTree = "<group>"; };
 		0628087C1D50C0D6008B967C /* BorrowingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModel.swift; sourceTree = "<group>"; };
+		062808801D53044B008B967C /* BorrowingModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				0628085A1D50B118008B967C /* You_owe_meTests.swift */,
+				062808801D53044B008B967C /* BorrowingModelTests.swift */,
 				0628085C1D50B118008B967C /* Info.plist */,
 			);
 			path = "You owe meTests";
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0628085B1D50B118008B967C /* You_owe_meTests.swift in Sources */,
+				062808811D53044B008B967C /* BorrowingModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,8 +21,5 @@ class You_owe_meTests: XCTestCase {
         super.tearDown()
     }
     
-    func testBorrowingCVLoad() {
-        let bvc = BorrowingViewController()
-        XCTAssertNotNil(bvc.view, "Didn't loaded")
-    }
+
 }
