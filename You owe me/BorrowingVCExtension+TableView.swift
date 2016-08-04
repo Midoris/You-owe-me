@@ -11,7 +11,6 @@ import UIKit
 
 extension BorrowingViewController: UITableViewDelegate, UITableViewDataSource {
     
-    
     // MARK: - TableView DataSource and Delegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return borrowingModel.borrowedItems.count
@@ -26,6 +25,4 @@ extension BorrowingViewController: UITableViewDelegate, UITableViewDataSource {
         historyCell.textLabel?.text = "\(borrowingMessage) \(amount) \(currency) on \(date)"
         return historyCell
     }
-    
-    
 }

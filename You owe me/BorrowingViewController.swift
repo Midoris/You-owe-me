@@ -11,8 +11,8 @@ import UIKit
 class BorrowingViewController: UIViewController {
     
     // MARK: - Variabels
-    private let name = "Maska"
-    private let currency = "฿"
+    internal let name = "Mashka"
+    internal let currency = "฿"
     
     // Outlets
     @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
@@ -79,12 +79,5 @@ class BorrowingViewController: UIViewController {
     @IBAction private func switchButtonPressed(sender: UIButton) {
         borrowMessageLabel.text = borrowingModel.getMessageWithName(self.name)
     }
-    
-    private enum Constants {
-        // Cell ID
-        static let BorrowingHistoryCellID = "BorrowingHistoryCell"
-    }
-    
-   
 }
 
