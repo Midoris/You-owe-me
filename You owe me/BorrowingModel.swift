@@ -22,7 +22,7 @@ class BorrowingModel {
         let borrowedItem = Borrowed(friendName: friendName, borrowingState: borrowingState, currency: currency, ammount: amount, date: currentDate)
         borrowedItems.append(borrowedItem)
         // Post notofication to update UI
-        NSNotificationCenter.defaultCenter().postNotificationName("ReloadData", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(BorrowingVCConstants.UpdateUI, object: nil)
     }
     
     // Get Date
@@ -37,15 +37,15 @@ class BorrowingModel {
     
     // Borrowing states
     /* When I borrow money to my friend it is a 'Plus' situation
-     because my friend should give me this money in the future. 
-     And when friend is borrowing money to me it is a 'Minus' situation 
+     because my friend should give me this money in the future.
+     And when friend is borrowing money to me it is a 'Minus' situation
      because in the future I should give this money back to my friend.
-    */
+     */
     internal enum BorrowingState {
         case Plus
         case Minus
     }
-
+    
     private func swichState() {
         switch borrowingState {
         case .Plus:
@@ -73,6 +73,35 @@ class BorrowingModel {
         case .Minus:
             return "\(name) borrowed me"
         }
+    }
+    
+    internal func getBalanceMessageWithFriend(name: String) -> String {
+        let balance = countBalance()
+        switch balance {
+        case let x where x > 0 :
+            return "\(name) owe me \(balance)"
+            
+        case let x where x < 0:
+            return "I owe \(name) \(balance)"
+            
+        default:
+            return "clear balance"
+        }
+    }
+    
+    private func countBalance() -> Double {
+        var balance: Double = 0
+        for item in borrowedItems {
+            let amount = item.ammount
+            let state = item.borrowingState
+            switch state {
+            case .Plus:
+                balance += amount
+            case .Minus:
+                balance -= amount
+            }
+        }
+        return balance
     }
     
     

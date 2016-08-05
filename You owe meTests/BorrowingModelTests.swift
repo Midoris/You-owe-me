@@ -28,7 +28,7 @@ class BorrowingModelTests: XCTestCase {
     
     func testGetMessageWithName() {
         let name = "Mark"
-        let message = borrowingModel!.getMessageWithName(name)
+        let message = borrowingModel!.switchMessageWithName(name)
         XCTAssertTrue(message == "I borrowed \(name)", "returned message isn't correct")
     }
     

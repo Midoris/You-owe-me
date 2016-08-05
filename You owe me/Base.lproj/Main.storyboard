@@ -67,6 +67,12 @@
                                     <action selector="switchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8le-6G-ZB4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1M-XQ-xHJ">
+                                <rect key="frame" x="20" y="174" width="216" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -78,6 +84,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="amountTextField" destination="vDy-DA-hXh" id="RQR-cI-rbp"/>
+                        <outlet property="balanceLabel" destination="P1M-XQ-xHJ" id="sAp-Gc-uwD"/>
                         <outlet property="borrowMessageLabel" destination="P2R-67-67z" id="JqB-aO-Hl7"/>
                         <outlet property="borrowingHistoryTableView" destination="NLL-pi-WRD" id="0lD-7d-KHc"/>
                         <outlet property="currencyLabel" destination="IRQ-vS-P23" id="7cY-Kz-7i7"/>

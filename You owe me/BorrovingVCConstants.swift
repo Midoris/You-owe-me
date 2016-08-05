@@ -9,6 +9,9 @@
 import Foundation
 
 struct BorrowingVCConstants {
-    // Cell ID
+    // Cell IDs
     static let BorrowingHistoryCellID = "BorrowingHistoryCell"
+    
+    // Notification names
+    static let UpdateUI = "ReloadData"
 }

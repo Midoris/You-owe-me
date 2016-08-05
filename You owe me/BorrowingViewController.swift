@@ -32,6 +32,8 @@ class BorrowingViewController: UIViewController {
             currencyLabel.text = self.currency
         }
     }
+    @IBOutlet weak var balanceLabel: UILabel!
+    
     @IBOutlet weak private var amountTextField: UITextField!
     @IBOutlet weak private var submitButton: UIButton!
     @IBOutlet weak private var switchButton: UIButton!
@@ -46,7 +48,7 @@ class BorrowingViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         // Add notofication observer fo updateing UI
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI(_:)), name:"ReloadData", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI(_:)), name: BorrowingVCConstants.UpdateUI, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,9 +64,9 @@ class BorrowingViewController: UIViewController {
     
     @objc private func updateUI(notification: NSNotification){
         self.borrowingHistoryTableView.reloadData()
+        self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name)
     }
 
-    
     // MARK: - Actions from storyBoard
     // Submit button
     @IBAction private func submittPressed(sender: UIButton) {
