@@ -75,15 +75,13 @@ class BorrowingModel {
         }
     }
     
-    internal func getBalanceMessageWithFriend(name: String) -> String {
+    internal func getBalanceMessageWithFriend(name: String, currency: String) -> String {
         let balance = countBalance()
         switch balance {
         case let x where x > 0 :
-            return "\(name) owe me \(balance)"
-            
+            return "\(name) owe me \(abs(balance)) \(currency)"
         case let x where x < 0:
-            return "I owe \(name) \(balance)"
-            
+            return "I owe \(name) \(abs(balance)) \(currency)"
         default:
             return "clear balance"
         }

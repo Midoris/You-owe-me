@@ -32,8 +32,11 @@ class BorrowingViewController: UIViewController {
             currencyLabel.text = self.currency
         }
     }
-    @IBOutlet weak var balanceLabel: UILabel!
-    
+    @IBOutlet weak var balanceLabel: UILabel! {
+        didSet {
+            self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, currency: self.currency)
+        }
+    }
     @IBOutlet weak private var amountTextField: UITextField!
     @IBOutlet weak private var submitButton: UIButton!
     @IBOutlet weak private var switchButton: UIButton!
@@ -64,7 +67,7 @@ class BorrowingViewController: UIViewController {
     
     @objc private func updateUI(notification: NSNotification){
         self.borrowingHistoryTableView.reloadData()
-        self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name)
+        self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, currency: self.currency)
     }
 
     // MARK: - Actions from storyBoard
