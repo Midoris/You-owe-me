@@ -33,12 +33,9 @@ class BorrowingModelTests: XCTestCase {
     }
     
     func testCreateNewBorrowedItem() {
+        let numberOFItemsBeforeNewOneAdded = borrowingModel?.borrowedItems.count
         borrowingModel?.createNewBorrowedItemWithMessage("Mark borrowed me", amount: 56, currency: "$")
-        
-        
-        XCTAssertTrue(borrowingModel?.borrowedItems.count > 0, "new borrowed item wasn't added to borrowedItems")
-        
-
+        XCTAssertTrue(borrowingModel?.borrowedItems.count > numberOFItemsBeforeNewOneAdded, "new borrowed item wasn't added to borrowedItems")
     }
     
     

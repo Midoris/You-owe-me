@@ -12,17 +12,17 @@ class BorrowingModel {
     
     // MARK: - Variabels
     internal var borrowedItems = [Borrowed]()
-    private var borrowingState = BorrowingMessageState.Forward
+    private var borrowingState = BorrowingState.Minus
     
     
     // MARK: - Methods
     // Creste new Borrowed Item
-    internal func createNewBorrowedItemWithMessage(message: String, amount: Double, currency: String) {
+    internal func createNewBorrowedItemWithMessage(friendName: String, amount: Double, currency: String) {
         let currentDate = getCurrentDate()
-        let borrowedItem = Borrowed(borrowingMessage: message, currency: currency, ammount: amount, date: currentDate)
+        let borrowedItem = Borrowed(friendName: friendName, borrowingState: borrowingState, currency: currency, ammount: amount, date: currentDate)
         borrowedItems.append(borrowedItem)
         // Post notofication to update UI
-        NSNotificationCenter.defaultCenter().postNotificationName("UpdateUI", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("ReloadData", object: nil)
     }
     
     // Get Date
@@ -36,29 +36,41 @@ class BorrowingModel {
     }
     
     // Borrowing states
-    private enum BorrowingMessageState {
-        case Forward
-        case Backward
+    /* When I borrow money to my friend it is a 'Plus' situation
+     because my friend should give me this money in the future. 
+     And when friend is borrowing money to me it is a 'Minus' situation 
+     because in the future I should give this money back to my friend.
+    */
+    internal enum BorrowingState {
+        case Plus
+        case Minus
     }
 
     private func swichState() {
         switch borrowingState {
-        case .Forward:
-            borrowingState = .Backward
-        case .Backward:
-            borrowingState = .Forward
+        case .Plus:
+            borrowingState = .Minus
+        case .Minus:
+            borrowingState = .Plus
         }
     }
     
-    internal func getMessageWithName(name: String) -> String {
-        // switch state before exit the func
-        defer {
-            swichState()
-        }
+    internal func switchMessageWithName(name: String) -> String {
+        // switch state before decide which message should be shown
+        swichState()
         switch borrowingState {
-        case .Forward:
+        case .Plus:
             return "I borrowed \(name)"
-        case .Backward:
+        case .Minus:
+            return "\(name) borrowed me"
+        }
+    }
+    
+    internal func getMessageWIthBorrowingState(state: BorrowingModel.BorrowingState, name: String) -> String {
+        switch state {
+        case .Plus:
+            return "I borrowed \(name)"
+        case .Minus:
             return "\(name) borrowed me"
         }
     }

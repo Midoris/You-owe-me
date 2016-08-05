@@ -10,7 +10,8 @@ import Foundation
 
 struct Borrowed {
     
-    var borrowingMessage: String
+    var friendName: String
+    var borrowingState: BorrowingModel.BorrowingState
     var currency: String
     var ammount: Double
     var date: String

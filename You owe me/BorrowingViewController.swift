@@ -24,7 +24,7 @@ class BorrowingViewController: UIViewController {
     @IBOutlet weak private var borrowMessageLabel: UILabel! {
         didSet {
             // set message label
-            borrowMessageLabel.text = borrowingModel.getMessageWithName(self.name)
+            borrowMessageLabel.text = borrowingModel.switchMessageWithName(self.name)
         }
     }
     @IBOutlet weak private var currencyLabel: UILabel! {
@@ -46,7 +46,7 @@ class BorrowingViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         // Add notofication observer fo updateing UI
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI(_:)), name:"UpdateUI", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI(_:)), name:"ReloadData", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,14 +70,14 @@ class BorrowingViewController: UIViewController {
     @IBAction private func submittPressed(sender: UIButton) {
         if self.amountTextField.text != "" {
             let amount = Double(self.amountTextField.text!)
-            borrowingModel.createNewBorrowedItemWithMessage(self.borrowMessageLabel.text!, amount: amount!, currency: self.currency)
+            borrowingModel.createNewBorrowedItemWithMessage(self.name, amount: amount!, currency: self.currency)
             self.dismissKeyboard()
             self.amountTextField.text = nil
         }
     }
     
     @IBAction private func switchButtonPressed(sender: UIButton) {
-        borrowMessageLabel.text = borrowingModel.getMessageWithName(self.name)
+        borrowMessageLabel.text = borrowingModel.switchMessageWithName(self.name)
     }
 }
 

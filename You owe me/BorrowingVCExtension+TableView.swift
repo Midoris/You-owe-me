@@ -18,10 +18,12 @@ extension BorrowingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let historyCell = tableView.dequeueReusableCellWithIdentifier(BorrowingVCConstants.BorrowingHistoryCellID)!
-        let borrowingMessage = borrowingModel.borrowedItems[indexPath.row].borrowingMessage
+        let friendName = borrowingModel.borrowedItems[indexPath.row].friendName
+        let borrowingState = borrowingModel.borrowedItems[indexPath.row].borrowingState
         let amount = borrowingModel.borrowedItems[indexPath.row].ammount
         let date = borrowingModel.borrowedItems[indexPath.row].date
         let currency = borrowingModel.borrowedItems[indexPath.row].currency
+        let borrowingMessage = borrowingModel.getMessageWIthBorrowingState(borrowingState, name: friendName)
         historyCell.textLabel?.text = "\(borrowingMessage) \(amount) \(currency) on \(date)"
         return historyCell
     }
