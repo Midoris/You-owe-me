@@ -17,7 +17,7 @@ class BorrowingModel {
     
     // MARK: - Methods
     // Creste new Borrowed Item
-    internal func createNewBorrowedItemWithMessage(friendName: String, amount: Double, currency: String) {
+    internal func createNewBorrowedItemWithFriend(friendName: String, amount: Double, andCurrency currency: String) {
         let currentDate = getCurrentDate()
         let borrowedItem = Borrowed(friendName: friendName, borrowingState: borrowingState, currency: currency, ammount: amount, date: currentDate)
         borrowedItems.append(borrowedItem)
@@ -33,17 +33,6 @@ class BorrowingModel {
         formatter.dateStyle = .ShortStyle
         let dateString = formatter.stringFromDate(date)
         return dateString
-    }
-    
-    // Borrowing states
-    /* When I borrow money to my friend it is a 'Plus' situation
-     because my friend should give me this money in the future.
-     And when friend is borrowing money to me it is a 'Minus' situation
-     because in the future I should give this money back to my friend.
-     */
-    internal enum BorrowingState {
-        case Plus
-        case Minus
     }
     
     private func swichState() {
@@ -66,7 +55,7 @@ class BorrowingModel {
         }
     }
     
-    internal func getMessageWIthBorrowingState(state: BorrowingModel.BorrowingState, name: String) -> String {
+    internal func getMessageWithBorrowingState(state: BorrowingState, andName name: String) -> String {
         switch state {
         case .Plus:
             return "I borrowed \(name)"
@@ -75,7 +64,7 @@ class BorrowingModel {
         }
     }
     
-    internal func getBalanceMessageWithFriend(name: String, currency: String) -> String {
+    internal func getBalanceMessageWithFriend(name: String, andCurrency currency: String) -> String {
         let balance = countBalance()
         switch balance {
         case let x where x > 0 :
@@ -104,3 +93,19 @@ class BorrowingModel {
     
     
 }
+
+// Borrowing states
+/* When I borrow money to my friend it is a 'Plus' situation
+ because my friend should give me this money in the future.
+ And when friend is borrowing money to me it is a 'Minus' situation
+ because in the future I should give this money back to my friend.
+ */
+enum BorrowingState {
+    case Plus
+    case Minus
+}
+
+
+
+
+

@@ -11,7 +11,7 @@ import Foundation
 struct Borrowed {
     
     var friendName: String
-    var borrowingState: BorrowingModel.BorrowingState
+    var borrowingState: BorrowingState
     var currency: String
     var ammount: Double
     var date: String

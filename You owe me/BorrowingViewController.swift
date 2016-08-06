@@ -34,7 +34,7 @@ class BorrowingViewController: UIViewController {
     }
     @IBOutlet weak var balanceLabel: UILabel! {
         didSet {
-            self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, currency: self.currency)
+            self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, andCurrency: self.currency)
         }
     }
     @IBOutlet weak private var amountTextField: UITextField!
@@ -67,7 +67,7 @@ class BorrowingViewController: UIViewController {
     
     @objc private func updateUI(notification: NSNotification){
         self.borrowingHistoryTableView.reloadData()
-        self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, currency: self.currency)
+        self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, andCurrency: self.currency)
     }
 
     // MARK: - Actions from storyBoard
@@ -75,7 +75,7 @@ class BorrowingViewController: UIViewController {
     @IBAction private func submittPressed(sender: UIButton) {
         if self.amountTextField.text != "" {
             let amount = Double(self.amountTextField.text!)
-            borrowingModel.createNewBorrowedItemWithMessage(self.name, amount: amount!, currency: self.currency)
+            borrowingModel.createNewBorrowedItemWithFriend(self.name, amount: amount!, andCurrency: self.currency)
             self.dismissKeyboard()
             self.amountTextField.text = nil
         }

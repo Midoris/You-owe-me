@@ -29,13 +29,19 @@ class BorrowingModelTests: XCTestCase {
     func testGetMessageWithName() {
         let name = "Mark"
         let message = borrowingModel!.switchMessageWithName(name)
-        XCTAssertTrue(message == "I borrowed \(name)", "returned message isn't correct")
+        XCTAssertTrue(message == "I borrowed \(name)", "Returned message isn't correct")
     }
     
     func testCreateNewBorrowedItem() {
         let numberOFItemsBeforeNewOneAdded = borrowingModel?.borrowedItems.count
-        borrowingModel?.createNewBorrowedItemWithMessage("Mark borrowed me", amount: 56, currency: "$")
-        XCTAssertTrue(borrowingModel?.borrowedItems.count > numberOFItemsBeforeNewOneAdded, "new borrowed item wasn't added to borrowedItems")
+        borrowingModel?.createNewBorrowedItemWithFriend("Mark borrowed me", amount: 56, andCurrency: "$")
+        XCTAssertTrue(borrowingModel?.borrowedItems.count > numberOFItemsBeforeNewOneAdded, "New borrowed item wasn't added to borrowedItems")
+    }
+    
+    func testGetMessageWithBorrowingState() {
+        let expectedMessage = "Mark borrowed me"
+        let result = borrowingModel?.getMessageWithBorrowingState(.Minus, andName: "Mark")
+        XCTAssertTrue(expectedMessage == result, "Created message is wrong")
     }
     
     

@@ -23,7 +23,7 @@ extension BorrowingViewController: UITableViewDelegate, UITableViewDataSource {
         let amount = borrowingModel.borrowedItems[indexPath.row].ammount
         let date = borrowingModel.borrowedItems[indexPath.row].date
         let currency = borrowingModel.borrowedItems[indexPath.row].currency
-        let borrowingMessage = borrowingModel.getMessageWIthBorrowingState(borrowingState, name: friendName)
+        let borrowingMessage = borrowingModel.getMessageWithBorrowingState(borrowingState, andName: friendName)
         historyCell.textLabel?.text = "\(borrowingMessage) \(amount) \(currency) on \(date)"
         return historyCell
     }
