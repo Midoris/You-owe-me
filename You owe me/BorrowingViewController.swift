@@ -53,6 +53,12 @@ class BorrowingViewController: UIViewController {
         // Add notofication observer fo updateing UI
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI(_:)), name: BorrowingVCConstants.UpdateUI, object: nil)
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        // remove notification observer
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
