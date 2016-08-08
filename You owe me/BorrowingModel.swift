@@ -7,19 +7,23 @@
 //
 
 import Foundation
+import CoreData
+
 
 class BorrowingModel {
     
     // MARK: - Variabels
-    internal var borrowedItems = [Borrowed]()
+    internal var borrowedItems = [BorrowedStr]()
     private var borrowingState = BorrowingState.Minus
+    
+    
     
     
     // MARK: - Methods
     // Creste new Borrowed Item
     internal func createNewBorrowedItemWithFriend(friendName: String, amount: Double, andCurrency currency: String) {
         let currentDate = getCurrentDate()
-        let borrowedItem = Borrowed(friendName: friendName, borrowingState: borrowingState, currency: currency, ammount: amount, date: currentDate)
+        let borrowedItem = BorrowedStr(friendName: friendName, borrowingState: borrowingState, currency: currency, ammount: amount, date: currentDate)
         borrowedItems.append(borrowedItem)
         // Post notofication to update UI
         NSNotificationCenter.defaultCenter().postNotificationName(BorrowingVCConstants.UpdateUI, object: nil)
@@ -90,6 +94,9 @@ class BorrowingModel {
         }
         return balance
     }
+    
+        
+    
     
     
 }

@@ -15,11 +15,16 @@
 		062808501D50B118008B967C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0628084E1D50B118008B967C /* LaunchScreen.storyboard */; };
 		0628085B1D50B118008B967C /* You_owe_meTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628085A1D50B118008B967C /* You_owe_meTests.swift */; };
 		062808661D50B118008B967C /* You_owe_meUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808651D50B118008B967C /* You_owe_meUITests.swift */; };
-		062808741D50B48E008B967C /* BorrowingVCExtension+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808731D50B48E008B967C /* BorrowingVCExtension+TableView.swift */; };
+		062808741D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */; };
 		062808761D50B609008B967C /* BorrovingVCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808751D50B609008B967C /* BorrovingVCConstants.swift */; };
-		0628087B1D50BC12008B967C /* Borrowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087A1D50BC12008B967C /* Borrowed.swift */; };
+		0628087B1D50BC12008B967C /* BorrowedStr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087A1D50BC12008B967C /* BorrowedStr.swift */; };
 		0628087D1D50C0D6008B967C /* BorrowingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087C1D50C0D6008B967C /* BorrowingModel.swift */; };
 		062808811D53044B008B967C /* BorrowingModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808801D53044B008B967C /* BorrowingModelTests.swift */; };
+		062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */; };
+		062808951D589E6C008B967C /* Borrower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808911D589E6C008B967C /* Borrower.swift */; };
+		062808961D589E6C008B967C /* Borrowed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808921D589E6C008B967C /* Borrowed+CoreDataProperties.swift */; };
+		062808971D589E6C008B967C /* Borrowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808931D589E6C008B967C /* Borrowed.swift */; };
+		0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808991D58B5B4008B967C /* CoreDataTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,11 +59,16 @@
 		062808611D50B118008B967C /* You owe meUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "You owe meUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		062808651D50B118008B967C /* You_owe_meUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = You_owe_meUITests.swift; sourceTree = "<group>"; };
 		062808671D50B118008B967C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		062808731D50B48E008B967C /* BorrowingVCExtension+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowingVCExtension+TableView.swift"; sourceTree = "<group>"; };
+		062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowingVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		062808751D50B609008B967C /* BorrovingVCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrovingVCConstants.swift; sourceTree = "<group>"; };
-		0628087A1D50BC12008B967C /* Borrowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borrowed.swift; sourceTree = "<group>"; };
+		0628087A1D50BC12008B967C /* BorrowedStr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowedStr.swift; sourceTree = "<group>"; };
 		0628087C1D50C0D6008B967C /* BorrowingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModel.swift; sourceTree = "<group>"; };
 		062808801D53044B008B967C /* BorrowingModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModelTests.swift; sourceTree = "<group>"; };
+		062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Borrower+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		062808911D589E6C008B967C /* Borrower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borrower.swift; sourceTree = "<group>"; };
+		062808921D589E6C008B967C /* Borrowed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Borrowed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		062808931D589E6C008B967C /* Borrowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borrowed.swift; sourceTree = "<group>"; };
+		062808991D58B5B4008B967C /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,13 +119,13 @@
 		062808411D50B118008B967C /* You owe me */ = {
 			isa = PBXGroup;
 			children = (
+				062808981D589EDD008B967C /* Core Data */,
 				062808421D50B118008B967C /* AppDelegate.swift */,
 				062808771D50B9D0008B967C /* Borrowing Group */,
 				062808461D50B118008B967C /* Main.storyboard */,
 				0628084C1D50B118008B967C /* Assets.xcassets */,
 				0628084E1D50B118008B967C /* LaunchScreen.storyboard */,
 				062808511D50B118008B967C /* Info.plist */,
-				062808491D50B118008B967C /* You_owe_me.xcdatamodeld */,
 			);
 			path = "You owe me";
 			sourceTree = "<group>";
@@ -144,11 +154,24 @@
 			children = (
 				062808441D50B118008B967C /* BorrowingViewController.swift */,
 				0628087C1D50C0D6008B967C /* BorrowingModel.swift */,
-				062808731D50B48E008B967C /* BorrowingVCExtension+TableView.swift */,
+				062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */,
 				062808751D50B609008B967C /* BorrovingVCConstants.swift */,
-				0628087A1D50BC12008B967C /* Borrowed.swift */,
+				0628087A1D50BC12008B967C /* BorrowedStr.swift */,
 			);
 			name = "Borrowing Group";
+			sourceTree = "<group>";
+		};
+		062808981D589EDD008B967C /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */,
+				062808911D589E6C008B967C /* Borrower.swift */,
+				062808921D589E6C008B967C /* Borrowed+CoreDataProperties.swift */,
+				062808931D589E6C008B967C /* Borrowed.swift */,
+				062808491D50B118008B967C /* You_owe_me.xcdatamodeld */,
+				062808991D58B5B4008B967C /* CoreDataTableViewController.swift */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,11 +307,16 @@
 			files = (
 				062808451D50B118008B967C /* BorrowingViewController.swift in Sources */,
 				062808761D50B609008B967C /* BorrovingVCConstants.swift in Sources */,
-				0628087B1D50BC12008B967C /* Borrowed.swift in Sources */,
+				0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */,
+				0628087B1D50BC12008B967C /* BorrowedStr.swift in Sources */,
+				062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */,
 				062808431D50B118008B967C /* AppDelegate.swift in Sources */,
 				0628084B1D50B118008B967C /* You_owe_me.xcdatamodeld in Sources */,
-				062808741D50B48E008B967C /* BorrowingVCExtension+TableView.swift in Sources */,
+				062808741D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift in Sources */,
+				062808961D589E6C008B967C /* Borrowed+CoreDataProperties.swift in Sources */,
 				0628087D1D50C0D6008B967C /* BorrowingModel.swift in Sources */,
+				062808951D589E6C008B967C /* Borrower.swift in Sources */,
+				062808971D589E6C008B967C /* Borrowed.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
