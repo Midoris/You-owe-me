@@ -12,7 +12,7 @@
         <relationship name="borrowings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Borrowed" inverseName="borrower" inverseEntity="Borrowed" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Borrower" positionX="-254" positionY="-9" width="128" height="73"/>
         <element name="Borrowed" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="Borrower" positionX="-254" positionY="-9" width="128" height="73"/>
     </elements>
 </model>

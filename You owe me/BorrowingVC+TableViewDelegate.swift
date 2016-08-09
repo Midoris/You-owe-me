@@ -10,30 +10,12 @@ import Foundation
 import UIKit
 import CoreData
 
-extension BorrowingViewController: UITableViewDelegate, UITableViewDataSource {
+extension BorrowingViewController {
     
-    // MARK: - TableView DataSource and Delegate
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        //return borrowingModel.borrowedItems.count
-//        return borrowings.count
-//    }
+
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let historyCell = tableView.dequeueReusableCellWithIdentifier(BorrowingVCConstants.BorrowingHistoryCellID)!
-//        let friendName = borrowingModel.borrowedItems[indexPath.row].friendName
-//        let borrowingState = borrowingModel.borrowedItems[indexPath.row].borrowingState
-//        let amount = borrowingModel.borrowedItems[indexPath.row].ammount
-//        let date = borrowingModel.borrowedItems[indexPath.row].date
-//        let currency = borrowingModel.borrowedItems[indexPath.row].currency
-//        let borrowingMessage = borrowingModel.getMessageWithBorrowingState(borrowingState, andName: friendName)
-//        historyCell.textLabel?.text = "\(borrowingMessage) \(amount) \(currency) on \(date)"
-//        
-//        
-//        return historyCell
-        
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingVCConstants.BorrowingHistoryCellID, forIndexPath: indexPath)
-        
-        
         if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
             var message: String?
             borrowed.managedObjectContext?.performBlockAndWait {
@@ -41,12 +23,26 @@ extension BorrowingViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.textLabel?.text = message
         }
-        
-        
         return cell
-        
-        
     }
+    
+    // DELETE
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
+                borrowed.managedObjectContext?.performBlockAndWait {
+                    borrowed.managedObjectContext?.deleteObject(borrowed)
+                    do {
+                        try self.managedObjectCOntext!.save()
+                    } catch let error {
+                        print("Core Data Error: \(error)")
+                        // TODO: Notify User
+                    }
+                }
+            }
+        }
+    }
+
     
      
     

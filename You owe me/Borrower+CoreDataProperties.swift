@@ -2,7 +2,7 @@
 //  Borrower+CoreDataProperties.swift
 //  You owe me
 //
-//  Created by тигренок  on 08/08/2016.
+//  Created by тигренок  on 09/08/2016.
 //  Copyright © 2016 Midori.s. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

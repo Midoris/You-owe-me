@@ -9,126 +9,10 @@
 import UIKit
 import CoreData
 
-class BorrowingViewController: UIViewController, NSFetchedResultsControllerDelegate {
-    
-    
-    // MARK: - NSFetchedResultsController
-    var fetchedResultsController : NSFetchedResultsController? {
-        didSet {
-            do {
-                if let frc = fetchedResultsController {
-                    frc.delegate = self
-                    try frc.performFetch()
-                }
-                self.borrowingHistoryTableView.reloadData()
-            } catch let error {
-                print("NSFetchedResultsController.performFetch() faild: \(error)")
-            }
-        }
-    }
-    
-    
-    // MARK: - UITableViewDataSource
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        print("fetchedResultsController?.sections?.count = \(fetchedResultsController?.sections?.count)")
-        return fetchedResultsController?.sections?.count ?? 1
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = fetchedResultsController?.sections where sections.count > 0 {
-            print("sections[section].numberOfObjects = \(sections[section].numberOfObjects)")
-            return sections[section].numberOfObjects
-        } else {
-            return 0
-        }
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let sections = fetchedResultsController?.sections where sections.count > 0 {
-            return sections[section].name
-        } else {
-            return nil
-        }
-    }
-    
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-        return fetchedResultsController?.sectionIndexTitles
-    }
-    
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return fetchedResultsController?.sectionForSectionIndexTitle(title, atIndex: index) ?? 0
-    }
-    
-    
-    
-    // DELETE
-     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            
-            if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
-                borrowed.managedObjectContext?.performBlockAndWait {
-                    borrowed.managedObjectContext?.deleteObject(borrowed)
-                    //borrowed.managedObjectContext?.save()
-                    do {
-                        try self.managedObjectCOntext!.save()
-                    } catch let error {
-                        print("Core Data Error: \(error)")
-                        // TODO: Notify User
-                    }
-
-                }
-              
-            }
-
-            //self.borrowingHistoryTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        }
-    }
-    
-    // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.borrowingHistoryTableView.beginUpdates()
-        //self.borrowingHistoryTableView.reloadData() //beginUpdates()
-        self.borrowingHistoryTableView.endUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        switch type {
-        case .Insert: borrowingHistoryTableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Delete: borrowingHistoryTableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        default: break
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-        case .Insert:
-            borrowingHistoryTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Delete:
-            borrowingHistoryTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Update:
-            borrowingHistoryTableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Move:
-            borrowingHistoryTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            borrowingHistoryTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
+class BorrowingViewController: CoreDataTableViewController {
     
     // MARK: - Variabels
-    internal var name = "Mashka" { didSet { updateUI() } } // set from privius VC as  var name: String?
+    internal var name = "Mashka"/*"Mashka"*/ { didSet { updateUI() } } // set from privius VC as  var name: String?
     internal let currency = "฿"
     // This will be on the privius VC
     var managedObjectCOntext: NSManagedObjectContext? =
@@ -141,8 +25,9 @@ class BorrowingViewController: UIViewController, NSFetchedResultsControllerDeleg
     // Outlets
     @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
         didSet {
-            self.borrowingHistoryTableView.delegate = self
-            self.borrowingHistoryTableView.dataSource = self
+            self.tableView = borrowingHistoryTableView
+//            self.borrowingHistoryTableView.delegate = self
+//            self.borrowingHistoryTableView.dataSource = self
         }
     }
     @IBOutlet weak private var borrowMessageLabel: UILabel! {
@@ -165,6 +50,7 @@ class BorrowingViewController: UIViewController, NSFetchedResultsControllerDeleg
     @IBOutlet weak private var submitButton: UIButton!
     @IBOutlet weak private var switchButton: UIButton!
     
+    
     // Model
     let borrowingModel = BorrowingModel()
     
@@ -178,12 +64,6 @@ class BorrowingViewController: UIViewController, NSFetchedResultsControllerDeleg
         // Add notofication observer fo updateing UI
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI), name: BorrowingVCConstants.UpdateUI, object: nil)
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        //updateUI()
-    }
-    
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -205,7 +85,7 @@ class BorrowingViewController: UIViewController, NSFetchedResultsControllerDeleg
     @objc private func updateUI(){
         if let context = managedObjectCOntext where self.name.characters.count > 0 {
             let request = NSFetchRequest(entityName: "Borrowed")
-            //request.predicate = NSPredicate(format: "any borrowed.borrower.name = %@", self.name)
+            request.predicate = NSPredicate(format: "borrower.name = %@", self.name) // borrowed.borrower.name // "any borrowerName = %@"
             request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
             self.fetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
@@ -239,7 +119,7 @@ class BorrowingViewController: UIViewController, NSFetchedResultsControllerDeleg
             }
             self.clean()
         }
-        //printDatabaseStatistics()
+        printDatabaseStatistics()
     }
     
     private func printDatabaseStatistics() {
@@ -252,7 +132,7 @@ class BorrowingViewController: UIViewController, NSFetchedResultsControllerDeleg
             print("\(borrowedCount) borroweds")
         }
     }
-//    }
+
     
     private func clean() {
         dispatch_async(dispatch_get_main_queue()) { 
@@ -260,21 +140,12 @@ class BorrowingViewController: UIViewController, NSFetchedResultsControllerDeleg
             self.amountTextField.text = nil
         }
     }
-
-
-
     
 
     // MARK: - Actions from storyBoard
     // Submit button
     @IBAction private func submittPressed(sender: UIButton) {
         updateDataBase()
-//        if self.amountTextField.text != "" {
-//            let amount = Double(self.amountTextField.text!)
-//            borrowingModel.createNewBorrowedItemWithFriend(self.name, amount: amount!, andCurrency: self.currency)
-//            self.dismissKeyboard()
-//            self.amountTextField.text = nil
-//        }
     }
     
     @IBAction private func switchButtonPressed(sender: UIButton) {
