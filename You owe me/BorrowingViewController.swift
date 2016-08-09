@@ -12,14 +12,13 @@ import CoreData
 class BorrowingViewController: CoreDataTableViewController {
     
     // MARK: - Variabels
-    internal var name = "Mashka"/*"Mashka"*/ { didSet { updateUI() } } // set from privius VC as  var name: String?
-    internal let currency = "฿"
+    internal var name = "Mashka"/*"Mashka"*/ //{ didSet { updateUI() } } // set from privius VC as  var name: String?
+    internal var currency = "฿"
     // This will be on the privius VC
-    var managedObjectCOntext: NSManagedObjectContext? =
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+    //var managedObjectCOntext: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     
     // set from privius VC
-    /* var managedObjectCOntext: NSManagedObjectContext? { didSet { updateUI() } } */
+    var managedObjectCOntext: NSManagedObjectContext? //{ didSet { updateUI() } }
     
     
     // Outlets
@@ -56,17 +55,7 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        // remove notification observer
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     // MARK: - Class methods
     // resign the first responder
@@ -114,7 +103,6 @@ class BorrowingViewController: CoreDataTableViewController {
             self.clean()
         }
         printDatabaseStatistics()
-        
     }
     
     private func printDatabaseStatistics() {
@@ -124,7 +112,7 @@ class BorrowingViewController: CoreDataTableViewController {
             }
             // a more efficient way to count objects
             let borrowedCount = self.managedObjectCOntext!.countForFetchRequest(NSFetchRequest(entityName: "Borrowed"), error: nil)
-            print("\(borrowedCount) borroweds")
+            print("\(borrowedCount) borrowings")
         }
     }
     
