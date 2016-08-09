@@ -16,7 +16,7 @@ class BorrowingViewController: CoreDataTableViewController {
     internal let currency = "฿"
     // This will be on the privius VC
     var managedObjectCOntext: NSManagedObjectContext? =
-    (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     
     // set from privius VC
     /* var managedObjectCOntext: NSManagedObjectContext? { didSet { updateUI() } } */
@@ -56,13 +56,13 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         // remove notification observer
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -85,15 +85,15 @@ class BorrowingViewController: CoreDataTableViewController {
                 sectionNameKeyPath: nil,
                 cacheName: nil
             )
-                    } else {
+        } else {
             fetchedResultsController = nil
         }
         
         dispatch_async(dispatch_get_main_queue(), {
             self.updateBalanceLabel()
         })
-
-
+        
+        
     }
     
     private func updateDataBase() {
@@ -160,17 +160,17 @@ class BorrowingViewController: CoreDataTableViewController {
     internal func updateBalanceLabel() {
         self.balanceLabel.text = self.getBalanceMessageWithFriend(self.name, andCurrency: self.currency)
     }
-
-
+    
+    
     
     private func clean() {
-        dispatch_async(dispatch_get_main_queue()) { 
+        dispatch_async(dispatch_get_main_queue()) {
             self.dismissKeyboard()
             self.amountTextField.text = nil
         }
     }
     
-
+    
     // MARK: - Actions from storyBoard
     // Submit button
     @IBAction private func submittPressed(sender: UIButton) {
@@ -181,7 +181,30 @@ class BorrowingViewController: CoreDataTableViewController {
         borrowMessageLabel.text = borrowingModel.switchMessageWithName(self.name)
     }
     
-       
+    
+    @IBAction func ClearButtonPressed(sender: UIButton) {
+        if let results = fetchedResultsController?.fetchedObjects {
+            for result in results {
+                if let borrowed = result as? Borrowed {
+                    borrowed.managedObjectContext?.performBlockAndWait {
+                        borrowed.managedObjectContext?.deleteObject(borrowed)
+                        do {
+                            try self.managedObjectCOntext!.save()
+                        } catch let error {
+                            print("Core Data Error: \(error)")
+                            // TODO: Notify User
+                        }
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.updateBalanceLabel()
+                })
 
+            }
+        }
+    }
+    
+    
+    
 }
 

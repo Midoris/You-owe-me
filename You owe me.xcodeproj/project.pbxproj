@@ -17,7 +17,6 @@
 		062808661D50B118008B967C /* You_owe_meUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808651D50B118008B967C /* You_owe_meUITests.swift */; };
 		062808741D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */; };
 		062808761D50B609008B967C /* BorrovingVCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808751D50B609008B967C /* BorrovingVCConstants.swift */; };
-		0628087B1D50BC12008B967C /* BorrowedStr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087A1D50BC12008B967C /* BorrowedStr.swift */; };
 		0628087D1D50C0D6008B967C /* BorrowingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087C1D50C0D6008B967C /* BorrowingModel.swift */; };
 		062808811D53044B008B967C /* BorrowingModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808801D53044B008B967C /* BorrowingModelTests.swift */; };
 		062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */; };
@@ -61,7 +60,6 @@
 		062808671D50B118008B967C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowingVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		062808751D50B609008B967C /* BorrovingVCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrovingVCConstants.swift; sourceTree = "<group>"; };
-		0628087A1D50BC12008B967C /* BorrowedStr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowedStr.swift; sourceTree = "<group>"; };
 		0628087C1D50C0D6008B967C /* BorrowingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModel.swift; sourceTree = "<group>"; };
 		062808801D53044B008B967C /* BorrowingModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModelTests.swift; sourceTree = "<group>"; };
 		062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Borrower+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				0628087C1D50C0D6008B967C /* BorrowingModel.swift */,
 				062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */,
 				062808751D50B609008B967C /* BorrovingVCConstants.swift */,
-				0628087A1D50BC12008B967C /* BorrowedStr.swift */,
 			);
 			name = "Borrowing Group";
 			sourceTree = "<group>";
@@ -308,7 +305,6 @@
 				062808451D50B118008B967C /* BorrowingViewController.swift in Sources */,
 				062808761D50B609008B967C /* BorrovingVCConstants.swift in Sources */,
 				0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */,
-				0628087B1D50BC12008B967C /* BorrowedStr.swift in Sources */,
 				062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */,
 				062808431D50B118008B967C /* AppDelegate.swift in Sources */,
 				0628084B1D50B118008B967C /* You_owe_me.xcdatamodeld in Sources */,
@@ -544,6 +540,7 @@
 				0628086C1D50B118008B967C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0628086D1D50B118008B967C /* Build configuration list for PBXNativeTarget "You owe meTests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +549,7 @@
 				0628086F1D50B118008B967C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		062808701D50B118008B967C /* Build configuration list for PBXNativeTarget "You owe meUITests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +558,7 @@
 				062808721D50B118008B967C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
