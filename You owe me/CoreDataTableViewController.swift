@@ -12,6 +12,10 @@ import CoreData
 
 class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
+    /*
+     When you want to subclass from CoreDataTableViewController you need to set tableView and override cellForRowAtIndexPath.
+    */
+    
     // MARK: - Variabels
     var fetchedResultsController : NSFetchedResultsController? {
         didSet {

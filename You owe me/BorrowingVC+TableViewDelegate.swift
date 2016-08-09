@@ -12,21 +12,28 @@ import CoreData
 
 extension BorrowingViewController {
     
-
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingVCConstants.BorrowingHistoryCellID, forIndexPath: indexPath)
         if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
-            var message: String?
+            var name: String?
+            var date: NSDate?
+            var amount: Double?
+            var currency: String?
+            var iBorrowed: Bool?
             borrowed.managedObjectContext?.performBlockAndWait {
-                message = "I borrowed \(borrowed.borrower?.name) \(borrowed.amount)"
+                name = borrowed.borrower!.name
+                date = borrowed.date
+                amount = Double(borrowed.amount!)
+                currency = borrowed.currency!
+                iBorrowed = Bool(borrowed.iBorrowed!)
             }
-            cell.textLabel?.text = message
+            let message = borrowingModel.getMessageWithBorrowingState(iBorrowed!, andName: name!)
+            cell.textLabel?.text = "\(message) \(amount!) \(currency!) "
+            cell.detailTextLabel?.text = borrowingModel.getDateStringFromDate(date!)
         }
         return cell
     }
     
-    // DELETE
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
@@ -39,6 +46,10 @@ extension BorrowingViewController {
                         // TODO: Notify User
                     }
                 }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.updateBalanceLabel()
+                })
+
             }
         }
     }

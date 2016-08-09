@@ -13,25 +13,23 @@ import CoreData
 class BorrowingModel {
     
     // MARK: - Variabels
-    internal var borrowedItems = [BorrowedStr]()
-    private var borrowingState = BorrowingState.Minus
+    //internal var borrowedItems = [BorrowedStr]()
+    internal var iBorrowed = false
     
     
     
     
     // MARK: - Methods
     // Creste new Borrowed Item
-    internal func createNewBorrowedItemWithFriend(friendName: String, amount: Double, andCurrency currency: String) {
-        let currentDate = getCurrentDate()
-        let borrowedItem = BorrowedStr(friendName: friendName, borrowingState: borrowingState, currency: currency, ammount: amount, date: currentDate)
-        borrowedItems.append(borrowedItem)
-        // Post notofication to update UI
-        NSNotificationCenter.defaultCenter().postNotificationName(BorrowingVCConstants.UpdateUI, object: nil)
-    }
+//    internal func createNewBorrowedItemWithFriend(friendName: String, amount: Double, andCurrency currency: String) {
+//        let currentDate = getCurrentDate()
+//        let borrowedItem = BorrowedStr(friendName: friendName, borrowingState: borrowingState, currency: currency, ammount: amount, date: currentDate)
+//        borrowedItems.append(borrowedItem)
+//        
+//    }
     
     // Get Date
-    private func getCurrentDate() -> String {
-        let date = NSDate()
+    internal func getDateStringFromDate(date: NSDate) -> String {
         let formatter = NSDateFormatter()
         formatter.timeStyle = .ShortStyle
         formatter.dateStyle = .ShortStyle
@@ -40,60 +38,60 @@ class BorrowingModel {
     }
     
     private func swichState() {
-        switch borrowingState {
-        case .Plus:
-            borrowingState = .Minus
-        case .Minus:
-            borrowingState = .Plus
+        switch iBorrowed {
+        case true:
+            iBorrowed = false
+        case false:
+            iBorrowed = true
         }
     }
     
     internal func switchMessageWithName(name: String) -> String {
         // switch state before decide which message should be shown
         swichState()
-        switch borrowingState {
-        case .Plus:
+        switch iBorrowed {
+        case true:
             return "I borrowed \(name)"
-        case .Minus:
+        case false:
             return "\(name) borrowed me"
         }
     }
     
-    internal func getMessageWithBorrowingState(state: BorrowingState, andName name: String) -> String {
+    internal func getMessageWithBorrowingState(state: Bool, andName name: String) -> String {
         switch state {
-        case .Plus:
+        case true:
             return "I borrowed \(name)"
-        case .Minus:
+        case false:
             return "\(name) borrowed me"
         }
     }
     
-    internal func getBalanceMessageWithFriend(name: String, andCurrency currency: String) -> String {
-        let balance = countBalance()
-        switch balance {
-        case let x where x > 0 :
-            return "\(name) owe me \(abs(balance)) \(currency)"
-        case let x where x < 0:
-            return "I owe \(name) \(abs(balance)) \(currency)"
-        default:
-            return "clear balance"
-        }
-    }
+//    internal func getBalanceMessageWithFriend(name: String, andCurrency currency: String) -> String {
+//        let balance = countBalance()
+//        switch balance {
+//        case let x where x > 0 :
+//            return "\(name) owe me \(abs(balance)) \(currency)"
+//        case let x where x < 0:
+//            return "I owe \(name) \(abs(balance)) \(currency)"
+//        default:
+//            return "clear balance"
+//        }
+//    }
     
-    private func countBalance() -> Double {
-        var balance: Double = 0
-        for item in borrowedItems {
-            let amount = item.ammount
-            let state = item.borrowingState
-            switch state {
-            case .Plus:
-                balance += amount
-            case .Minus:
-                balance -= amount
-            }
-        }
-        return balance
-    }
+//    private func countBalance() -> Double {
+//        var balance: Double = 0
+//        for item in borrowedItems {
+//            let amount = item.ammount
+//            let state = item.borrowingState
+//            switch state {
+//            case .Plus:
+//                balance += amount
+//            case .Minus:
+//                balance -= amount
+//            }
+//        }
+//        return balance
+//    }
     
         
     

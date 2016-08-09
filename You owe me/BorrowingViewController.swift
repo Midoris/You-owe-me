@@ -26,8 +26,6 @@ class BorrowingViewController: CoreDataTableViewController {
     @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
         didSet {
             self.tableView = borrowingHistoryTableView
-//            self.borrowingHistoryTableView.delegate = self
-//            self.borrowingHistoryTableView.dataSource = self
         }
     }
     @IBOutlet weak private var borrowMessageLabel: UILabel! {
@@ -41,11 +39,7 @@ class BorrowingViewController: CoreDataTableViewController {
             currencyLabel.text = self.currency
         }
     }
-    @IBOutlet weak var balanceLabel: UILabel! {
-        didSet {
-            self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, andCurrency: self.currency)
-        }
-    }
+    @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak private var amountTextField: UITextField!
     @IBOutlet weak private var submitButton: UIButton!
     @IBOutlet weak private var switchButton: UIButton!
@@ -61,8 +55,6 @@ class BorrowingViewController: CoreDataTableViewController {
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        // Add notofication observer fo updateing UI
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowingViewController.updateUI), name: BorrowingVCConstants.UpdateUI, object: nil)
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -93,14 +85,15 @@ class BorrowingViewController: CoreDataTableViewController {
                 sectionNameKeyPath: nil,
                 cacheName: nil
             )
-        } else {
+                    } else {
             fetchedResultsController = nil
         }
         
-        
-        
-//        self.borrowingHistoryTableView.reloadData()
-//        self.balanceLabel.text = borrowingModel.getBalanceMessageWithFriend(self.name, andCurrency: self.currency)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.updateBalanceLabel()
+        })
+
+
     }
     
     private func updateDataBase() {
@@ -109,9 +102,10 @@ class BorrowingViewController: CoreDataTableViewController {
             if self.amountTextField.text != "" {
                 let amount = Double(self.amountTextField.text!)
                 let date = NSDate()
-                _ = Borrowed.borrowedWithInfo(self.name, iBorrowed: true, currency: self.currency, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectCOntext!)
+                _ = Borrowed.borrowedWithInfo(self.name, iBorrowed: self.borrowingModel.iBorrowed, currency: self.currency, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectCOntext!)
                 do {
                     try self.managedObjectCOntext?.save()
+                    self.updateBalanceLabel()
                 } catch let error {
                     print("Core Data Error: \(error)")
                     // TODO: Notify User
@@ -120,6 +114,7 @@ class BorrowingViewController: CoreDataTableViewController {
             self.clean()
         }
         printDatabaseStatistics()
+        
     }
     
     private func printDatabaseStatistics() {
@@ -132,6 +127,40 @@ class BorrowingViewController: CoreDataTableViewController {
             print("\(borrowedCount) borroweds")
         }
     }
+    
+    private func countBalance() -> Double {
+        var balance: Double = 0
+        if let results = fetchedResultsController?.fetchedObjects {
+            for result in results {
+                if let borrowed = result as? Borrowed {
+                    let state = Bool(borrowed.iBorrowed!)
+                    let amount = Double(borrowed.amount!)
+                    switch state {
+                    case true : balance += amount
+                    case false: balance -= amount
+                    }
+                }
+            }
+        }
+        return balance
+    }
+    
+    private func getBalanceMessageWithFriend(name: String, andCurrency currency: String) -> String {
+        let balance = countBalance()
+        switch balance {
+        case let x where x > 0 :
+            return "\(name) owe me \(abs(balance)) \(currency)"
+        case let x where x < 0:
+            return "I owe \(name) \(abs(balance)) \(currency)"
+        default:
+            return "clear balance"
+        }
+    }
+    
+    internal func updateBalanceLabel() {
+        self.balanceLabel.text = self.getBalanceMessageWithFriend(self.name, andCurrency: self.currency)
+    }
+
 
     
     private func clean() {
