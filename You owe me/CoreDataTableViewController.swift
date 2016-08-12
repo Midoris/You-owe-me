@@ -71,7 +71,7 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return fetchedResultsController?.sectionForSectionIndexTitle(title, atIndex: index) ?? 0
     }
-        
+    
     // MARK: - NSFetchedResultsControllerDelegate
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView!.beginUpdates()

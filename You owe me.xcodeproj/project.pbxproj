@@ -25,6 +25,7 @@
 		062808971D589E6C008B967C /* Borrowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808931D589E6C008B967C /* Borrowed.swift */; };
 		0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808991D58B5B4008B967C /* CoreDataTableViewController.swift */; };
 		0628089C1D5A0ACA008B967C /* BorrowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */; };
+		0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		062808931D589E6C008B967C /* Borrowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borrowed.swift; sourceTree = "<group>"; };
 		062808991D58B5B4008B967C /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowersViewController.swift; sourceTree = "<group>"; };
+		0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowersVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,14 +121,14 @@
 		062808411D50B118008B967C /* You owe me */ = {
 			isa = PBXGroup;
 			children = (
-				062808981D589EDD008B967C /* Core Data */,
 				062808421D50B118008B967C /* AppDelegate.swift */,
+				062808981D589EDD008B967C /* Core Data */,
+				0628089F1D5DC098008B967C /* Borrowers Group */,
 				062808771D50B9D0008B967C /* Borrowing Group */,
 				062808461D50B118008B967C /* Main.storyboard */,
 				0628084C1D50B118008B967C /* Assets.xcassets */,
 				0628084E1D50B118008B967C /* LaunchScreen.storyboard */,
 				062808511D50B118008B967C /* Info.plist */,
-				0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */,
 			);
 			path = "You owe me";
 			sourceTree = "<group>";
@@ -172,6 +174,15 @@
 				062808991D58B5B4008B967C /* CoreDataTableViewController.swift */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		0628089F1D5DC098008B967C /* Borrowers Group */ = {
+			isa = PBXGroup;
+			children = (
+				0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */,
+				0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */,
+			);
+			name = "Borrowers Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +320,7 @@
 				062808761D50B609008B967C /* BorrovingVCConstants.swift in Sources */,
 				0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */,
 				062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */,
+				0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */,
 				062808431D50B118008B967C /* AppDelegate.swift in Sources */,
 				0628084B1D50B118008B967C /* You_owe_me.xcdatamodeld in Sources */,
 				062808741D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift in Sources */,

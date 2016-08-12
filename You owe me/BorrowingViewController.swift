@@ -133,7 +133,7 @@ class BorrowingViewController: CoreDataTableViewController {
         return balance
     }
     
-    private func getBalanceMessageWithFriend(name: String, andCurrency currency: String) -> String {
+    private func getBalanceMessageWithBorrowerNme(name: String, andCurrency currency: String) -> String {
         let balance = countBalance()
         switch balance {
         case let x where x > 0 :
@@ -146,7 +146,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     internal func updateBalanceLabel() {
-        self.balanceLabel.text = self.getBalanceMessageWithFriend(self.name, andCurrency: self.currency)
+        self.balanceLabel.text = self.getBalanceMessageWithBorrowerNme(self.name, andCurrency: self.currency)
     }
     
     

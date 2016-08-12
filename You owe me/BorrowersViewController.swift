@@ -16,6 +16,8 @@ class BorrowersViewController: CoreDataTableViewController {
     @IBOutlet weak var borrowersTableView: UITableView! {
         didSet {
             self.tableView = borrowersTableView
+            borrowersTableView.delegate = self
+            //borrowersTableView.dataSource = self
         }
     }
     var managedObjectCOntext: NSManagedObjectContext? =
@@ -23,17 +25,11 @@ class BorrowersViewController: CoreDataTableViewController {
     var selectedBorrowerName: String?
     var currncy = "฿"
     
-    
-    
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowersViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
     }
-    
     
     // MARK: - Class methods
     // resign the first responder
@@ -44,7 +40,11 @@ class BorrowersViewController: CoreDataTableViewController {
     @objc private func updateUI(){
         if let context = managedObjectCOntext  {
             let request = NSFetchRequest(entityName: "Borrower")
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending:  true)]
+            request.sortDescriptors = [NSSortDescriptor(
+                key: "name",
+                ascending:  true,
+                selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
+                )]
             self.fetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
                 managedObjectContext: context,
@@ -60,42 +60,14 @@ class BorrowersViewController: CoreDataTableViewController {
         managedObjectCOntext?.performBlock {
             // create a new borrower
             _ = Borrower.borrowerWithInfo("Maska", inManagedObgectContext: self.managedObjectCOntext!)
-                do {
-                    try self.managedObjectCOntext?.save()
-                } catch let error {
-                    print("Core Data Error: \(error)")
-                    // TODO: Notify User
-                }
+            do {
+                try self.managedObjectCOntext?.save()
+            } catch let error {
+                print("Core Data Error: \(error)")
+                // TODO: Notify User
             }
-    }
-
-    
-    
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("borrowerCell", forIndexPath: indexPath)
-        if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
-            var name: String?
-            borrower.managedObjectContext?.performBlockAndWait {
-                name = borrower.name
-            }
-            cell.textLabel?.text = "\(name!) "
-        }
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
-            var name: String?
-            borrower.managedObjectContext?.performBlockAndWait {
-                name = borrower.name
-            }
-            selectedBorrowerName = name!
-            self.performSegueWithIdentifier("FromBorrowerToBorrowings", sender: self)
         }
     }
-    
-    
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
