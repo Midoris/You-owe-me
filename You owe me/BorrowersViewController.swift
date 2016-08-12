@@ -32,11 +32,6 @@ class BorrowersViewController: CoreDataTableViewController {
     }
     
     // MARK: - Class methods
-    // resign the first responder
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
     @objc private func updateUI(){
         if let context = managedObjectCOntext  {
             let request = NSFetchRequest(entityName: "Borrower")

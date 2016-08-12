@@ -59,7 +59,7 @@ class BorrowingViewController: CoreDataTableViewController {
     
     // MARK: - Class methods
     // resign the first responder
-    @objc private func dismissKeyboard() {
+        @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -81,8 +81,6 @@ class BorrowingViewController: CoreDataTableViewController {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateBalanceLabel()
         })
-        
-        
     }
     
     private func updateDataBase() {
@@ -148,8 +146,6 @@ class BorrowingViewController: CoreDataTableViewController {
     internal func updateBalanceLabel() {
         self.balanceLabel.text = self.getBalanceMessageWithBorrowerNme(self.name, andCurrency: self.currency)
     }
-    
-    
     
     private func clean() {
         dispatch_async(dispatch_get_main_queue()) {
