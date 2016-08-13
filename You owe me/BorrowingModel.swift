@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import CoreData
-
 
 class BorrowingModel {
     
@@ -18,7 +16,7 @@ class BorrowingModel {
     
     // MARK: - Methods
     // Get Date
-    internal func getDateStringFromDate(date: NSDate) -> String {
+    internal func dateStringFromDate(date: NSDate) -> String {
         let formatter = NSDateFormatter()
         formatter.timeStyle = .ShortStyle
         formatter.dateStyle = .ShortStyle
@@ -35,7 +33,7 @@ class BorrowingModel {
         }
     }
     
-    internal func switchMessageWithName(name: String) -> String {
+    internal func switchedMessageWithName(name: String) -> String {
         // switch state before decide which message should be shown
         swichState()
         switch iBorrowed {
@@ -46,7 +44,7 @@ class BorrowingModel {
         }
     }
     
-    internal func getMessageWithBorrowingState(state: Bool, andName name: String) -> String {
+    internal func messageWithBorrowingState(state: Bool, andName name: String) -> String {
         switch state {
         case true:
             return "I borrowed \(name)"

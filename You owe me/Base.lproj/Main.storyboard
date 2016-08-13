@@ -160,7 +160,7 @@
                                                 <color key="titleColor" red="1" green="0.055564177692276173" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <action selector="ClearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Go-Rk-l1h"/>
+                                                <action selector="clearAllButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fcp-f4-wkL"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
