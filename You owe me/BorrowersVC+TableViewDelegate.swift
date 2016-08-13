@@ -15,10 +15,13 @@ extension BorrowersViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("borrowerCell", forIndexPath: indexPath)
         if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
             var name: String?
+            var borrowings = [Borrowed]()
             borrower.managedObjectContext?.performBlockAndWait {
                 name = borrower.name
+                borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
             }
             cell.textLabel?.text = "\(name!) "
+            cell.detailTextLabel?.text = balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
         }
         cell.selectionStyle = .None
         return cell
