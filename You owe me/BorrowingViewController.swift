@@ -165,7 +165,7 @@ class BorrowingViewController: CoreDataTableViewController {
         if let results = fetchedResultsController?.fetchedObjects {
             for result in results {
                 if let borrowed = result as? Borrowed {
-                    borrowed.managedObjectContext?.performBlockAndWait {
+                    borrowed.managedObjectContext?.performBlock {
                         borrowed.managedObjectContext?.deleteObject(borrowed)
                         do {
                             try self.managedObjectCOntext!.save()

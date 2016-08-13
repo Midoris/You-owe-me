@@ -10,14 +10,12 @@ import Foundation
 import UIKit
 import CoreData
 
-class BorrowersViewController: CoreDataTableViewController {
+class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelegate {
     
     // MARK: - Variabels
     @IBOutlet weak var borrowersTableView: UITableView! {
         didSet {
             self.tableView = borrowersTableView
-            borrowersTableView.delegate = self
-            //borrowersTableView.dataSource = self
         }
     }
     var managedObjectCOntext: NSManagedObjectContext? =
@@ -64,6 +62,24 @@ class BorrowersViewController: CoreDataTableViewController {
         }
     }
     
+    internal func saveNewBorrowerWithName(name: String) {
+        managedObjectCOntext?.performBlock {
+            // create a new borrower
+            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectCOntext!)
+            do {
+                try self.managedObjectCOntext?.save()
+            } catch let error {
+                print("Core Data Error: \(error)")
+                // TODO: Notify User
+            }
+        }
+    }
+    
+    // MARK: - StoryBoard methods
+    @IBAction private func addButtonAdded(sender: UIBarButtonItem) {
+        performSegueWithIdentifier("addBorrower", sender: self)
+    }
+    
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "FromBorrowerToBorrowings" {
@@ -71,6 +87,10 @@ class BorrowersViewController: CoreDataTableViewController {
                 borrowingVC.managedObjectCOntext = self.managedObjectCOntext
                 borrowingVC.name = self.selectedBorrowerName!
                 borrowingVC.currency = self.currncy
+            }
+        } else if segue.identifier == "addBorrower" {
+            if let addBorrowerVC = segue.destinationViewController as? AddBorrowerViewController {
+                addBorrowerVC.addBorrowerDelegate = self
             }
         }
     }

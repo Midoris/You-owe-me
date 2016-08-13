@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Borrowers View Controller-->
@@ -44,16 +45,77 @@
                             <constraint firstItem="FoW-H4-u9i" firstAttribute="top" secondItem="poP-0f-RrH" secondAttribute="bottom" constant="220" id="l4z-zT-pPl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Vdm-Fm-iIK"/>
+                    <navigationItem key="navigationItem" id="Vdm-Fm-iIK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0YN-BQ-HwQ">
+                            <connections>
+                                <action selector="addButtonAdded:" destination="xDT-Zt-jJ9" id="zMl-HV-EFl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="borrowersTableView" destination="FoW-H4-u9i" id="a44-Qa-JHS"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="FromBorrowerToBorrowings" id="xK2-x3-q8S"/>
+                        <segue destination="s1X-Us-oSQ" kind="presentation" identifier="addBorrower" id="2Rs-sb-UdF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a42-Gf-3TL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="613.5" y="373.5"/>
+        </scene>
+        <!--Add Borrower View Controller-->
+        <scene sceneID="aiT-3p-Qef">
+            <objects>
+                <viewController id="s1X-Us-oSQ" customClass="AddBorrowerViewController" customModule="You_owe_me" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MlJ-FK-93b"/>
+                        <viewControllerLayoutGuide type="bottom" id="LxE-Td-Q7X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L5u-RC-wh8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9V-U0-haR">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Bpa-gO-y3p"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Title" id="nUz-1n-IHz">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HQc-ck-Z79">
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="s1X-Us-oSQ" id="SEE-ms-pz5"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="TYh-Mn-XxL">
+                                            <connections>
+                                                <action selector="saveButtonPressed:" destination="s1X-Us-oSQ" id="aIj-NZ-3WI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAK-Ok-tPk">
+                                <rect key="frame" x="65" y="131" width="245" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="k9V-U0-haR" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-20" id="BBk-cg-NPW"/>
+                            <constraint firstItem="k9V-U0-haR" firstAttribute="top" secondItem="L5u-RC-wh8" secondAttribute="topMargin" id="HrW-kR-GIK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="k9V-U0-haR" secondAttribute="trailing" constant="-20" id="nOs-cf-sxX"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="borrowerNameTextField" destination="OAK-Ok-tPk" id="Ion-4V-Yxx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WhT-zr-6VY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="613.5" y="1168.5"/>
         </scene>
         <!--Borrowing View Controller-->
         <scene sceneID="tne-QT-ifu">

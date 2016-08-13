@@ -31,6 +31,7 @@ extension BorrowingViewController {
             cell.textLabel?.text = "\(message) \(amount!) \(currency!) "
             cell.detailTextLabel?.text = borrowingModel.dateStringFromDate(date!)
         }
+        cell.selectionStyle = .None
         return cell
     }
     

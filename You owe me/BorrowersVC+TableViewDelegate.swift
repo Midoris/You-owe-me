@@ -20,8 +20,26 @@ extension BorrowersViewController {
             }
             cell.textLabel?.text = "\(name!) "
         }
+        cell.selectionStyle = .None
         return cell
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
+                borrower.managedObjectContext?.performBlockAndWait {
+                    borrower.managedObjectContext?.deleteObject(borrower)
+                    do {
+                        try self.managedObjectCOntext!.save()
+                    } catch let error {
+                        print("Core Data Error: \(error)")
+                        // TODO: Notify User
+                    }
+                }
+            }
+        }
+    }
+
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {

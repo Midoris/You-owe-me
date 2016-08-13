@@ -26,6 +26,7 @@
 		0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808991D58B5B4008B967C /* CoreDataTableViewController.swift */; };
 		0628089C1D5A0ACA008B967C /* BorrowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */; };
 		0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */; };
+		062808A11D5F065E008B967C /* AddBorrowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808A01D5F065E008B967C /* AddBorrowerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		062808991D58B5B4008B967C /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowersViewController.swift; sourceTree = "<group>"; };
 		0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowersVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		062808A01D5F065E008B967C /* AddBorrowerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorrowerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 			children = (
 				0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */,
 				0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */,
+				062808A01D5F065E008B967C /* AddBorrowerViewController.swift */,
 			);
 			name = "Borrowers Group";
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				062808761D50B609008B967C /* BorrovingVCConstants.swift in Sources */,
 				0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */,
 				062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */,
+				062808A11D5F065E008B967C /* AddBorrowerViewController.swift in Sources */,
 				0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */,
 				062808431D50B118008B967C /* AppDelegate.swift in Sources */,
 				0628084B1D50B118008B967C /* You_owe_me.xcdatamodeld in Sources */,
