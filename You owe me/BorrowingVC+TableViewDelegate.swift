@@ -28,7 +28,7 @@ extension BorrowingViewController {
                 iBorrowed = Bool(borrowed.iBorrowed!)
             }
             let message = borrowingModel.messageWithBorrowingState(iBorrowed!, andName: name!)
-            cell.textLabel?.text = "\(message) \(amount!) \(currency!) "
+            cell.textLabel?.text = "\(message) \(borrowingModel.stringFromDoubleWithTailingZero(amount!)) \(currency!) "
             cell.detailTextLabel?.text = borrowingModel.dateStringFromDate(date!)
         }
         cell.selectionStyle = .None

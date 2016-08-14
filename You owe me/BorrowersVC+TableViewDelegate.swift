@@ -42,7 +42,6 @@ extension BorrowersViewController {
             }
         }
     }
-
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
@@ -54,6 +53,5 @@ extension BorrowersViewController {
             self.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: self)
         }
     }
-
     
 }

@@ -11,7 +11,6 @@ import Foundation
 class BorrowingModel {
     
     // MARK: - Variabels
-    
     internal var iBorrowed = false
     
     // MARK: - Methods
@@ -66,12 +65,16 @@ class BorrowingModel {
         let balance = countedBalance(borrowings)
         switch balance {
         case let x where x > 0 :
-            return "\(name) owe me \(abs(balance)) \(currency)"
+            return "\(name) owe me \(stringFromDoubleWithTailingZero(abs(balance))) \(currency)"
         case let x where x < 0:
-            return "I owe \(name) \(abs(balance)) \(currency)"
+            return "I owe \(name) \(stringFromDoubleWithTailingZero(abs(balance))) \(currency)"
         default:
             return "clear balance"
         }
+    }
+    
+    func stringFromDoubleWithTailingZero(number: Double) -> String{
+        return String(format: "%g", number)
     }
     
     
