@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="borrowerCell" textLabel="IqV-QF-yBO" detailTextLabel="YSg-nW-icP" style="IBUITableViewCellStyleSubtitle" id="WrZ-Vi-kGB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BorrowerCell" textLabel="IqV-QF-yBO" detailTextLabel="YSg-nW-icP" style="IBUITableViewCellStyleSubtitle" id="WrZ-Vi-kGB">
                                         <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WrZ-Vi-kGB" id="IKR-dP-Q5c">
@@ -72,7 +72,7 @@
                     <connections>
                         <outlet property="borrowersTableView" destination="FoW-H4-u9i" id="a44-Qa-JHS"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="FromBorrowerToBorrowings" id="xK2-x3-q8S"/>
-                        <segue destination="s1X-Us-oSQ" kind="presentation" identifier="addBorrower" id="2Rs-sb-UdF"/>
+                        <segue destination="s1X-Us-oSQ" kind="presentation" identifier="AddBorrower" id="2Rs-sb-UdF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a42-Gf-3TL" userLabel="First Responder" sceneMemberID="firstResponder"/>

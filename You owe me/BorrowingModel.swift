@@ -11,7 +11,7 @@ import Foundation
 class BorrowingModel {
     
     // MARK: - Variabels
-
+    
     internal var iBorrowed = false
     
     // MARK: - Methods
@@ -24,7 +24,8 @@ class BorrowingModel {
         return dateString
     }
     
-    private func swichState() {
+    // Switch borrowing state
+    private func switchState() {
         switch iBorrowed {
         case true:
             iBorrowed = false
@@ -34,14 +35,9 @@ class BorrowingModel {
     }
     
     internal func switchedMessageWithName(name: String) -> String {
-        // switch state before decide which message should be shown
-        swichState()
-        switch iBorrowed {
-        case true:
-            return "I borrowed \(name)"
-        case false:
-            return "\(name) borrowed me"
-        }
+        // switch state before decide which message we should return
+        switchState()
+        return messageWithBorrowingState(iBorrowed, andName: name)
     }
     
     internal func messageWithBorrowingState(state: Bool, andName name: String) -> String {
@@ -52,6 +48,32 @@ class BorrowingModel {
             return "\(name) borrowed me"
         }
     }
+    
+    private func countedBalance(borrowings: [Borrowed]) -> Double {
+        var balance = 0.0
+        for borrowed in borrowings {
+            let state = Bool(borrowed.iBorrowed!)
+            let amount = Double(borrowed.amount!)
+            switch state {
+            case true : balance += amount
+            case false: balance -= amount
+            }
+        }
+        return balance
+    }
+    
+    internal func balanceMessageWithBorrowerName(name: String, borrowings: [Borrowed], andCurrency currency: String) -> String {
+        let balance = countedBalance(borrowings)
+        switch balance {
+        case let x where x > 0 :
+            return "\(name) owe me \(abs(balance)) \(currency)"
+        case let x where x < 0:
+            return "I owe \(name) \(abs(balance)) \(currency)"
+        default:
+            return "clear balance"
+        }
+    }
+    
     
 }
 

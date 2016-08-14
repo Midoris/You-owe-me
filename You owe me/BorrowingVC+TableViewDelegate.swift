@@ -13,7 +13,7 @@ import CoreData
 extension BorrowingViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingVCConstants.BorrowingHistoryCellID, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingConstants.BorrowingHistoryCellID, forIndexPath: indexPath)
         if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
             var name: String?
             var date: NSDate?

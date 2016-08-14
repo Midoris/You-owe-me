@@ -26,7 +26,6 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     @IBOutlet weak private var borrowMessageLabel: UILabel! {
         didSet {
-            // set message label
             borrowMessageLabel.text = borrowingModel.switchedMessageWithName(self.name!)
         }
     }
@@ -54,16 +53,15 @@ class BorrowingViewController: CoreDataTableViewController {
     }
 
     
-    // MARK: - Class methods
-    // resign the first responder
-        @objc private func dismissKeyboard() {
+    // MARK: - Methods
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
     
     @objc private func updateUI(){
         if let context = managedObjectCOntext where self.name!.characters.count > 0 {
             let request = NSFetchRequest(entityName: "Borrowed")
-            request.predicate = NSPredicate(format: "borrower.name = %@", self.name!) // borrowed.borrower.name // "any borrowerName = %@"
+            request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
             request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
             self.fetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
@@ -110,38 +108,11 @@ class BorrowingViewController: CoreDataTableViewController {
             print("\(borrowedCount) borrowings")
         }
     }
-    
-    private func countedBalance() -> Double {
-        var balance: Double = 0
-        if let results = fetchedResultsController?.fetchedObjects {
-            for result in results {
-                if let borrowed = result as? Borrowed {
-                    let state = Bool(borrowed.iBorrowed!)
-                    let amount = Double(borrowed.amount!)
-                    switch state {
-                    case true : balance += amount
-                    case false: balance -= amount
-                    }
-                }
-            }
-        }
-        return balance
-    }
-    
-    private func balanceMessageWithBorrowerName(name: String, andCurrency currency: String) -> String {
-        let balance = countedBalance()
-        switch balance {
-        case let x where x > 0 :
-            return "\(name) owe me \(abs(balance)) \(currency)"
-        case let x where x < 0:
-            return "I owe \(name) \(abs(balance)) \(currency)"
-        default:
-            return "clear balance"
-        }
-    }
-    
+        
     internal func updateBalanceLabel() {
-        self.balanceLabel.text = self.balanceMessageWithBorrowerName(self.name!, andCurrency: self.currency!)
+        if let borrowings = fetchedResultsController?.fetchedObjects as? [Borrowed] {
+            self.balanceLabel.text = borrowingModel.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
+        }
     }
     
     private func clean() {
@@ -181,7 +152,6 @@ class BorrowingViewController: CoreDataTableViewController {
             }
         }
     }
-    
     
     
 }

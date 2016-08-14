@@ -123,14 +123,10 @@
 		062808411D50B118008B967C /* You owe me */ = {
 			isa = PBXGroup;
 			children = (
-				062808421D50B118008B967C /* AppDelegate.swift */,
 				062808981D589EDD008B967C /* Core Data */,
 				0628089F1D5DC098008B967C /* Borrowers Group */,
 				062808771D50B9D0008B967C /* Borrowing Group */,
-				062808461D50B118008B967C /* Main.storyboard */,
-				0628084C1D50B118008B967C /* Assets.xcassets */,
-				0628084E1D50B118008B967C /* LaunchScreen.storyboard */,
-				062808511D50B118008B967C /* Info.plist */,
+				062808A81D603A00008B967C /* Supporting files */,
 			);
 			path = "You owe me";
 			sourceTree = "<group>";
@@ -186,6 +182,18 @@
 				062808A01D5F065E008B967C /* AddBorrowerViewController.swift */,
 			);
 			name = "Borrowers Group";
+			sourceTree = "<group>";
+		};
+		062808A81D603A00008B967C /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				062808421D50B118008B967C /* AppDelegate.swift */,
+				062808461D50B118008B967C /* Main.storyboard */,
+				0628084C1D50B118008B967C /* Assets.xcassets */,
+				0628084E1D50B118008B967C /* LaunchScreen.storyboard */,
+				062808511D50B118008B967C /* Info.plist */,
+			);
+			name = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,7 +260,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = Midori.s;
+				ORGANIZATIONNAME = "Iablonskyi Ievgenii";
 				TargetAttributes = {
 					0628083E1D50B118008B967C = {
 						CreatedOnToolsVersion = 7.3;

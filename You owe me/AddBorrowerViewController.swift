@@ -35,7 +35,11 @@ class AddBorrowerViewController: UIViewController {
     
     @IBAction private func saveButtonPressed(sender: UIBarButtonItem) {
         if borrowerNameTextField.text!.characters.count > 0 {
-            addBorrowerDelegate?.saveNewBorrowerWithName(borrowerNameTextField.text!)
+            // Trim spaces from the name
+            let name = borrowerNameTextField.text!.stringByTrimmingCharactersInSet(
+                NSCharacterSet.whitespaceAndNewlineCharacterSet()
+            )
+            addBorrowerDelegate?.saveNewBorrowerWithName(name)
             dismissVC()
         }
     }

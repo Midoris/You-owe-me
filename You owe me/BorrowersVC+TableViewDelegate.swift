@@ -12,7 +12,7 @@ import UIKit
 extension BorrowersViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("borrowerCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingConstants.BorrowerCellID, forIndexPath: indexPath)
         if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
             var name: String?
             var borrowings = [Borrowed]()
@@ -21,7 +21,7 @@ extension BorrowersViewController {
                 borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
             }
             cell.textLabel?.text = "\(name!) "
-            cell.detailTextLabel?.text = balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
+            cell.detailTextLabel?.text = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
         }
         cell.selectionStyle = .None
         return cell
@@ -51,7 +51,7 @@ extension BorrowersViewController {
                 name = borrower.name
             }
             selectedBorrowerName = name!
-            self.performSegueWithIdentifier("FromBorrowerToBorrowings", sender: self)
+            self.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: self)
         }
     }
 

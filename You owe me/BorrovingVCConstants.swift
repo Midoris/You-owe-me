@@ -8,10 +8,15 @@
 
 import Foundation
 
-struct BorrowingVCConstants {
+struct BorrowingConstants {
     // Cell IDs
     static let BorrowingHistoryCellID = "BorrowingHistoryCell"
+    static let BorrowerCellID = "BorrowerCell"
     
     // Notification names
     static let UpdateUI = "ReloadData"
+    
+    // Segue IDs
+    static let FromBorrowerToBorrowingsSegueID = "FromBorrowerToBorrowings"
+    static let AddBorrowerSegueId = "AddBorrower"
 }
