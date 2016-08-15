@@ -29,6 +29,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.tintColor = UIColor.darkGrayColor()
         updateUI()
     }
     

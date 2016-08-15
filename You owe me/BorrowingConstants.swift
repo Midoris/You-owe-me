@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct BorrowingConstants {
     // Cell IDs
@@ -19,4 +20,5 @@ struct BorrowingConstants {
     // Segue IDs
     static let FromBorrowerToBorrowingsSegueID = "FromBorrowerToBorrowings"
     static let AddBorrowerSegueId = "AddBorrower"
+       
 }

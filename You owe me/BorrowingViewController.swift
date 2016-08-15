@@ -51,6 +51,11 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController!.navigationBar.tintColor = UIColor.darkGrayColor()
+    }
 
     
     // MARK: - Methods
@@ -132,7 +137,7 @@ class BorrowingViewController: CoreDataTableViewController {
         borrowMessageLabel.text = borrowingModel.switchedMessageWithName(self.name!)
     }
     
-    @IBAction func clearAllButtonPressed(sender: UIButton) {
+    @IBAction private func clearAllButtonPressed(sender: UIButton) {
         if let results = fetchedResultsController?.fetchedObjects {
             for result in results {
                 if let borrowed = result as? Borrowed {
@@ -152,6 +157,16 @@ class BorrowingViewController: CoreDataTableViewController {
             }
         }
     }
+    
+    @IBAction private func splitBillButtonPressed(sender: UIButton) {
+        if self.amountTextField.text != "" {
+            if let ammount = Double(amountTextField.text!) {
+                self.amountTextField.text = borrowingModel.stringFromDoubleWithTailingZeroAndRounding(ammount / 2)
+            }
+        }
+    }
+    
+
     
     
 }

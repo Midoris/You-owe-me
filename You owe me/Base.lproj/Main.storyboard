@@ -146,32 +146,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I borrowed you" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2R-67-67z">
-                                <rect key="frame" x="20" y="66" width="180" height="44"/>
+                                <rect key="frame" x="20" y="87" width="180" height="44"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="฿" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRQ-vS-P23">
-                                <rect key="frame" x="311" y="66" width="44" height="37"/>
+                                <rect key="frame" x="311" y="90" width="44" height="37"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vDy-DA-hXh">
-                                <rect key="frame" x="206" y="70" width="97" height="30"/>
+                                <rect key="frame" x="206" y="94" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aH-v3-HfK">
-                                <rect key="frame" x="151" y="132" width="49" height="30"/>
-                                <state key="normal" title="Submit"/>
+                                <rect key="frame" x="254" y="153" width="54" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" red="0.0" green="0.1538868736" blue="0.4687223801" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="submittPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LbM-bS-Jvq"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NLL-pi-WRD">
-                                <rect key="frame" x="0.0" y="210" width="375" height="413"/>
+                                <rect key="frame" x="0.0" y="210" width="375" height="403"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="413" id="QkR-mz-WIa"/>
+                                    <constraint firstAttribute="height" constant="403" id="QkR-mz-WIa"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BorrowingHistoryCell" textLabel="SqC-sP-XrO" detailTextLabel="kRa-OI-Kvv" style="IBUITableViewCellStyleSubtitle" id="w3T-lq-BXG">
@@ -205,24 +208,30 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="om2-Wb-Dwb">
-                                <rect key="frame" x="74" y="139" width="36" height="16"/>
-                                <state key="normal" title="&lt;--&gt;"/>
+                                <rect key="frame" x="74" y="160" width="36" height="16"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="&lt;--&gt;">
+                                    <color key="titleColor" red="0.0" green="0.1538868735987185" blue="0.46872238005050504" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="switchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8le-6G-ZB4"/>
                                 </connections>
                             </button>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YK1-nD-pRr">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YK1-nD-pRr">
+                                <rect key="frame" x="-4" y="613" width="383" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="t6r-fk-Fbk"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="Dmg-6R-FUi">
                                         <view key="customView" contentMode="scaleToFill" id="wu7-4X-MbV">
-                                            <rect key="frame" x="16" y="3.5" width="227" height="37"/>
+                                            <rect key="frame" x="16" y="8.5" width="227" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1M-XQ-xHJ">
                                                     <rect key="frame" x="2" y="2" width="222" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16.5"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -232,10 +241,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yvw-9z-yjc"/>
                                     <barButtonItem style="plain" id="ni5-gj-Ddc">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fIh-2w-I7j">
-                                            <rect key="frame" x="303" y="7" width="56" height="30"/>
+                                            <rect key="frame" x="297" y="12" width="70" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16.5"/>
                                             <state key="normal" title="Clear all">
-                                                <color key="titleColor" red="1" green="0.055564177692276173" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="0.52513415404040398" green="0.029178647447384135" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="clearAllButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fcp-f4-wkL"/>
@@ -244,12 +254,25 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7g-5N-1vd">
+                                <rect key="frame" x="160" y="153" width="59" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Split Bill">
+                                    <color key="titleColor" red="0.0" green="0.1538868736" blue="0.4687223801" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="splitBillButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MNe-vO-0x2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NLL-pi-WRD" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-44" id="3W1-oc-Ufx"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YK1-nD-pRr" secondAttribute="bottom" id="23c-Tq-dL9"/>
+                            <constraint firstItem="NLL-pi-WRD" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-54" id="3W1-oc-Ufx"/>
+                            <constraint firstItem="YK1-nD-pRr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="JZI-Kb-HmT"/>
                             <constraint firstAttribute="trailing" secondItem="NLL-pi-WRD" secondAttribute="trailing" id="Rn9-BW-3vq"/>
                             <constraint firstItem="NLL-pi-WRD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aFW-51-7bk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YK1-nD-pRr" secondAttribute="trailing" constant="-20" id="x1n-x7-ZbE"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
