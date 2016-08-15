@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddNewBorrowerDelegate {
+protocol AddNewBorrowerDelegate: class {
     func saveNewBorrowerWithName(name: String)
 }
 
@@ -16,7 +16,7 @@ class AddBorrowerViewController: UIViewController {
     
     // MARK: - Variabels
     @IBOutlet weak var borrowerNameTextField: UITextField!
-    internal var addBorrowerDelegate: AddNewBorrowerDelegate?
+    internal weak var addBorrowerDelegate: AddNewBorrowerDelegate?
 
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {

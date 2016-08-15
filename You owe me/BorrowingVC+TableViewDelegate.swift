@@ -35,51 +35,51 @@ extension BorrowingViewController {
         return cell
     }
     
-//        func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//            if editingStyle == .Delete {
-//                if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
-//                    borrowed.managedObjectContext?.performBlockAndWait {
-//                        borrowed.managedObjectContext?.deleteObject(borrowed)
-//                        do {
-//                            try self.managedObjectCOntext!.save()
-//                        } catch let error {
-//                            print("Core Data Error: \(error)")
-//                            // TODO: Notify User
-//                        }
-//                    }
-//                    dispatch_async(dispatch_get_main_queue(), {
-//                        self.updateBalanceLabel()
-//                    })
-//                }
-//            }
-//         }
+        func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+            if editingStyle == .Delete {
+                if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
+                    borrowed.managedObjectContext?.performBlockAndWait {
+                        borrowed.managedObjectContext?.deleteObject(borrowed)
+                        do {
+                            try self.managedObjectCOntext!.save()
+                        } catch let error {
+                            print("Core Data Error: \(error)")
+                            // TODO: Notify User
+                        }
+                    }
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.updateBalanceLabel()
+                    })
+                }
+            }
+         }
     
 //    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
 //        let edite = UITableViewRowAction(style: .Normal, title: "Edite") { action, index in
 //            print("edite button tapped")
+//        
+//            
 //        }
 //        edite.backgroundColor = UIColor.grayColor()
 //        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-//            print("more button tapped")
+//            if let borrowed = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
+//                borrowed.managedObjectContext?.performBlockAndWait {
+//                    borrowed.managedObjectContext?.deleteObject(borrowed)
+//                    do {
+//                        try self.managedObjectCOntext!.save()
+//                    } catch let error {
+//                        print("Core Data Error: \(error)")
+//                        // TODO: Notify User
+//                    }
+//                }
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    self.updateBalanceLabel()
+//                })
+//            }
 //        }
 //        delete.backgroundColor = UIColor.redColor()
 //        return [delete, edite]
 //    }
-    
-    //    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-    //        let button1 = UITableViewRowAction(style: .Default, title: "Happy!", handler: { (action, indexPath) in
-    //            print("button1 pressed!")
-    //        })
-    //        button1.backgroundColor = UIColor.blueColor()
-    //        let button2 = UITableViewRowAction(style: .Default, title: "Exuberant!", handler: { (action, indexPath) in
-    //            print("button2 pressed!")
-    //        })
-    //        button2.backgroundColor = UIColor.redColor()
-    //        return [button1, button2]
-    //    }
-    
-    
-    
     
     
     
