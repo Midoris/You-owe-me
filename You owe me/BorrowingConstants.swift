@@ -20,5 +20,8 @@ struct BorrowingConstants {
     // Segue IDs
     static let FromBorrowerToBorrowingsSegueID = "FromBorrowerToBorrowings"
     static let AddBorrowerSegueId = "AddBorrower"
-       
+    
+    // Colors
+    static let BlackColor = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+    
 }

@@ -54,7 +54,7 @@ class BorrowingViewController: CoreDataTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.tintColor = UIColor.darkGrayColor()
+        self.navigationController!.navigationBar.tintColor = BorrowingConstants.BlackColor
     }
 
     
