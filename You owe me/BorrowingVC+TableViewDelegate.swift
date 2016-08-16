@@ -32,6 +32,7 @@ extension BorrowingViewController {
             cell.detailTextLabel?.text = borrowingModel.dateStringFromDate(date!)
         }
         cell.selectionStyle = .None
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     

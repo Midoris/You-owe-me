@@ -50,7 +50,17 @@ class BorrowingViewController: CoreDataTableViewController {
 
     // MARK: - Methods
     private func setNeedsDisplay() {
-        self.navigationController!.navigationBar.tintColor = BorrowingConstants.BlackColor
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        let navigationBar = self.navigationController!.navigationBar
+        navigationBar.translucent = false
+        navigationBar.barTintColor = BorrowingConstants.NavBarColor
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationBar.tintColor = UIColor.whiteColor()
+        self.view.backgroundColor = BorrowingConstants.BackgroundColor
+        self.borrowingHistoryTableView.backgroundColor = BorrowingConstants.BackgroundColor
+        borrowingHistoryTableView.separatorColor = BorrowingConstants.NavBarColor
+
+        
         updateUI()
         //Looks for single or multiple taps to dismiss keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))

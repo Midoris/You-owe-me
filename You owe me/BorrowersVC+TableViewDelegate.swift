@@ -20,10 +20,11 @@ extension BorrowersViewController {
                 name = borrower.name
                 borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
             }
-            cell.textLabel?.text = "\(name!) "
+            cell.textLabel?.text = "\(name!)"
             cell.detailTextLabel?.text = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
         }
         cell.selectionStyle = .None
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     
@@ -52,6 +53,10 @@ extension BorrowersViewController {
             selectedBorrowerName = name!
             self.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: self)
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
     }
     
 }
