@@ -37,6 +37,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     private func setNeedsDisplay() {
         self.navigationController!.navigationBar.tintColor = BorrowingConstants.BlackColor
         updateUI()
+        self.borrowersTableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     @objc private func updateUI(){
