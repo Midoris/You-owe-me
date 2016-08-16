@@ -15,13 +15,13 @@ protocol AddNewBorrowerDelegate: class {
 class AddBorrowerViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Variabels
-    @IBOutlet weak var borrowerNameTextField: UITextField! {
+    internal weak var addBorrowerDelegate: AddNewBorrowerDelegate?
+    @IBOutlet weak private var borrowerNameTextField: UITextField! {
         didSet {
             self.borrowerNameTextField.delegate = self
         }
     }
-    internal weak var addBorrowerDelegate: AddNewBorrowerDelegate?
-    let limitLength = 12
+    private let limitLength = 12
 
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
@@ -34,7 +34,6 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate {
         let newLength = text.characters.count + string.characters.count - range.length
         return newLength <= limitLength
     }
-
     
     // MARK: - Methods
     private func dismissVC() {

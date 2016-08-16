@@ -13,15 +13,16 @@ import CoreData
 class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelegate {
     
     // MARK: - Variabels
+    var managedObjectCOntext: NSManagedObjectContext? =
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+    var selectedBorrowerName: String?
+    var currncy = "฿"
+    
     @IBOutlet weak var borrowersTableView: UITableView! {
         didSet {
             self.tableView = borrowersTableView
         }
     }
-    var managedObjectCOntext: NSManagedObjectContext? =
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-    var selectedBorrowerName: String?
-    var currncy = "฿"
     
     // Model
     let borrowingModel = BorrowingModel()
@@ -29,11 +30,15 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsDisplay()
+    }
+    
+    // MARK: - Methods
+    private func setNeedsDisplay() {
         self.navigationController!.navigationBar.tintColor = BorrowingConstants.BlackColor
         updateUI()
     }
     
-    // MARK: - Methods
     @objc private func updateUI(){
         if let context = managedObjectCOntext  {
             let request = NSFetchRequest(entityName: "Borrower")

@@ -12,11 +12,10 @@ import CoreData
 class BorrowingViewController: CoreDataTableViewController {
     
     // MARK: - Variabels
-    internal var name: String?
-    internal var currency: String?
+    internal var name: String? //{ didSet { updateUI() } }
+    internal var currency: String? //{ didSet { updateUI() } }
 
-    var managedObjectCOntext: NSManagedObjectContext? //{ didSet { updateUI() } }
-    
+    var managedObjectCOntext: NSManagedObjectContext? //{ didSet { updateUI() } } //{ didSet { updateUI() } }
     
     // Outlets
     @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
@@ -46,19 +45,18 @@ class BorrowingViewController: CoreDataTableViewController {
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsDisplay()
+    }
+
+    // MARK: - Methods
+    private func setNeedsDisplay() {
+        self.navigationController!.navigationBar.tintColor = BorrowingConstants.BlackColor
         updateUI()
-        //Looks for single or multiple taps.
+        //Looks for single or multiple taps to dismiss keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.tintColor = BorrowingConstants.BlackColor
-    }
-
-    
-    // MARK: - Methods
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
