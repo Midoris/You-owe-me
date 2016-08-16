@@ -27,6 +27,7 @@
 		0628089C1D5A0ACA008B967C /* BorrowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */; };
 		0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */; };
 		062808A11D5F065E008B967C /* AddBorrowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808A01D5F065E008B967C /* AddBorrowerViewController.swift */; };
+		062808AA1D62E8E9008B967C /* BorrowersNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		0628089B1D5A0ACA008B967C /* BorrowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowersViewController.swift; sourceTree = "<group>"; };
 		0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowersVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		062808A01D5F065E008B967C /* AddBorrowerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorrowerViewController.swift; sourceTree = "<group>"; };
+		062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowersNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				0628089F1D5DC098008B967C /* Borrowers Group */,
 				062808771D50B9D0008B967C /* Borrowing Group */,
 				062808A81D603A00008B967C /* Supporting files */,
+				062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */,
 			);
 			path = "You owe me";
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */,
 				062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */,
 				062808A11D5F065E008B967C /* AddBorrowerViewController.swift in Sources */,
+				062808AA1D62E8E9008B967C /* BorrowersNavigationController.swift in Sources */,
 				0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */,
 				062808431D50B118008B967C /* AppDelegate.swift in Sources */,
 				0628084B1D50B118008B967C /* You_owe_me.xcdatamodeld in Sources */,
@@ -489,6 +493,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.midori.s.You-owe-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -500,6 +505,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.midori.s.You-owe-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

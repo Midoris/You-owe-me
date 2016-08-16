@@ -35,12 +35,6 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     
     // MARK: - Methods
     private func setNeedsDisplay() {
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        let navigationBar = self.navigationController!.navigationBar
-        navigationBar.translucent = false
-        navigationBar.barTintColor = BorrowingConstants.NavBarColor
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationBar.tintColor = UIColor.whiteColor()
         self.view.backgroundColor = BorrowingConstants.BackgroundColor
         self.borrowersTableView.backgroundColor = BorrowingConstants.BackgroundColor
         updateUI()

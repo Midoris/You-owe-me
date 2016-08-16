@@ -115,8 +115,9 @@
                             </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAK-Ok-tPk">
                                 <rect key="frame" x="65" y="131" width="245" height="30"/>
+                                <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -259,8 +260,9 @@
                                             <rect key="frame" x="297" y="12" width="70" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16.5"/>
+                                            <size key="titleShadowOffset" width="0.0" height="2.2250738585072014e-308"/>
                                             <state key="normal" title="Clear all">
-                                                <color key="titleColor" red="0.76862745098039209" green="0.10588235294117647" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="1" green="0.13488662485648673" blue="0.26522291614919125" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="clearAllButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fcp-f4-wkL"/>
@@ -337,10 +339,10 @@
             </objects>
             <point key="canvasLocation" x="1181.5" y="373.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Borrowers Navigation Controller-->
         <scene sceneID="TUc-cP-kDY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aqf-ga-hID" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aqf-ga-hID" customClass="BorrowersNavigationController" customModule="You_owe_me" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fcy-Em-Lbz">

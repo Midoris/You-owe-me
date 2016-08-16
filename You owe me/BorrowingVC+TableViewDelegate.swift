@@ -28,42 +28,19 @@ extension BorrowingViewController {
                 iBorrowed = Bool(borrowed.iBorrowed!)
             }
             let message = borrowingModel.messageWithBorrowingState(iBorrowed!, andName: name!)
-            cell.textLabel?.text = "\(message) \(borrowingModel.stringFromDoubleWithTailingZeroAndRounding(amount!)) \(currency!) "
+            cell.textLabel?.text = "\(message) \(borrowingModel.stringFromDoubleWithTailingZeroAndRounding(amount!)) \(currency!)"
+            cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
             cell.detailTextLabel?.text = borrowingModel.dateStringFromDate(date!)
+            cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
         }
         cell.selectionStyle = .None
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }
-    
-        func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-            if editingStyle == .Delete {
-                if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
-                    borrowed.managedObjectContext?.performBlockAndWait {
-                        borrowed.managedObjectContext?.deleteObject(borrowed)
-                        do {
-                            try self.managedObjectCOntext!.save()
-                        } catch let error {
-                            print("Core Data Error: \(error)")
-                            // TODO: Notify User
-                        }
-                    }
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.updateBalanceLabel()
-                    })
-                }
-            }
-         }
-    
-//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-//        let edite = UITableViewRowAction(style: .Normal, title: "Edite") { action, index in
-//            print("edite button tapped")
-//        
-//            
-//        }
-//        edite.backgroundColor = UIColor.grayColor()
-//        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-//            if let borrowed = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
+//
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == .Delete {
+//            if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
 //                borrowed.managedObjectContext?.performBlockAndWait {
 //                    borrowed.managedObjectContext?.deleteObject(borrowed)
 //                    do {
@@ -78,9 +55,34 @@ extension BorrowingViewController {
 //                })
 //            }
 //        }
-//        delete.backgroundColor = UIColor.redColor()
-//        return [delete, edite]
-//    }
+//     }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        /*
+        let edite = UITableViewRowAction(style: .Normal, title: "Edite") { action, index in
+            print("edite button tapped")
+        }
+        edite.backgroundColor = UIColor.grayColor()
+         */
+        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
+            if let borrowed = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
+                borrowed.managedObjectContext?.performBlockAndWait {
+                    borrowed.managedObjectContext?.deleteObject(borrowed)
+                    do {
+                        try self.managedObjectCOntext!.save()
+                    } catch let error {
+                        print("Core Data Error: \(error)")
+                        // TODO: Notify User
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.updateBalanceLabel()
+                })
+            }
+        }
+        delete.backgroundColor = BorrowingConstants.DarkRedColor
+        return [delete/*, edite*/]
+    }
     
     
     

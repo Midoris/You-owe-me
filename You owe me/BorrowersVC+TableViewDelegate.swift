@@ -21,16 +21,42 @@ extension BorrowersViewController {
                 borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
             }
             cell.textLabel?.text = "\(name!)"
+            cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(22))
+            cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
             cell.detailTextLabel?.text = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
+            cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(13.5))
+            cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
         }
         cell.selectionStyle = .None
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == UITableViewCellEditingStyle.Delete {
+//            if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
+//                borrower.managedObjectContext?.performBlockAndWait {
+//                    borrower.managedObjectContext?.deleteObject(borrower)
+//                    do {
+//                        try self.managedObjectCOntext!.save()
+//                    } catch let error {
+//                        print("Core Data Error: \(error)")
+//                        // TODO: Notify User
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        /*
+         let edite = UITableViewRowAction(style: .Normal, title: "Edite") { action, index in
+         print("edite button tapped")
+         }
+         edite.backgroundColor = UIColor.grayColor()
+         */
+        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
+            if let borrower = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
                 borrower.managedObjectContext?.performBlockAndWait {
                     borrower.managedObjectContext?.deleteObject(borrower)
                     do {
@@ -42,7 +68,10 @@ extension BorrowersViewController {
                 }
             }
         }
+        delete.backgroundColor = BorrowingConstants.DarkRedColor
+        return [delete/*, edite*/]
     }
+
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
