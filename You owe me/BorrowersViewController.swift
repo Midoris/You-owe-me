@@ -39,6 +39,12 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         self.borrowersTableView.backgroundColor = BorrowingConstants.BackgroundColor
         updateUI()
         self.borrowersTableView.separatorStyle = .None
+        addShortcutItems()
+    }
+    
+    private func addShortcutItems() {
+        let shortcut = UIApplicationShortcutItem(type: "com.midori.s.You-owe-me", localizedTitle: "Maska", localizedSubtitle: "I owe Maska 234 ฿", icon: UIApplicationShortcutIcon(type: .Add), userInfo: nil)
+        UIApplication.sharedApplication().shortcutItems = [shortcut]
     }
     
     @objc private func updateUI(){
