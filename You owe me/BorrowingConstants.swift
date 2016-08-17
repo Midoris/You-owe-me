@@ -29,4 +29,10 @@ struct BorrowingConstants {
     static let DarkBlueCOlor = UIColor(red: 10/255, green: 96/255, blue: 254/255, alpha: 1)
     static let DarkRedColor = UIColor(red: 195/255, green: 0/255, blue: 22/255, alpha: 1)
     
+    // User defaults keys
+    static let BorrowersDictKey = "BorrowersDict"
+    
+    // Quick items limit
+    static let QuickItemLimit = 3
+    
 }

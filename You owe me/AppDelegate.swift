@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // set status bar color
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-            
+        
         return true
     }
     
@@ -114,42 +114,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - 3D Touch
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: Bool -> Void) {
-        switch (shortcutItem.type) {
-        case "com.midori.s.You-owe-me" :
-            print("YES")
-            // Init the storyboard
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            // Init the root navigationController
-            let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
-            // Set the root navigationController as rootViewController of the application
-            UIApplication.sharedApplication().keyWindow?.rootViewController = navigationController
-            
-            // Init the wanted viewController
-            let viewController = storyboard.instantiateViewControllerWithIdentifier("Borrowers")
-            // Push this viewController
-            navigationController!.pushViewController(viewController, animated: false)
-            
-            print("Push Borrowers VC")
-            
-            if let borrowersVC = viewController as? BorrowersViewController {
-                borrowersVC.selectedBorrowerName = "Maska"
-                borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
-            }
-            
-           
-
-            
-        default:
-            break
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+        UIApplication.sharedApplication().keyWindow?.rootViewController = navigationController
+        let viewController = storyboard.instantiateViewControllerWithIdentifier("Borrowers")
+        navigationController!.pushViewController(viewController, animated: false)
+        if let borrowersVC = viewController as? BorrowersViewController {
+            borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
+            borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
         }
         completionHandler(true)
     }
-    
-    private func openVC() {
-        
-    }
-    
-    
+       
 }
 

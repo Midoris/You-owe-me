@@ -18,7 +18,6 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     var selectedBorrowerName: String?
     var currncy = "฿"
     
-    var borrowersFor3DTouch = [[String: String]]()
     @IBOutlet weak var borrowersTableView: UITableView! {
         didSet {
             self.tableView = borrowersTableView
@@ -49,18 +48,18 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         self.borrowersTableView.separatorStyle = .None
     }
     
-    private func addShortcutItems() {
+    private func addShortcutItemsFromBorrowers(borrowers: [[String: String]]) {
         var quickItems = [UIApplicationShortcutItem]()
-        for (index, borrower) in borrowersFor3DTouch.enumerate() {
-            if index < 3 {
+        for (index, borrower) in borrowers.enumerate() {
+            if index < BorrowingConstants.QuickItemLimit {
                 let title = borrower["name"]
                 let subtitle = borrower["balanceMessage"]
                 let shortcut = UIApplicationShortcutItem(type: "com.midori.s.You-owe-me", localizedTitle: title!, localizedSubtitle: subtitle, icon: UIApplicationShortcutIcon(type: .Add), userInfo: nil)
                 quickItems.append(shortcut)
             }
         }
-        //print("number of shortcuts is : \(quickItems.count)")
         defer {
+            // reverse sort and then save
             quickItems = quickItems.reverse()
             UIApplication.sharedApplication().shortcutItems = quickItems
         }
@@ -85,9 +84,9 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         }
     }
     
-    @objc private func saveBorrowersFor3DTouch() {
+    private func borrowersFromCoreData() -> [[String: String]]? {
         if let borrowers = fetchedResultsController?.fetchedObjects as? [Borrower] {
-            borrowersFor3DTouch.removeAll()
+            var borrowersFor3DTouch = [[String: String]]()
             for borrower in borrowers {
                 var name: String?
                 var borrowings = [Borrowed]()
@@ -96,13 +95,24 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                     borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
                 }
                 let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
-                self.borrowersFor3DTouch.append(["name": name!, "balanceMessage": balanceMessage])
+                borrowersFor3DTouch.append(["name": name!, "balanceMessage": balanceMessage])
             }
             print("Borrowers is \(borrowersFor3DTouch), count is \(borrowersFor3DTouch.count)")
-            addShortcutItems()
+            return borrowersFor3DTouch
         }
+        return nil
     }
     
+    @objc private func saveBorrowersFor3DTouch() {
+        let borrowers = borrowersFromCoreData()
+        if borrowers != nil {
+            // add borrowers to quick items and save
+            addShortcutItemsFromBorrowers(borrowers!)
+        } else {
+            // remove all quick items
+            UIApplication.sharedApplication().shortcutItems = []
+        }
+    }
     
     
     // MARK: - Add New Borrower Delegate
