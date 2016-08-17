@@ -11,7 +11,7 @@
         <!--Borrowers View Controller-->
         <scene sceneID="mvL-Jr-K7h">
             <objects>
-                <viewController id="xDT-Zt-jJ9" customClass="BorrowersViewController" customModule="You_owe_me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Borrowers" id="xDT-Zt-jJ9" customClass="BorrowersViewController" customModule="You_owe_me" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="poP-0f-RrH"/>
                         <viewControllerLayoutGuide type="bottom" id="ZKT-hi-Gmn"/>

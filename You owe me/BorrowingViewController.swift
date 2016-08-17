@@ -15,6 +15,7 @@ class BorrowingViewController: CoreDataTableViewController {
     internal var name: String? //{ didSet { updateUI() } }
     internal var currency: String? //{ didSet { updateUI() } }
 
+
     var managedObjectCOntext: NSManagedObjectContext? //{ didSet { updateUI() } } //{ didSet { updateUI() } }
     
     // Outlets
@@ -57,6 +58,11 @@ class BorrowingViewController: CoreDataTableViewController {
         //Looks for single or multiple taps to dismiss keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    
+    func showKeyboard() {
+        print("Show keyboard")
+        self.amountTextField.becomeFirstResponder()
     }
     
     @objc private func dismissKeyboard() {

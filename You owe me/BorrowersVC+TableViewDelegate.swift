@@ -23,7 +23,8 @@ extension BorrowersViewController {
             cell.textLabel?.text = "\(name!)"
             cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(22))
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
-            cell.detailTextLabel?.text = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
+            let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
+            cell.detailTextLabel?.text = balanceMessage
             cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(13.5))
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
         }

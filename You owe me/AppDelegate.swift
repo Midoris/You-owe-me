@@ -20,27 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // set status bar color
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-        
-        
-        //        let shortcut2 = UIMutableApplicationShortcutItem(type: "SearchMusic",
-        //                                                         localizedTitle: "Search",
-        //                                                         localizedSubtitle: "Find a track to play",
-        //                                                         icon: UIApplicationShortcutIcon(type: .Search),
-        //                                                         userInfo: nil
-        //        )
-        //
-        //        let shortcut3 = UIMutableApplicationShortcutItem(type: "AddMusic",
-        //                                                         localizedTitle: "Add Track",
-        //                                                         localizedSubtitle: "Add track to playlist",
-        //                                                         icon: UIApplicationShortcutIcon(type: .Add),
-        //                                                         userInfo: nil
-        //        )
-        //
-        //        application.shortcutItems = [shortcut2, shortcut3]
-        
-        
-        
-        
+            
         return true
     }
     
@@ -52,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        NSNotificationCenter.defaultCenter().postNotificationName("SaveBorrowersForTouch", object: nil)
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -136,7 +117,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch (shortcutItem.type) {
         case "com.midori.s.You-owe-me" :
             print("YES")
-                   default:
+            // Init the storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            // Init the root navigationController
+            let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+            // Set the root navigationController as rootViewController of the application
+            UIApplication.sharedApplication().keyWindow?.rootViewController = navigationController
+            
+            // Init the wanted viewController
+            let viewController = storyboard.instantiateViewControllerWithIdentifier("Borrowers")
+            // Push this viewController
+            navigationController!.pushViewController(viewController, animated: false)
+            
+            print("Push Borrowers VC")
+            
+            if let borrowersVC = viewController as? BorrowersViewController {
+                borrowersVC.selectedBorrowerName = "Maska"
+                borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
+            }
+            
+           
+
+            
+        default:
             break
         }
         completionHandler(true)
