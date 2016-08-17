@@ -20,7 +20,7 @@ class Borrowed: NSManagedObject {
             borrowed.currency = currency
             borrowed.amount = amount
             borrowed.date = date
-            borrowed.borrower = Borrower.borrowerWithInfo(name, inManagedObgectContext: context)
+            borrowed.borrower = Borrower.borrowerWithInfo(name, inManagedObgectContext: context, date: date)
             return borrowed
         }
         

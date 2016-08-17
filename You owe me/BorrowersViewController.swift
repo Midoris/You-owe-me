@@ -68,11 +68,12 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     @objc private func updateUI(){
         if let context = managedObjectCOntext  {
             let request = NSFetchRequest(entityName: "Borrower")
-            request.sortDescriptors = [NSSortDescriptor(
-                key: "name",
-                ascending:  true,
-                selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
-                )]
+//            request.sortDescriptors = [NSSortDescriptor(
+//                key: "name",
+//                ascending:  true,
+//                selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
+//                )]
+            request.sortDescriptors = [NSSortDescriptor(key: "modified", ascending:  false)]
             self.fetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
                 managedObjectContext: context,
@@ -119,7 +120,8 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     internal func saveNewBorrowerWithName(name: String) {
         managedObjectCOntext?.performBlock {
             // create a new borrower
-            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectCOntext!)
+            let date = NSDate()
+            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectCOntext!, date: date)
             do {
                 try self.managedObjectCOntext?.save()
             } catch let error {
