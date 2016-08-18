@@ -117,14 +117,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         UIApplication.sharedApplication().keyWindow?.rootViewController = navigationController
-        let viewController = storyboard.instantiateViewControllerWithIdentifier("Borrowers")
-        navigationController!.pushViewController(viewController, animated: false)
-        if let borrowersVC = viewController as? BorrowersViewController {
+        if let borrowersVC = navigationController?.viewControllers.first as? BorrowersViewController {
             borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
             borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
         }
+        
+        
+        //          let viewController = storyboard.instantiateViewControllerWithIdentifier("Borrowers")
+        //        if let borrowersVC = viewController as? BorrowersViewController {
+        //            //navigationController!.pushViewController(borrowersVC, animated: false)
+        //            borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
+        //            borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
+        //        }
         completionHandler(true)
     }
-       
+    
 }
 

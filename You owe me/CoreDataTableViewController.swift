@@ -73,8 +73,11 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView!.beginUpdates()
+    }
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        //self.tableView!.beginUpdates()
         //self.borrowingHistoryTableView.reloadData() //beginUpdates()
         self.tableView!.endUpdates()
     }
