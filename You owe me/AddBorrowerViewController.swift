@@ -26,6 +26,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate {
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        showKeyboard()
     }
     
     // MARK: - Text Field delegate
@@ -36,7 +37,16 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Methods
+    private func showKeyboard() {
+        self.borrowerNameTextField.becomeFirstResponder()
+    }
+    
+    private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
     private func dismissVC() {
+        dismissKeyboard()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

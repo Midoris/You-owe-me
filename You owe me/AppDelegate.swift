@@ -121,14 +121,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
             borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
         }
-        
-        
-        //          let viewController = storyboard.instantiateViewControllerWithIdentifier("Borrowers")
-        //        if let borrowersVC = viewController as? BorrowersViewController {
-        //            //navigationController!.pushViewController(borrowersVC, animated: false)
-        //            borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
-        //            borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
-        //        }
         completionHandler(true)
     }
     

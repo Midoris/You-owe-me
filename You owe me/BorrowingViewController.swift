@@ -16,7 +16,7 @@ class BorrowingViewController: CoreDataTableViewController {
     internal var currency: String? //{ didSet { updateUI() } }
 
 
-    var managedObjectCOntext: NSManagedObjectContext? //{ didSet { updateUI() } } //{ didSet { updateUI() } }
+    var managedObjectContext: NSManagedObjectContext? //{ didSet { updateUI() } } //{ didSet { updateUI() } }
     
     // Outlets
     @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
@@ -41,7 +41,7 @@ class BorrowingViewController: CoreDataTableViewController {
     
     
     // Model
-    let borrowingModel = BorrowingModel()
+    let borrowingModel = SharedBorrowingModel()
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
@@ -60,7 +60,7 @@ class BorrowingViewController: CoreDataTableViewController {
         view.addGestureRecognizer(tap)
     }
     
-    func showKeyboard() {
+    private func showKeyboard() {
         print("Show keyboard")
         self.amountTextField.becomeFirstResponder()
     }
@@ -70,7 +70,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     @objc private func updateUI(){
-        if let context = managedObjectCOntext where self.name!.characters.count > 0 {
+        if let context = managedObjectContext where self.name!.characters.count > 0 {
             let request = NSFetchRequest(entityName: "Borrowed")
             request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
             request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
@@ -90,14 +90,14 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     private func updateDataBase() {
-        managedObjectCOntext?.performBlock {
+        managedObjectContext?.performBlock {
             // create a new borrowed
             if self.amountTextField.text != "" {
                 let amount = Double(self.amountTextField.text!)
                 let date = NSDate()
-                _ = Borrowed.borrowedWithInfo(self.name!, iBorrowed: self.borrowingModel.iBorrowed, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectCOntext!)
+                _ = Borrowed.borrowedWithInfo(self.name!, iBorrowed: self.borrowingModel.iBorrowed, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectContext!)
                 do {
-                    try self.managedObjectCOntext?.save()
+                    try self.managedObjectContext?.save()
                     self.updateBalanceLabel()
                 } catch let error {
                     print("Core Data Error: \(error)")
@@ -110,11 +110,11 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     private func printDatabaseStatistics() {
-        managedObjectCOntext?.performBlock {
-            let borrowersCount = self.managedObjectCOntext!.countForFetchRequest(NSFetchRequest(entityName: "Borrower"), error: nil)
+        managedObjectContext?.performBlock {
+            let borrowersCount = self.managedObjectContext!.countForFetchRequest(NSFetchRequest(entityName: "Borrower"), error: nil)
             print("\(borrowersCount) borrowings")
             // a more efficient way to count objects
-            let borrowedCount = self.managedObjectCOntext!.countForFetchRequest(NSFetchRequest(entityName: "Borrowed"), error: nil)
+            let borrowedCount = self.managedObjectContext!.countForFetchRequest(NSFetchRequest(entityName: "Borrowed"), error: nil)
             print("\(borrowedCount) borrowings")
         }
     }
@@ -149,7 +149,7 @@ class BorrowingViewController: CoreDataTableViewController {
                     borrowed.managedObjectContext?.performBlock {
                         borrowed.managedObjectContext?.deleteObject(borrowed)
                         do {
-                            try self.managedObjectCOntext!.save()
+                            try self.managedObjectContext!.save()
                         } catch let error {
                             print("Core Data Error: \(error)")
                             // TODO: Notify User

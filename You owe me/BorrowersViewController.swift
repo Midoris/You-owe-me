@@ -13,7 +13,7 @@ import CoreData
 class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelegate {
     
     // MARK: - Variabels
-    var managedObjectCOntext: NSManagedObjectContext? =
+    var managedObjectContext: NSManagedObjectContext? =
         (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var selectedBorrowerName: String?
     var currncy = "฿"
@@ -25,7 +25,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // Model
-    let borrowingModel = BorrowingModel()
+    let borrowingModel = SharedBorrowingModel()
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
@@ -66,13 +66,8 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     @objc private func updateUI(){
-        if let context = managedObjectCOntext  {
+        if let context = managedObjectContext  {
             let request = NSFetchRequest(entityName: "Borrower")
-//            request.sortDescriptors = [NSSortDescriptor(
-//                key: "name",
-//                ascending:  true,
-//                selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
-//                )]
             request.sortDescriptors = [NSSortDescriptor(key: "modified", ascending:  false)]
             self.fetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
@@ -115,15 +110,14 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         }
     }
     
-    
     // MARK: - Add New Borrower Delegate
     internal func saveNewBorrowerWithName(name: String) {
-        managedObjectCOntext?.performBlock {
+        managedObjectContext?.performBlock {
             // create a new borrower
             let date = NSDate()
-            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectCOntext!, date: date)
+            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectContext!, date: date)
             do {
-                try self.managedObjectCOntext?.save()
+                try self.managedObjectContext?.save()
             } catch let error {
                 print("Core Data Error: \(error)")
                 // TODO: Notify User
@@ -140,7 +134,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == BorrowingConstants.FromBorrowerToBorrowingsSegueID {
             if let borrowingVC = segue.destinationViewController as? BorrowingViewController {
-                borrowingVC.managedObjectCOntext = self.managedObjectCOntext
+                borrowingVC.managedObjectContext = self.managedObjectContext
                 borrowingVC.name = self.selectedBorrowerName!
                 borrowingVC.currency = self.currncy
             }
@@ -150,8 +144,6 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
             }
         }
     }
-    
-    
     
     
 }

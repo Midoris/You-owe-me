@@ -16,7 +16,6 @@ class Borrower: NSManagedObject {
         let request = NSFetchRequest(entityName: "Borrower")
         request.predicate = NSPredicate(format: "name = %@", name)
         if let borrower = (try? context.executeFetchRequest(request))?.first as? Borrower {
-            //print("Borrower is \(borrower)")
             // return existing borrower
             borrower.modified = date
             return borrower

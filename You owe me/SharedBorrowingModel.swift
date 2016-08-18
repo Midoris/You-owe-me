@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BorrowingModel {
+class SharedBorrowingModel {
     
     // MARK: - Variabels
     internal var iBorrowed = false

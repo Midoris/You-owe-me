@@ -69,7 +69,7 @@ extension BorrowingViewController {
                 borrowed.managedObjectContext?.performBlockAndWait {
                     borrowed.managedObjectContext?.deleteObject(borrowed)
                     do {
-                        try self.managedObjectCOntext!.save()
+                        try self.managedObjectContext!.save()
                     } catch let error {
                         print("Core Data Error: \(error)")
                         // TODO: Notify User
