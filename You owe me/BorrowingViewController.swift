@@ -14,6 +14,7 @@ class BorrowingViewController: CoreDataTableViewController {
     // MARK: - Variabels
     internal var name: String? //{ didSet { updateUI() } }
     internal var currency: String? //{ didSet { updateUI() } }
+    internal var comeFrom3DTouch = false
 
 
     var managedObjectContext: NSManagedObjectContext? //{ didSet { updateUI() } } //{ didSet { updateUI() } }
@@ -55,13 +56,16 @@ class BorrowingViewController: CoreDataTableViewController {
         self.borrowingHistoryTableView.backgroundColor = BorrowingConstants.BackgroundColor
         borrowingHistoryTableView.separatorColor = BorrowingConstants.NavBarColor
         updateUI()
+        // decide to show or not keyboard
+        if comeFrom3DTouch {
+            showKeyboard()
+        }
         //Looks for single or multiple taps to dismiss keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-    
+
     private func showKeyboard() {
-        print("Show keyboard")
         self.amountTextField.becomeFirstResponder()
     }
     

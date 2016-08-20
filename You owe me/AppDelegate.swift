@@ -97,7 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     // MARK: - Core Data Saving support
-    
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -119,6 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().keyWindow?.rootViewController = navigationController
         if let borrowersVC = navigationController?.viewControllers.first as? BorrowersViewController {
             borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
+            // switch to true to show keyboard in Borrowing VC
+            borrowersVC.openedFrom3dTouch = true
             borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
         }
         completionHandler(true)

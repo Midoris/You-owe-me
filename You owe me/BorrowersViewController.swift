@@ -17,6 +17,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var selectedBorrowerName: String?
     var currncy = "฿"
+    var openedFrom3dTouch: Bool?
     
     @IBOutlet weak var borrowersTableView: UITableView! {
         didSet {
@@ -36,8 +37,8 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        print("did dissapiar, save borrowers")
         self.saveBorrowersFor3DTouch()
+        self.openedFrom3dTouch = nil
     }
     
     // MARK: - Methods
@@ -93,7 +94,6 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                 let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
                 borrowersFor3DTouch.append(["name": name!, "balanceMessage": balanceMessage])
             }
-            print("Borrowers is \(borrowersFor3DTouch), count is \(borrowersFor3DTouch.count)")
             return borrowersFor3DTouch
         }
         return nil
@@ -137,6 +137,8 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                 borrowingVC.managedObjectContext = self.managedObjectContext
                 borrowingVC.name = self.selectedBorrowerName!
                 borrowingVC.currency = self.currncy
+                // decide to show or not keyboard in Borrowing VC
+                borrowingVC.comeFrom3DTouch = self.openedFrom3dTouch ?? false
             }
         } else if segue.identifier == BorrowingConstants.AddBorrowerSegueId {
             if let addBorrowerVC = segue.destinationViewController as? AddBorrowerViewController {
