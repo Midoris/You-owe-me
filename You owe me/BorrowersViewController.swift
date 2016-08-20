@@ -16,7 +16,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     var managedObjectContext: NSManagedObjectContext? =
         (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var selectedBorrowerName: String?
-    var currncy = "฿"
+    var borrowerCurrncy: String?
     var openedFrom3dTouch: Bool?
     
     @IBOutlet weak var borrowersTableView: UITableView! {
@@ -38,6 +38,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         self.saveBorrowersFor3DTouch()
+        // Set to nil so keyboard in Borrowing VC will be shown only if the app is opened from 3d Touch quick action
         self.openedFrom3dTouch = nil
     }
     
@@ -86,12 +87,14 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
             var borrowersFor3DTouch = [[String: String]]()
             for borrower in borrowers {
                 var name: String?
+                var currncy: String?
                 var borrowings = [Borrowed]()
                 borrower.managedObjectContext?.performBlockAndWait {
                     name = borrower.name
+                    currncy = borrower.currency
                     borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
                 }
-                let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
+                let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
                 borrowersFor3DTouch.append(["name": name!, "balanceMessage": balanceMessage])
             }
             return borrowersFor3DTouch
@@ -111,11 +114,11 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // MARK: - Add New Borrower Delegate
-    internal func saveNewBorrowerWithName(name: String) {
+    internal func saveNewBorrowerWithName(name: String, currency: String) {
         managedObjectContext?.performBlock {
             // create a new borrower
             let date = NSDate()
-            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectContext!, date: date)
+            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectContext!, date: date, currency: currency)
             do {
                 try self.managedObjectContext?.save()
             } catch let error {
@@ -136,7 +139,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
             if let borrowingVC = segue.destinationViewController as? BorrowingViewController {
                 borrowingVC.managedObjectContext = self.managedObjectContext
                 borrowingVC.name = self.selectedBorrowerName!
-                borrowingVC.currency = self.currncy
+                borrowingVC.currency = self.borrowerCurrncy
                 // decide to show or not keyboard in Borrowing VC
                 borrowingVC.comeFrom3DTouch = self.openedFrom3dTouch ?? false
             }

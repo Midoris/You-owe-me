@@ -15,15 +15,17 @@ extension BorrowersViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingConstants.BorrowerCellID, forIndexPath: indexPath)
         if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
             var name: String?
+            var currncy: String?
             var borrowings = [Borrowed]()
             borrower.managedObjectContext?.performBlockAndWait {
                 name = borrower.name
+                currncy = borrower.currency
                 borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
             }
             cell.textLabel?.text = "\(name!)"
             cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(22))
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
-            let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: self.currncy)
+            let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
             cell.detailTextLabel?.text = balanceMessage
             cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(13.5))
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
@@ -77,10 +79,13 @@ extension BorrowersViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
             var name: String?
+            var currency: String?
             borrower.managedObjectContext?.performBlockAndWait {
                 name = borrower.name
+                currency = borrower.currency
             }
             selectedBorrowerName = name!
+            borrowerCurrncy = currency!
             self.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: self)
         }
     }

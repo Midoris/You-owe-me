@@ -8,12 +8,13 @@
         <relationship name="borrower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Borrower" inverseName="borrowings" inverseEntity="Borrower" syncable="YES"/>
     </entity>
     <entity name="Borrower" representedClassName=".Borrower" syncable="YES">
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="borrowings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Borrowed" inverseName="borrower" inverseEntity="Borrowed" syncable="YES"/>
     </entity>
     <elements>
         <element name="Borrowed" positionX="-54" positionY="-9" width="128" height="118"/>
-        <element name="Borrower" positionX="-288" positionY="-27" width="128" height="88"/>
+        <element name="Borrower" positionX="-288" positionY="-27" width="128" height="103"/>
     </elements>
 </model>

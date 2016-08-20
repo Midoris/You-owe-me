@@ -12,7 +12,7 @@ import CoreData
 
 class Borrower: NSManagedObject {
 
-    class func borrowerWithInfo(name: String, inManagedObgectContext context: NSManagedObjectContext, date: NSDate) -> Borrower? {
+    class func borrowerWithInfo(name: String, inManagedObgectContext context: NSManagedObjectContext, date: NSDate, currency: String) -> Borrower? {
         let request = NSFetchRequest(entityName: "Borrower")
         request.predicate = NSPredicate(format: "name = %@", name)
         if let borrower = (try? context.executeFetchRequest(request))?.first as? Borrower {
@@ -23,6 +23,7 @@ class Borrower: NSManagedObject {
             // create new borrower
             borrower.modified = date
             borrower.name = name
+            borrower.currency = currency
             return borrower
         }
         return nil
