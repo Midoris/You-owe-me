@@ -118,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().keyWindow?.rootViewController = navigationController
         if let borrowersVC = navigationController?.viewControllers.first as? BorrowersViewController {
             borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
+            borrowersVC.borrowerCurrncy = currencyFromSubtitle(shortcutItem.localizedSubtitle!)
             // switch to true to show keyboard in Borrowing VC
             borrowersVC.openedFrom3dTouch = true
             borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
@@ -125,5 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(true)
     }
     
+    private func currencyFromSubtitle(subtitle: String) -> String {
+        return subtitle.characters.split{$0 == " "}.map(String.init).last!
+    }
 }
 

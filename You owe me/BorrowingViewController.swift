@@ -15,8 +15,8 @@ class BorrowingViewController: CoreDataTableViewController {
     internal var name: String? //{ didSet { updateUI() } }
     internal var currency: String? //{ didSet { updateUI() } }
     internal var comeFrom3DTouch = false
-
-
+    
+    
     var managedObjectContext: NSManagedObjectContext? //{ didSet { updateUI() } } //{ didSet { updateUI() } }
     
     // Outlets
@@ -49,7 +49,7 @@ class BorrowingViewController: CoreDataTableViewController {
         super.viewDidLoad()
         setNeedsDisplay()
     }
-
+    
     // MARK: - Methods
     private func setNeedsDisplay() {
         self.view.backgroundColor = BorrowingConstants.BackgroundColor
@@ -64,7 +64,7 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-
+    
     private func showKeyboard() {
         self.amountTextField.becomeFirstResponder()
     }
@@ -122,7 +122,7 @@ class BorrowingViewController: CoreDataTableViewController {
             print("\(borrowedCount) borrowings")
         }
     }
-        
+    
     internal func updateBalanceLabel() {
         if let borrowings = fetchedResultsController?.fetchedObjects as? [Borrowed] {
             self.balanceLabel.text = borrowingModel.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
@@ -170,12 +170,18 @@ class BorrowingViewController: CoreDataTableViewController {
     @IBAction private func splitBillButtonPressed(sender: UIButton) {
         if self.amountTextField.text != "" {
             if let ammount = Double(amountTextField.text!) {
-                self.amountTextField.text = borrowingModel.stringFromDoubleWithTailingZeroAndRounding(ammount / 2)
+                self.amountTextField.text = calculatedAmount(ammount, dependingOnTag: sender.tag)
             }
         }
     }
     
-
+    private func calculatedAmount(ammount: Double, dependingOnTag tag: Int) -> String {
+        let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double
+        return borrowingModel.stringFromDoubleWithTailingZeroAndRounding(resoult)
+    }
+    
+    
+    
     
     
 }
