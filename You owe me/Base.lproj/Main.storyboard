@@ -117,23 +117,45 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLE-bl-ule">
-                                <rect key="frame" x="0.0" y="154" width="375" height="216"/>
-                            </pickerView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAK-Ok-tPk">
-                                <rect key="frame" x="65" y="100" width="245" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAK-Ok-tPk">
+                                <rect key="frame" x="61" y="96" width="253" height="30"/>
                                 <color key="backgroundColor" red="0.74901960784313726" green="0.74901960784313726" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select currency:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcs-qW-ogg">
+                                <rect key="frame" x="108" y="140" width="158" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="FKP-Uo-ReQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
+                                <color key="textColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLE-bl-ule">
+                                <rect key="frame" x="-8" y="169" width="391" height="185"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="185" id="flv-vW-mCA"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="k9V-U0-haR" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-16" id="7DP-jc-rnZ"/>
                             <constraint firstItem="k9V-U0-haR" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-20" id="BBk-cg-NPW"/>
                             <constraint firstItem="k9V-U0-haR" firstAttribute="top" secondItem="L5u-RC-wh8" secondAttribute="topMargin" id="HrW-kR-GIK"/>
+                            <constraint firstItem="jcs-qW-ogg" firstAttribute="centerX" secondItem="L5u-RC-wh8" secondAttribute="centerX" id="NCF-VF-ksJ"/>
+                            <constraint firstItem="OAK-Ok-tPk" firstAttribute="top" secondItem="k9V-U0-haR" secondAttribute="bottom" constant="32" id="Qv2-us-5fv"/>
+                            <constraint firstItem="fLE-bl-ule" firstAttribute="top" secondItem="jcs-qW-ogg" secondAttribute="bottom" id="TU1-Q6-75S"/>
+                            <constraint firstItem="fLE-bl-ule" firstAttribute="centerX" secondItem="L5u-RC-wh8" secondAttribute="centerX" id="ZWB-pS-m0t"/>
+                            <constraint firstItem="OAK-Ok-tPk" firstAttribute="centerX" secondItem="L5u-RC-wh8" secondAttribute="centerX" id="e1S-B3-Ntb"/>
+                            <constraint firstItem="OAK-Ok-tPk" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="45" id="gqu-It-CC1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OAK-Ok-tPk" secondAttribute="trailing" constant="45" id="mFX-7K-4u8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="k9V-U0-haR" secondAttribute="trailing" constant="-16" id="nOs-cf-sxX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fLE-bl-ule" secondAttribute="trailing" constant="-24" id="qTn-ip-VUB"/>
+                            <constraint firstItem="jcs-qW-ogg" firstAttribute="top" secondItem="OAK-Ok-tPk" secondAttribute="bottom" constant="14" id="vcH-bH-E7S"/>
+                            <constraint firstItem="fLE-bl-ule" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-24" id="yMh-fE-lbi"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -146,6 +168,7 @@
                         <outlet property="borrowerNameTextField" destination="OAK-Ok-tPk" id="Ion-4V-Yxx"/>
                         <outlet property="currencyPicker" destination="fLE-bl-ule" id="vyC-sf-hwx"/>
                         <outlet property="saveButton" destination="TYh-Mn-XxL" id="kQq-Sy-EG0"/>
+                        <outlet property="selectedCurrencyLabel" destination="jcs-qW-ogg" id="Ggc-kR-rxr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhT-zr-6VY" userLabel="First Responder" sceneMemberID="firstResponder"/>

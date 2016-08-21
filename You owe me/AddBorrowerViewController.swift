@@ -28,6 +28,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
         }
     }
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var selectedCurrencyLabel: UILabel!
     private let limitLength = 12
     private var currencies = [String]()
     private var selectedCurrency: String?
@@ -62,6 +63,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCurrency = BorrowingConstants.Currencies[currencies[row]]!
+        selectedCurrencyLabel.text = selectedCurrency
         saveButton.enabled = true
     }
     

@@ -78,6 +78,12 @@ class SharedBorrowingModel {
         return String(format: "%g", roundedNumber)
     }
     
+    func calculatedAmount(ammount: Double, dependingOnTag tag: Int) -> String {
+        let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double
+        return self.stringFromDoubleWithTailingZeroAndRounding(resoult)
+    }
+
+    
     
 }
 

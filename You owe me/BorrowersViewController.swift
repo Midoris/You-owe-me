@@ -26,7 +26,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // Model
-    let borrowingModel = SharedBorrowingModel()
+    let sharedBorrowingModel = SharedBorrowingModel()
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
@@ -94,7 +94,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                     currncy = borrower.currency
                     borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
                 }
-                let balanceMessage = borrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
+                let balanceMessage = sharedBorrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
                 borrowersFor3DTouch.append(["name": name!, "balanceMessage": balanceMessage])
             }
             return borrowersFor3DTouch
