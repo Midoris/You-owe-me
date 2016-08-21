@@ -126,6 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(true)
     }
     
+    // Get currancy
     private func currencyFromSubtitle(subtitle: String) -> String {
         return subtitle.characters.split{$0 == " "}.map(String.init).last!
     }

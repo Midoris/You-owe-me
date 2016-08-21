@@ -62,6 +62,7 @@ class BorrowingViewController: CoreDataTableViewController {
         //Looks for single or multiple taps to dismiss keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        setImageForSwitchButton()
     }
     
     private func showKeyboard() {
@@ -126,6 +127,12 @@ class BorrowingViewController: CoreDataTableViewController {
         if let borrowings = fetchedResultsController?.fetchedObjects as? [Borrowed] {
             self.balanceLabel.text = sharedBorrowingModel.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
         }
+    }
+    
+    private func setImageForSwitchButton() {
+        let tintedImage = UIImage(named: "icon_switch")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        self.switchButton.setImage(tintedImage, forState: .Normal)
+        self.switchButton.tintColor = BorrowingConstants.DarkBlueCOlor
     }
     
     private func clean() {

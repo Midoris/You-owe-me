@@ -29,7 +29,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var selectedCurrencyLabel: UILabel!
-    private let limitLength = 12
+    private let limitLength = 9
     private var currencies = [String]()
     private var selectedCurrency: String?
 
