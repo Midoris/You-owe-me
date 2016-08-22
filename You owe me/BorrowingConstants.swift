@@ -30,7 +30,7 @@ struct BorrowingConstants {
     static let DarkRedColor = UIColor(red: 195/255, green: 0/255, blue: 22/255, alpha: 1)
     
     // Quick items limit
-    static let QuickItemLimit = 5
+    static let QuickItemLimit = 3
     
     // Currencies
     static let Currencies = [
