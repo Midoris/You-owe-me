@@ -39,6 +39,9 @@ class BorrowingViewController: CoreDataTableViewController {
     @IBOutlet weak private var amountTextField: UITextField!
     @IBOutlet weak private var submitButton: UIButton!
     @IBOutlet weak private var switchButton: UIButton!
+    @IBOutlet weak var splitButton: UIButton!
+    @IBOutlet weak var doubleButton: UIButton!
+    
     
     // Model
     let sharedBorrowingModel = SharedBorrowingModel()
@@ -63,6 +66,9 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         setImageForSwitchButton()
+        setBorderForButton(submitButton)
+        setBorderForButton(splitButton)
+        setBorderForButton(doubleButton)
     }
     
     private func showKeyboard() {
@@ -93,7 +99,7 @@ class BorrowingViewController: CoreDataTableViewController {
         })
     }
     
-    private func updateDataBase() {
+    func updateDataBase() {
         managedObjectContext?.performBlock {
             // create a new borrowed
             if self.amountTextField.text != "" {
@@ -132,7 +138,13 @@ class BorrowingViewController: CoreDataTableViewController {
     private func setImageForSwitchButton() {
         let tintedImage = UIImage(named: "icon_switch")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.switchButton.setImage(tintedImage, forState: .Normal)
-        self.switchButton.tintColor = BorrowingConstants.DarkBlueCOlor
+        self.switchButton.tintColor = BorrowingConstants.DarkBlueColor
+    }
+    
+    private func setBorderForButton(button: UIButton) {
+        button.layer.borderWidth = 1
+        button.layer.borderColor = BorrowingConstants.DarkBlueColor.CGColor
+        button.layer.cornerRadius = 5
     }
     
     private func clean() {
@@ -180,10 +192,6 @@ class BorrowingViewController: CoreDataTableViewController {
             }
         }
     }
-    
-        
-    
-    
     
     
 }

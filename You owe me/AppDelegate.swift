@@ -117,8 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         UIApplication.sharedApplication().keyWindow?.rootViewController = navigationController
         if let borrowersVC = navigationController?.viewControllers.first as? BorrowersViewController {
-            borrowersVC.selectedBorrowerName = shortcutItem.localizedTitle
-            borrowersVC.borrowerCurrncy = currencyFromSubtitle(shortcutItem.localizedSubtitle!)
+            let name = shortcutItem.localizedTitle
+            borrowersVC.selectedBorrowerName = name
+            borrowersVC.borrowerCurrncy = currencyFromName(name, inManagedObgectContext: managedObjectContext)
             // switch to true to show keyboard in Borrowing VC
             borrowersVC.openedFrom3dTouch = true
             borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
@@ -127,8 +128,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // Get currancy
-    private func currencyFromSubtitle(subtitle: String) -> String {
-        return subtitle.characters.split{$0 == " "}.map(String.init).last!
+    private func currencyFromName(name: String, inManagedObgectContext context: NSManagedObjectContext ) -> String? {
+        var currency: String?
+        context.performBlockAndWait {
+            let request = NSFetchRequest(entityName: "Borrower")
+            request.predicate = NSPredicate(format: "name = %@", name)
+            if let borrower = (try? context.executeFetchRequest(request))?.first as? Borrower {
+                    currency = borrower.currency
+            }
+        }
+        return currency
     }
 }
 
