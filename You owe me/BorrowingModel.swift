@@ -81,7 +81,7 @@ class BorrowingModel {
     
     func calculatedAmount(ammount: Double, dependingOnTag tag: Int) -> String {
         let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double
-        return SheredFunctions.stringFromDoubleWithTailingZeroAndRounding(resoult)
+        return SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(resoult)
     }
     
 

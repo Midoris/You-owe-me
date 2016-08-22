@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct SheredFunctions {
+struct SharedFunctions {
     
     // Show Error Alert
     static func showErrorAlert(controller: UIViewController) {
@@ -21,12 +21,12 @@ struct SheredFunctions {
     
     // Get calculated balance and return it in message depending on is it negative or positive
     static func balanceMessageWithBorrowerName(name: String, borrowings: [Borrowed], andCurrency currency: String) -> String {
-        let balance = SheredFunctions.countedBalance(borrowings)
+        let balance = SharedFunctions.countedBalance(borrowings)
         switch balance {
         case let x where x > 0 :
-            return "\(name) owe me \(SheredFunctions.stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
+            return "\(name) owe me \(SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
         case let x where x < 0:
-            return "I owe \(name) \(SheredFunctions.stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
+            return "I owe \(name) \(SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
         default:
             return "clear balance"
         }

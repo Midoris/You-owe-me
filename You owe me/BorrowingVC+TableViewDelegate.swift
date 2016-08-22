@@ -28,7 +28,7 @@ extension BorrowingViewController {
                 iBorrowed = Bool(borrowed.iBorrowed!)
             }
             let message = sharedBorrowingModel.messageWithBorrowingState(iBorrowed!, andName: name!)
-            cell.textLabel?.text = "\(message) \(SheredFunctions.stringFromDoubleWithTailingZeroAndRounding(amount!)) \(currency!)"
+            cell.textLabel?.text = "\(message) \(SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(amount!)) \(currency!)"
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
             cell.detailTextLabel?.text = sharedBorrowingModel.dateStringFromDate(date!)
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
@@ -48,7 +48,7 @@ extension BorrowingViewController {
                     } catch let error {
                         print("Core Data Error: \(error)")
                         // Notify User
-                        SheredFunctions.showErrorAlert(self)
+                        SharedFunctions.showErrorAlert(self)
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), {

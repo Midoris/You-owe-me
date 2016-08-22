@@ -112,7 +112,7 @@ class BorrowingViewController: CoreDataTableViewController {
                 } catch let error {
                     print("Core Data Error: \(error)")
                     // Notify User
-                    SheredFunctions.showErrorAlert(self)
+                    SharedFunctions.showErrorAlert(self)
                 }
             }
             self.clean()
@@ -139,14 +139,14 @@ class BorrowingViewController: CoreDataTableViewController {
             } catch let error {
                 print("Core Data Error: \(error)")
                 // Notify User
-                SheredFunctions.showErrorAlert(self)
+                SharedFunctions.showErrorAlert(self)
             }
         }
     }
     
     internal func updateBalanceLabel() {
         if let borrowings = fetchedResultsController?.fetchedObjects as? [Borrowed] {
-            self.balanceLabel.text = SheredFunctions.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
+            self.balanceLabel.text = SharedFunctions.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
         }
     }
     
@@ -190,7 +190,7 @@ class BorrowingViewController: CoreDataTableViewController {
                         } catch let error {
                             print("Core Data Error: \(error)")
                             // Notify User
-                            SheredFunctions.showErrorAlert(self)
+                            SharedFunctions.showErrorAlert(self)
                         }
                     }
                 }
