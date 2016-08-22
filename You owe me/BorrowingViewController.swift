@@ -44,7 +44,7 @@ class BorrowingViewController: CoreDataTableViewController {
     
     
     // Model
-    let sharedBorrowingModel = SharedBorrowingModel()
+    let sharedBorrowingModel = BorrowingModel()
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
@@ -111,7 +111,8 @@ class BorrowingViewController: CoreDataTableViewController {
                     self.updateBalanceLabel()
                 } catch let error {
                     print("Core Data Error: \(error)")
-                    // TODO: Notify User
+                    // Notify User
+                    SheredFunctions.showErrorAlert(self)
                 }
             }
             self.clean()
@@ -131,22 +132,21 @@ class BorrowingViewController: CoreDataTableViewController {
     
     func updateModifiedDateForBorrowerName(name: String) {
         managedObjectContext?.performBlock {
-            // create a new borrower
             let date = NSDate()
             _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectContext!, date: date, currency: self.currency!)
             do {
                 try self.managedObjectContext?.save()
             } catch let error {
                 print("Core Data Error: \(error)")
-                // TODO: Notify User
+                // Notify User
+                SheredFunctions.showErrorAlert(self)
             }
         }
-
     }
     
     internal func updateBalanceLabel() {
         if let borrowings = fetchedResultsController?.fetchedObjects as? [Borrowed] {
-            self.balanceLabel.text = sharedBorrowingModel.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
+            self.balanceLabel.text = SheredFunctions.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
         }
     }
     
@@ -189,7 +189,8 @@ class BorrowingViewController: CoreDataTableViewController {
                             try self.managedObjectContext!.save()
                         } catch let error {
                             print("Core Data Error: \(error)")
-                            // TODO: Notify User
+                            // Notify User
+                            SheredFunctions.showErrorAlert(self)
                         }
                     }
                 }
@@ -207,7 +208,6 @@ class BorrowingViewController: CoreDataTableViewController {
             }
         }
     }
-    
-    
+        
 }
 

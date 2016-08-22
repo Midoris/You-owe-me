@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060793FC1D6ACEEA00033D93 /* SheredFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060793FB1D6ACEEA00033D93 /* SheredFunctions.swift */; };
 		062808431D50B118008B967C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808421D50B118008B967C /* AppDelegate.swift */; };
 		062808451D50B118008B967C /* BorrowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808441D50B118008B967C /* BorrowingViewController.swift */; };
 		062808481D50B118008B967C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 062808461D50B118008B967C /* Main.storyboard */; };
@@ -17,7 +18,7 @@
 		062808661D50B118008B967C /* You_owe_meUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808651D50B118008B967C /* You_owe_meUITests.swift */; };
 		062808741D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */; };
 		062808761D50B609008B967C /* BorrowingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808751D50B609008B967C /* BorrowingConstants.swift */; };
-		0628087D1D50C0D6008B967C /* SharedBorrowingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087C1D50C0D6008B967C /* SharedBorrowingModel.swift */; };
+		0628087D1D50C0D6008B967C /* BorrowingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628087C1D50C0D6008B967C /* BorrowingModel.swift */; };
 		062808811D53044B008B967C /* BorrowingModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808801D53044B008B967C /* BorrowingModelTests.swift */; };
 		062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */; };
 		062808951D589E6C008B967C /* Borrower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808911D589E6C008B967C /* Borrower.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		060793FB1D6ACEEA00033D93 /* SheredFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheredFunctions.swift; sourceTree = "<group>"; };
 		0628083F1D50B118008B967C /* You owe me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "You owe me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		062808421D50B118008B967C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		062808441D50B118008B967C /* BorrowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowingViewController.swift; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 		062808671D50B118008B967C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowingVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		062808751D50B609008B967C /* BorrowingConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingConstants.swift; sourceTree = "<group>"; };
-		0628087C1D50C0D6008B967C /* SharedBorrowingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedBorrowingModel.swift; sourceTree = "<group>"; };
+		0628087C1D50C0D6008B967C /* BorrowingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModel.swift; sourceTree = "<group>"; };
 		062808801D53044B008B967C /* BorrowingModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowingModelTests.swift; sourceTree = "<group>"; };
 		062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Borrower+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		062808911D589E6C008B967C /* Borrower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borrower.swift; sourceTree = "<group>"; };
@@ -130,6 +132,8 @@
 				062808771D50B9D0008B967C /* Borrowing Group */,
 				062808A81D603A00008B967C /* Supporting files */,
 				062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */,
+				062808751D50B609008B967C /* BorrowingConstants.swift */,
+				060793FB1D6ACEEA00033D93 /* SheredFunctions.swift */,
 			);
 			path = "You owe me";
 			sourceTree = "<group>";
@@ -157,9 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				062808441D50B118008B967C /* BorrowingViewController.swift */,
-				0628087C1D50C0D6008B967C /* SharedBorrowingModel.swift */,
 				062808731D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift */,
-				062808751D50B609008B967C /* BorrowingConstants.swift */,
+				0628087C1D50C0D6008B967C /* BorrowingModel.swift */,
 			);
 			name = "Borrowing Group";
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				062808761D50B609008B967C /* BorrowingConstants.swift in Sources */,
 				0628089A1D58B5B4008B967C /* CoreDataTableViewController.swift in Sources */,
 				062808941D589E6C008B967C /* Borrower+CoreDataProperties.swift in Sources */,
+				060793FC1D6ACEEA00033D93 /* SheredFunctions.swift in Sources */,
 				062808A11D5F065E008B967C /* AddBorrowerViewController.swift in Sources */,
 				062808AA1D62E8E9008B967C /* BorrowersNavigationController.swift in Sources */,
 				0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */,
@@ -341,7 +345,7 @@
 				0628084B1D50B118008B967C /* You_owe_me.xcdatamodeld in Sources */,
 				062808741D50B48E008B967C /* BorrowingVC+TableViewDelegate.swift in Sources */,
 				062808961D589E6C008B967C /* Borrowed+CoreDataProperties.swift in Sources */,
-				0628087D1D50C0D6008B967C /* SharedBorrowingModel.swift in Sources */,
+				0628087D1D50C0D6008B967C /* BorrowingModel.swift in Sources */,
 				062808951D589E6C008B967C /* Borrower.swift in Sources */,
 				062808971D589E6C008B967C /* Borrowed.swift in Sources */,
 				0628089C1D5A0ACA008B967C /* BorrowersViewController.swift in Sources */,

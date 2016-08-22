@@ -25,9 +25,6 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         }
     }
     
-    // Model
-    let sharedBorrowingModel = SharedBorrowingModel()
-    
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +91,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                     currncy = borrower.currency
                     borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
                 }
-                let balanceMessage = sharedBorrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
+                let balanceMessage = SheredFunctions.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
                 borrowersFor3DTouch.append(["name": name!, "balanceMessage": balanceMessage])
             }
             return borrowersFor3DTouch
@@ -123,7 +120,8 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                 try self.managedObjectContext?.save()
             } catch let error {
                 print("Core Data Error: \(error)")
-                // TODO: Notify User
+                // Notify User
+                SheredFunctions.showErrorAlert(self)
             }
         }
     }

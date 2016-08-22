@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SharedBorrowingModel {
+class BorrowingModel {
     
     // MARK: - Variabels
     internal var iBorrowed = false
@@ -39,6 +39,19 @@ class SharedBorrowingModel {
         return messageWithBorrowingState(iBorrowed, andName: name)
     }
     
+//    private func countedBalance(borrowings: [Borrowed]) -> Double {
+//        var balance = 0.0
+//        for borrowed in borrowings {
+//            let state = Bool(borrowed.iBorrowed!)
+//            let amount = Double(borrowed.amount!)
+//            switch state {
+//            case true : balance += amount
+//            case false: balance -= amount
+//            }
+//        }
+//        return balance
+//    }
+    
     internal func messageWithBorrowingState(state: Bool, andName name: String) -> String {
         switch state {
         case true:
@@ -47,41 +60,30 @@ class SharedBorrowingModel {
             return "\(name) borrowed me"
         }
     }
+
     
-    private func countedBalance(borrowings: [Borrowed]) -> Double {
-        var balance = 0.0
-        for borrowed in borrowings {
-            let state = Bool(borrowed.iBorrowed!)
-            let amount = Double(borrowed.amount!)
-            switch state {
-            case true : balance += amount
-            case false: balance -= amount
-            }
-        }
-        return balance
-    }
+//    func balanceMessageWithBorrowerName(name: String, borrowings: [Borrowed], andCurrency currency: String) -> String {
+//        let balance = countedBalance(borrowings)
+//        switch balance {
+//        case let x where x > 0 :
+//            return "\(name) owe me \(stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
+//        case let x where x < 0:
+//            return "I owe \(name) \(stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
+//        default:
+//            return "clear balance"
+//        }
+//    }
     
-    internal func balanceMessageWithBorrowerName(name: String, borrowings: [Borrowed], andCurrency currency: String) -> String {
-        let balance = countedBalance(borrowings)
-        switch balance {
-        case let x where x > 0 :
-            return "\(name) owe me \(stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
-        case let x where x < 0:
-            return "I owe \(name) \(stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
-        default:
-            return "clear balance"
-        }
-    }
-    
-    func stringFromDoubleWithTailingZeroAndRounding(number: Double) -> String{
-        let roundedNumber = Double(round(10*number)/10)
-        return String(format: "%g", roundedNumber)
-    }
+//    func stringFromDoubleWithTailingZeroAndRounding(number: Double) -> String{
+//        let roundedNumber = Double(round(10*number)/10)
+//        return String(format: "%g", roundedNumber)
+//    }
     
     func calculatedAmount(ammount: Double, dependingOnTag tag: Int) -> String {
         let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double
-        return self.stringFromDoubleWithTailingZeroAndRounding(resoult)
+        return SheredFunctions.stringFromDoubleWithTailingZeroAndRounding(resoult)
     }
+    
 
     
     

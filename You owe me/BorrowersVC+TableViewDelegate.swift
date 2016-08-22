@@ -25,7 +25,7 @@ extension BorrowersViewController {
             cell.textLabel?.text = "\(name!)"
             cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(22))
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
-            let balanceMessage = sharedBorrowingModel.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
+            let balanceMessage = SheredFunctions.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
             cell.detailTextLabel?.text = balanceMessage
             cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(13.5))
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
@@ -44,7 +44,8 @@ extension BorrowersViewController {
                         try self.managedObjectContext!.save()
                     } catch let error {
                         print("Core Data Error: \(error)")
-                        // TODO: Notify User
+                        // Notify User
+                        SheredFunctions.showErrorAlert(self)
                     }
                 }
             }
