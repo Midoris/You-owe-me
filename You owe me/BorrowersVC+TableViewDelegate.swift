@@ -35,29 +35,7 @@ extension BorrowersViewController {
         return cell
     }
     
-//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == UITableViewCellEditingStyle.Delete {
-//            if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
-//                borrower.managedObjectContext?.performBlockAndWait {
-//                    borrower.managedObjectContext?.deleteObject(borrower)
-//                    do {
-//                        try self.managedObjectCOntext!.save()
-//                    } catch let error {
-//                        print("Core Data Error: \(error)")
-//                        // TODO: Notify User
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        /*
-         let edite = UITableViewRowAction(style: .Normal, title: "Edite") { action, index in
-         print("edite button tapped")
-         }
-         edite.backgroundColor = UIColor.grayColor()
-         */
         let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
             if let borrower = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
                 borrower.managedObjectContext?.performBlockAndWait {
@@ -72,7 +50,7 @@ extension BorrowersViewController {
             }
         }
         delete.backgroundColor = BorrowingConstants.DarkRedColor
-        return [delete/*, edite*/]
+        return [delete]
     }
 
     
