@@ -84,9 +84,6 @@ class BorrowingModel {
         return SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(resoult)
     }
     
-
-    
-    
 }
 
 

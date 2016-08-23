@@ -132,10 +132,8 @@
 				062808981D589EDD008B967C /* Core Data */,
 				0628089F1D5DC098008B967C /* Borrowers Group */,
 				062808771D50B9D0008B967C /* Borrowing Group */,
+				06E457281D6C2C30005A5E6B /* Shared files */,
 				062808A81D603A00008B967C /* Supporting files */,
-				062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */,
-				062808751D50B609008B967C /* BorrowingConstants.swift */,
-				060793FB1D6ACEEA00033D93 /* SheredFunctions.swift */,
 			);
 			path = "You owe me";
 			sourceTree = "<group>";
@@ -173,11 +171,11 @@
 		062808981D589EDD008B967C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				062808491D50B118008B967C /* You_owe_me.xcdatamodeld */,
 				062808901D589E6C008B967C /* Borrower+CoreDataProperties.swift */,
 				062808911D589E6C008B967C /* Borrower.swift */,
 				062808921D589E6C008B967C /* Borrowed+CoreDataProperties.swift */,
 				062808931D589E6C008B967C /* Borrowed.swift */,
-				062808491D50B118008B967C /* You_owe_me.xcdatamodeld */,
 				062808991D58B5B4008B967C /* CoreDataTableViewController.swift */,
 			);
 			name = "Core Data";
@@ -203,6 +201,16 @@
 				062808511D50B118008B967C /* Info.plist */,
 			);
 			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		06E457281D6C2C30005A5E6B /* Shared files */ = {
+			isa = PBXGroup;
+			children = (
+				062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */,
+				062808751D50B609008B967C /* BorrowingConstants.swift */,
+				060793FB1D6ACEEA00033D93 /* SheredFunctions.swift */,
+			);
+			name = "Shared files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

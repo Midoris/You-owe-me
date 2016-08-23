@@ -12,14 +12,12 @@ class BorrowersNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Set colors
         let navigationBar = self.navigationBar
         navigationBar.translucent = false
         navigationBar.barTintColor = BorrowingConstants.NavBarColor
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationBar.tintColor = UIColor.whiteColor()
-
     }
 
   
