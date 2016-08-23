@@ -127,7 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(true)
     }
     
-    // MARK: Custom Methods
     // Get currancy
     private func currencyFromName(name: String, inManagedObgectContext context: NSManagedObjectContext ) -> String? {
         var currency: String?
