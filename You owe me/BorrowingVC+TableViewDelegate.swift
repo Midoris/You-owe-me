@@ -27,10 +27,10 @@ extension BorrowingViewController {
                 currency = borrowed.currency!
                 iBorrowed = Bool(borrowed.iBorrowed!)
             }
-            let message = sharedBorrowingModel.messageWithBorrowingState(iBorrowed!, andName: name!)
+            let message = borrowingModel.messageWithBorrowingState(iBorrowed!, andName: name!)
             cell.textLabel?.text = "\(message) \(SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(amount!)) \(currency!)"
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
-            cell.detailTextLabel?.text = sharedBorrowingModel.dateStringFromDate(date!)
+            cell.detailTextLabel?.text = borrowingModel.dateStringFromDate(date!)
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
         }
         cell.selectionStyle = .None

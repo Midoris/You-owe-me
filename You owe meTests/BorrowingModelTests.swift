@@ -16,35 +16,40 @@ class BorrowingModelTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         borrowingModel = BorrowingModel()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    
-    func testGetMessageWithName() {
+    func testMessageWithName() {
         let name = "Mark"
-        let message = borrowingModel!.switchMessageWithName(name)
+        let message = borrowingModel!.switchedMessageWithName(name)
         XCTAssertTrue(message == "I borrowed \(name)", "Returned message isn't correct")
     }
-    
-    func testCreateNewBorrowedItem() {
-        let numberOFItemsBeforeNewOneAdded = borrowingModel?.borrowedItems.count
-        borrowingModel?.createNewBorrowedItemWithFriend("Mark borrowed me", amount: 56, andCurrency: "$")
-        XCTAssertTrue(borrowingModel?.borrowedItems.count > numberOFItemsBeforeNewOneAdded, "New borrowed item wasn't added to borrowedItems")
-    }
-    
-    func testGetMessageWithBorrowingState() {
+
+    func testMessageWithBorrowingState() {
+        // case 1
         let expectedMessage = "Mark borrowed me"
-        let result = borrowingModel?.getMessageWithBorrowingState(.Minus, andName: "Mark")
+        let result = borrowingModel?.messageWithBorrowingState(false, andName: "Mark")
         XCTAssertTrue(expectedMessage == result, "Created message is wrong")
+        // case 2
+        let expectedMessage2 = "I borrowed John"
+        let result2 = borrowingModel?.messageWithBorrowingState(true, andName: "John")
+        XCTAssertTrue(expectedMessage2 == result2, "Created message is wrong")
     }
-    
-    
+
+    func testCalculatedAmount() {
+        // case 1
+        let expectedString1 = "72.5"
+        let result1 = borrowingModel?.calculatedAmount(145, dependingOnTag: 0)
+        XCTAssertTrue(expectedString1 == result1, "Returned String is wrong")
+        // case 2
+        let expectedString2 = "72"
+        let result2 = borrowingModel?.calculatedAmount(36, dependingOnTag: 1)
+        XCTAssertTrue(expectedString2 == result2, "Returned String is wrong")
+    }
     
         
 }

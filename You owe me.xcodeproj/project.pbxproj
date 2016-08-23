@@ -29,6 +29,7 @@
 		0628089E1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */; };
 		062808A11D5F065E008B967C /* AddBorrowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808A01D5F065E008B967C /* AddBorrowerViewController.swift */; };
 		062808AA1D62E8E9008B967C /* BorrowersNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */; };
+		06E457271D6C1BE8005A5E6B /* SharedFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E457261D6C1BE8005A5E6B /* SharedFunctionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		0628089D1D5DC092008B967C /* BorrowersVC+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BorrowersVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		062808A01D5F065E008B967C /* AddBorrowerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorrowerViewController.swift; sourceTree = "<group>"; };
 		062808A91D62E8E9008B967C /* BorrowersNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowersNavigationController.swift; sourceTree = "<group>"; };
+		06E457261D6C1BE8005A5E6B /* SharedFunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			children = (
 				0628085A1D50B118008B967C /* You_owe_meTests.swift */,
 				062808801D53044B008B967C /* BorrowingModelTests.swift */,
+				06E457261D6C1BE8005A5E6B /* SharedFunctionsTests.swift */,
 				0628085C1D50B118008B967C /* Info.plist */,
 			);
 			path = "You owe meTests";
@@ -358,6 +361,7 @@
 			files = (
 				0628085B1D50B118008B967C /* You_owe_meTests.swift in Sources */,
 				062808811D53044B008B967C /* BorrowingModelTests.swift in Sources */,
+				06E457271D6C1BE8005A5E6B /* SharedFunctionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

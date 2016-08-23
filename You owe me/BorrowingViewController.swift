@@ -27,7 +27,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     @IBOutlet weak private var borrowMessageLabel: UILabel! {
         didSet {
-            borrowMessageLabel.text = sharedBorrowingModel.switchedMessageWithName(self.name!)
+            borrowMessageLabel.text = borrowingModel.switchedMessageWithName(self.name!)
         }
     }
     @IBOutlet weak private var currencyLabel: UILabel! {
@@ -35,16 +35,16 @@ class BorrowingViewController: CoreDataTableViewController {
             currencyLabel.text = self.currency
         }
     }
-    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak private var balanceLabel: UILabel!
     @IBOutlet weak private var amountTextField: UITextField!
     @IBOutlet weak private var submitButton: UIButton!
     @IBOutlet weak private var switchButton: UIButton!
-    @IBOutlet weak var splitButton: UIButton!
-    @IBOutlet weak var doubleButton: UIButton!
+    @IBOutlet weak private var splitButton: UIButton!
+    @IBOutlet weak private var doubleButton: UIButton!
     
     
     // Model
-    let sharedBorrowingModel = BorrowingModel()
+    let borrowingModel = BorrowingModel()
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
@@ -99,13 +99,13 @@ class BorrowingViewController: CoreDataTableViewController {
         })
     }
     
-    func updateDataBase() {
+    private func updateDataBase() {
         managedObjectContext?.performBlock {
             // create a new borrowed
             if self.amountTextField.text != "" {
                 let amount = Double(self.amountTextField.text!)
                 let date = NSDate()
-                _ = Borrowed.borrowedWithInfo(self.name!, iBorrowed: self.sharedBorrowingModel.iBorrowed, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectContext!)
+                _ = Borrowed.borrowedWithInfo(self.name!, iBorrowed: self.borrowingModel.iBorrowed, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectContext!)
                 do {
                     try self.managedObjectContext?.save()
                     self.updateBalanceLabel()
@@ -176,7 +176,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     @IBAction private func switchButtonPressed(sender: UIButton) {
-        borrowMessageLabel.text = sharedBorrowingModel.switchedMessageWithName(self.name!)
+        borrowMessageLabel.text = borrowingModel.switchedMessageWithName(self.name!)
     }
     
     @IBAction private func clearAllButtonPressed(sender: UIButton) {
@@ -204,7 +204,7 @@ class BorrowingViewController: CoreDataTableViewController {
     @IBAction private func splitBillButtonPressed(sender: UIButton) {
         if self.amountTextField.text != "" {
             if let ammount = Double(amountTextField.text!) {
-                self.amountTextField.text = sharedBorrowingModel.calculatedAmount(ammount, dependingOnTag: sender.tag)
+                self.amountTextField.text = borrowingModel.calculatedAmount(ammount, dependingOnTag: sender.tag)
             }
         }
     }
