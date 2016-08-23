@@ -39,12 +39,17 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         self.openedFrom3dTouch = nil
     }
     
+    deinit {
+        print("observer was removerd")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     // MARK: - Methods
     private func setNeedsDisplay() {
         self.view.backgroundColor = BorrowingConstants.BackgroundColor
         self.borrowersTableView.backgroundColor = BorrowingConstants.BackgroundColor
-        updateUI()
         self.borrowersTableView.separatorStyle = .None
+        updateUI()
     }
     
     private func addShortcutItemsFromBorrowers(borrowers: [[String: String]]) {

@@ -19,6 +19,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     @IBOutlet weak private var borrowerNameTextField: UITextField! {
         didSet {
             self.borrowerNameTextField.delegate = self
+            self.borrowerNameTextField.addTarget(self, action: #selector(AddBorrowerViewController.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         }
     }
     @IBOutlet weak var currencyPicker: UIPickerView!{
@@ -32,13 +33,16 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     private let limitLength = 9
     private var currencies = [String]()
     private var selectedCurrency: String?
-
+    
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         showKeyboard()
         self.currencies = parsedCurrencies()
-        saveButton.enabled = false
+        saveButton.enabled = canSaveWhen(
+            self.borrowerNameTextField.text?.characters.count > 0,
+            andCurrencySelected: selectedCurrency != nil
+        )
     }
     
     // MARK: - Text Field delegate
@@ -46,6 +50,10 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
         return newLength <= limitLength
+    }
+    
+    func textFieldDidChange(textField: UITextField) {
+        saveButton.enabled = canSaveWhen(self.borrowerNameTextField.text?.characters.count > 0, andCurrencySelected: selectedCurrency != nil)
     }
     
     // MARK: - Picker delegate and data source
@@ -64,7 +72,10 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCurrency = BorrowingConstants.Currencies[currencies[row]]!
         selectedCurrencyLabel.text = selectedCurrency
-        saveButton.enabled = true
+        saveButton.enabled = canSaveWhen(
+            self.borrowerNameTextField.text?.characters.count > 0,
+            andCurrencySelected: selectedCurrency != nil
+        )
     }
     
     // MARK: - Methods
@@ -76,6 +87,11 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
         view.endEditing(true)
     }
     
+    private func canSaveWhen(textFieldIsNotEmpty: Bool, andCurrencySelected selected: Bool) -> Bool {
+        guard textFieldIsNotEmpty && selected else { return false }
+        return true
+    }
+    
     private func parsedCurrencies() -> [String] {
         var currencies = [String]()
         for (currency,_) in BorrowingConstants.Currencies {
@@ -83,7 +99,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
         }
         return currencies.sort()
     }
-
+    
     private func dismissVC() {
         dismissKeyboard()
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -95,15 +111,13 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     
     @IBAction private func saveButtonPressed(sender: UIBarButtonItem) {
-        if borrowerNameTextField.text!.characters.count > 0 {
-            // Trim spaces from the name
-            let name = borrowerNameTextField.text!.stringByTrimmingCharactersInSet(
-                NSCharacterSet.whitespaceAndNewlineCharacterSet()
-            )
-            addBorrowerDelegate?.saveNewBorrowerWithName(name, currency: selectedCurrency!)
-            dismissVC()
-        }
+        // Trim spaces from the name
+        let name = borrowerNameTextField.text!.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
+        addBorrowerDelegate?.saveNewBorrowerWithName(name, currency: selectedCurrency!)
+        dismissVC()
     }
-      
-   
+    
+    
 }
