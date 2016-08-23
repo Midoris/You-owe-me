@@ -15,7 +15,11 @@ struct BorrowingConstants {
     static let BorrowerCellID = "BorrowerCell"
     
     // Notification names
-    static let UpdateUI = "ReloadData"
+    static let SaveBorrowersFor3DTouch = "SaveBorrowersFor3DTouch"
+    
+    // Quick items limit
+    static let QuickItemLimit = 3
+
     
     // Segue IDs
     static let FromBorrowerToBorrowingsSegueID = "FromBorrowerToBorrowings"
@@ -28,9 +32,6 @@ struct BorrowingConstants {
     static let SmallTextColor = UIColor(red: 5/255, green: 5/255, blue: 5/255, alpha: 1)
     static let DarkBlueColor = UIColor(red: 10/255, green: 96/255, blue: 254/255, alpha: 1)
     static let DarkRedColor = UIColor(red: 195/255, green: 0/255, blue: 22/255, alpha: 1)
-    
-    // Quick items limit
-    static let QuickItemLimit = 3
     
     // Currencies
     static let Currencies = [

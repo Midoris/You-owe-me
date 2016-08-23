@@ -117,14 +117,14 @@ class BorrowingViewController: CoreDataTableViewController {
             }
             self.clean()
         }
+        // Uncomment if you want to see Database Statistics
         //printDatabaseStatistics()
     }
     
     private func printDatabaseStatistics() {
         managedObjectContext?.performBlock {
             let borrowersCount = self.managedObjectContext!.countForFetchRequest(NSFetchRequest(entityName: "Borrower"), error: nil)
-            print("\(borrowersCount) borrowings")
-            // a more efficient way to count objects
+            print("\(borrowersCount) borrowers")
             let borrowedCount = self.managedObjectContext!.countForFetchRequest(NSFetchRequest(entityName: "Borrowed"), error: nil)
             print("\(borrowedCount) borrowings")
         }

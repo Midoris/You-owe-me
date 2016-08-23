@@ -29,7 +29,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setNeedsDisplay()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowersViewController.saveBorrowersFor3DTouch), name:"SaveBorrowersForTouch", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowersViewController.saveBorrowersFor3DTouch), name:BorrowingConstants.SaveBorrowersFor3DTouch, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -40,7 +40,6 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     deinit {
-        print("observer was removerd")
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
