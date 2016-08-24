@@ -24,7 +24,6 @@ class SharedFunctionsTests: XCTestCase {
         let expectedResoult = "14.5"
         let resoult = SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(14.530)
         XCTAssertTrue(expectedResoult == resoult, "Returned String is wrong")
-        
     }
     
 }

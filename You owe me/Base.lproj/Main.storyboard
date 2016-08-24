@@ -92,7 +92,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9V-U0-haR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="64"/>
                                 <color key="backgroundColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Bpa-gO-y3p"/>
@@ -140,7 +140,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="k9V-U0-haR" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-16" id="7DP-jc-rnZ"/>
+                            <constraint firstItem="k9V-U0-haR" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-20" id="7DP-jc-rnZ"/>
                             <constraint firstItem="k9V-U0-haR" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-20" id="BBk-cg-NPW"/>
                             <constraint firstItem="k9V-U0-haR" firstAttribute="top" secondItem="L5u-RC-wh8" secondAttribute="topMargin" id="HrW-kR-GIK"/>
                             <constraint firstItem="jcs-qW-ogg" firstAttribute="centerX" secondItem="L5u-RC-wh8" secondAttribute="centerX" id="NCF-VF-ksJ"/>
@@ -150,7 +150,7 @@
                             <constraint firstItem="OAK-Ok-tPk" firstAttribute="centerX" secondItem="L5u-RC-wh8" secondAttribute="centerX" id="e1S-B3-Ntb"/>
                             <constraint firstItem="OAK-Ok-tPk" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="45" id="gqu-It-CC1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OAK-Ok-tPk" secondAttribute="trailing" constant="45" id="mFX-7K-4u8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="k9V-U0-haR" secondAttribute="trailing" constant="-16" id="nOs-cf-sxX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="k9V-U0-haR" secondAttribute="trailing" constant="-20" id="nOs-cf-sxX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fLE-bl-ule" secondAttribute="trailing" constant="-24" id="qTn-ip-VUB"/>
                             <constraint firstItem="jcs-qW-ogg" firstAttribute="top" secondItem="OAK-Ok-tPk" secondAttribute="bottom" constant="14" id="vcH-bH-E7S"/>
                             <constraint firstItem="fLE-bl-ule" firstAttribute="leading" secondItem="L5u-RC-wh8" secondAttribute="leadingMargin" constant="-24" id="yMh-fE-lbi"/>

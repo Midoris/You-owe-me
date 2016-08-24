@@ -509,6 +509,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.midori.s.You-owe-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5eb752de-f637-4209-89f8-edfec082e695";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -521,6 +522,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.midori.s.You-owe-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5eb752de-f637-4209-89f8-edfec082e695";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
