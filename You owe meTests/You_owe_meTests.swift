@@ -3,7 +3,7 @@
 //  You owe meTests
 //
 //  Created by тигренок  on 02/08/2016.
-//  Copyright © 2016 Midori.s. All rights reserved.
+//  Copyright © 2016 Iablonskyi Ievgenii. All rights reserved.
 //
 
 import XCTest
