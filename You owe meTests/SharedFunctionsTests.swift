@@ -20,7 +20,7 @@ class SharedFunctionsTests: XCTestCase {
     }
     
     func testStringFromDoubleWithTailingZeroAndRounding() {
-        // The method should round number, remove tail zero and return it in String
+        // The method should round number, remove tail zero and return it in String.
         let expectedResoult = "14.5"
         let resoult = SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(14.530)
         XCTAssertTrue(expectedResoult == resoult, "Returned String is wrong")

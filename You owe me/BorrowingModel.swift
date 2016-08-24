@@ -11,10 +11,11 @@ import Foundation
 class BorrowingModel {
     
     // MARK: - Variabels
+    /// State of borrowings, if iBorrowed is true it means I borrowed money to Someone, if false Someone borrowed me money.
     internal var iBorrowed = false
     
     // MARK: - Methods
-    // Get Date
+    // Get String from date.
     internal func dateStringFromDate(date: NSDate) -> String {
         let formatter = NSDateFormatter()
         formatter.timeStyle = .ShortStyle
@@ -33,25 +34,14 @@ class BorrowingModel {
         }
     }
     
+    // Switch state and return message.
     internal func switchedMessageWithName(name: String) -> String {
-        // switch state before decide which message we should return
+        // switch state before decide which message we should return.
         switchState()
         return messageWithBorrowingState(iBorrowed, andName: name)
     }
     
-//    private func countedBalance(borrowings: [Borrowed]) -> Double {
-//        var balance = 0.0
-//        for borrowed in borrowings {
-//            let state = Bool(borrowed.iBorrowed!)
-//            let amount = Double(borrowed.amount!)
-//            switch state {
-//            case true : balance += amount
-//            case false: balance -= amount
-//            }
-//        }
-//        return balance
-//    }
-    
+    // Return message depending on borrowing state and name.
     internal func messageWithBorrowingState(state: Bool, andName name: String) -> String {
         switch state {
         case true:
@@ -61,26 +51,9 @@ class BorrowingModel {
         }
     }
 
-    
-//    func balanceMessageWithBorrowerName(name: String, borrowings: [Borrowed], andCurrency currency: String) -> String {
-//        let balance = countedBalance(borrowings)
-//        switch balance {
-//        case let x where x > 0 :
-//            return "\(name) owe me \(stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
-//        case let x where x < 0:
-//            return "I owe \(name) \(stringFromDoubleWithTailingZeroAndRounding(abs(balance))) \(currency)"
-//        default:
-//            return "clear balance"
-//        }
-//    }
-    
-//    func stringFromDoubleWithTailingZeroAndRounding(number: Double) -> String{
-//        let roundedNumber = Double(round(10*number)/10)
-//        return String(format: "%g", roundedNumber)
-//    }
-    
+    // Calculate amount and return in String with all required transformations.
     func calculatedAmount(ammount: Double, dependingOnTag tag: Int) -> String {
-        let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double
+        let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double.
         return SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(resoult)
     }
     

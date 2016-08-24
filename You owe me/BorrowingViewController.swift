@@ -12,12 +12,10 @@ import CoreData
 class BorrowingViewController: CoreDataTableViewController {
     
     // MARK: - Variabels
-    internal var name: String? //{ didSet { updateUI() } }
-    internal var currency: String? //{ didSet { updateUI() } }
+    internal var name: String?
+    internal var currency: String?
     internal var comeFrom3DTouch = false
-    
-    
-    var managedObjectContext: NSManagedObjectContext? //{ didSet { updateUI() } } //{ didSet { updateUI() } }
+    internal var managedObjectContext: NSManagedObjectContext?
     
     // Outlets
     @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
@@ -58,17 +56,18 @@ class BorrowingViewController: CoreDataTableViewController {
         self.borrowingHistoryTableView.backgroundColor = BorrowingConstants.BackgroundColor
         borrowingHistoryTableView.separatorColor = BorrowingConstants.NavBarColor
         updateUI()
-        // decide to show or not keyboard
+        // decide to show or not keyboard.
         if comeFrom3DTouch {
             showKeyboard()
         }
-        //Looks for single or multiple taps to dismiss keyboard
+        //Look for single or multiple taps to dismiss keyboard.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        setImageForSwitchButton()
-        setBorderForButton(submitButton)
-        setBorderForButton(splitButton)
-        setBorderForButton(doubleButton)
+        // set buttons.
+        setBorderAndColorsForButton(submitButton)
+        setBorderAndColorsForButton(splitButton)
+        setBorderAndColorsForButton(doubleButton)
+        setBorderAndColorsForButton(switchButton)
     }
     
     private func showKeyboard() {
@@ -79,7 +78,7 @@ class BorrowingViewController: CoreDataTableViewController {
         view.endEditing(true)
     }
     
-    @objc private func updateUI(){
+    private func updateUI(){
         if let context = managedObjectContext where self.name!.characters.count > 0 {
             let request = NSFetchRequest(entityName: "Borrowed")
             request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
@@ -93,15 +92,14 @@ class BorrowingViewController: CoreDataTableViewController {
         } else {
             fetchedResultsController = nil
         }
-        
         dispatch_async(dispatch_get_main_queue(), {
             self.updateBalanceLabel()
         })
     }
     
-    private func updateDataBase() {
+    private func updateDatabase() {
         managedObjectContext?.performBlock {
-            // create a new borrowed
+            // create a new borrowed.
             if self.amountTextField.text != "" {
                 let amount = Double(self.amountTextField.text!)
                 let date = NSDate()
@@ -117,7 +115,7 @@ class BorrowingViewController: CoreDataTableViewController {
             }
             self.clean()
         }
-        // Uncomment if you want to see Database Statistics
+        // Uncomment if you want to see Database Statistics.
         //printDatabaseStatistics()
     }
     
@@ -138,7 +136,7 @@ class BorrowingViewController: CoreDataTableViewController {
                 try self.managedObjectContext?.save()
             } catch let error {
                 print("Core Data Error: \(error)")
-                // Notify User
+                // Notify User.
                 SharedFunctions.showErrorAlert(self)
             }
         }
@@ -150,16 +148,20 @@ class BorrowingViewController: CoreDataTableViewController {
         }
     }
     
-    private func setImageForSwitchButton() {
+    private func setImageForSwitchButton(button: UIButton) {
         let tintedImage = UIImage(named: "icon_switch")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        self.switchButton.setImage(tintedImage, forState: .Normal)
-        self.switchButton.tintColor = BorrowingConstants.DarkBlueColor
+        button.setImage(tintedImage, forState: .Normal)
+        button.tintColor = BorrowingConstants.DarkBlueColor
     }
     
-    private func setBorderForButton(button: UIButton) {
+    private func setBorderAndColorsForButton(button: UIButton) {
+        if button == switchButton {
+            self.setImageForSwitchButton(button)
+        }
         button.layer.borderWidth = 1
         button.layer.borderColor = BorrowingConstants.DarkBlueColor.CGColor
-        button.layer.cornerRadius = 5
+        button.setTitleColor(BorrowingConstants.DarkBlueColor, forState: .Normal)
+        button.layer.cornerRadius = button.layer.frame.height/2
     }
     
     private func clean() {
@@ -172,7 +174,7 @@ class BorrowingViewController: CoreDataTableViewController {
     // MARK: - Actions from storyBoard
     // Submit button
     @IBAction private func submittPressed(sender: UIButton) {
-        updateDataBase()
+        updateDatabase()
     }
     
     @IBAction private func switchButtonPressed(sender: UIButton) {
@@ -189,7 +191,7 @@ class BorrowingViewController: CoreDataTableViewController {
                             try self.managedObjectContext!.save()
                         } catch let error {
                             print("Core Data Error: \(error)")
-                            // Notify User
+                            // Notify User.
                             SharedFunctions.showErrorAlert(self)
                         }
                     }

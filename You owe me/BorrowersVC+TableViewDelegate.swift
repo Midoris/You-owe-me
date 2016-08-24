@@ -44,7 +44,7 @@ extension BorrowersViewController {
                         try self.managedObjectContext!.save()
                     } catch let error {
                         print("Core Data Error: \(error)")
-                        // Notify User
+                        // Notify User.
                         SharedFunctions.showErrorAlert(self)
                     }
                 }

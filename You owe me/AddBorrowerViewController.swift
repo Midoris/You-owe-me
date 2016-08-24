@@ -111,7 +111,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     
     @IBAction private func saveButtonPressed(sender: UIBarButtonItem) {
-        // Trim spaces from the name
+        // Trim spaces from the name.
         let name = borrowerNameTextField.text!.stringByTrimmingCharactersInSet(
             NSCharacterSet.whitespaceAndNewlineCharacterSet()
         )

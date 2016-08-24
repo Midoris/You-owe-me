@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let name = shortcutItem.localizedTitle
             borrowersVC.selectedBorrowerName = name
             borrowersVC.borrowerCurrncy = currencyFromName(name, inManagedObgectContext: managedObjectContext)
-            // set to true to show keyboard in Borrowing VC
+            // set to true to show keyboard in Borrowing VC.
             borrowersVC.openedFrom3dTouch = true
             borrowersVC.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: borrowersVC)
         }

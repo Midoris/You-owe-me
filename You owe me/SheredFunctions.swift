@@ -19,7 +19,7 @@ struct SharedFunctions {
         controller.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    // Get calculated balance and return it in message depending on is it negative or positive
+    // Get calculated balance and return it in message depending on is it negative or positive.
     static func balanceMessageWithBorrowerName(name: String, borrowings: [Borrowed], andCurrency currency: String) -> String {
         let balance = SharedFunctions.countedBalance(borrowings)
         switch balance {
@@ -32,13 +32,13 @@ struct SharedFunctions {
         }
     }
     
-    // Round number, remove tail zero and transform it into String
+    // Round number, remove tail zero and transform it into String.
     static func stringFromDoubleWithTailingZeroAndRounding(number: Double) -> String{
         let roundedNumber = Double(round(10*number)/10)
         return String(format: "%g", roundedNumber)
     }
     
-    // Count balanse from borrowings depending on state of each of borrowed items
+    // Count balanse from borrowings depending on state of each of borrowed items.
     static private func countedBalance(borrowings: [Borrowed]) -> Double {
         var balance = 0.0
         for borrowed in borrowings {
