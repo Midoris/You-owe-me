@@ -31,14 +31,14 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var selectedCurrencyLabel: UILabel!
     private let limitLength = 9
-    private var currencies = [String]()
+    private var currencyNames = [String]()
     private var selectedCurrency: String?
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         showKeyboard()
-        self.currencies = parsedCurrencies()
+        self.currencyNames = parsedCurrencyNames()
         saveButton.enabled = canSaveWhen(
             self.borrowerNameTextField.text?.characters.count > 0,
             andCurrencySelected: selectedCurrency != nil
@@ -62,15 +62,15 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currencies.count
+        return currencyNames.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currencies[row]
+        return currencyNames[row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedCurrency = BorrowingConstants.Currencies[currencies[row]]!
+        selectedCurrency = BorrowingConstants.Currencies[currencyNames[row]]!
         selectedCurrencyLabel.text = selectedCurrency
         saveButton.enabled = canSaveWhen(
             self.borrowerNameTextField.text?.characters.count > 0,
@@ -92,12 +92,12 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
         return true
     }
     
-    private func parsedCurrencies() -> [String] {
-        var currencies = [String]()
-        for (currency,_) in BorrowingConstants.Currencies {
-            currencies.append(currency)
+    private func parsedCurrencyNames() -> [String] {
+        var currencyNames = [String]()
+        for (currencyName,_) in BorrowingConstants.Currencies {
+            currencyNames.append(currencyName)
         }
-        return currencies.sort()
+        return currencyNames.sort()
     }
     
     private func dismissVC() {
