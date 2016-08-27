@@ -23,9 +23,7 @@ class BorrowingModelTests: XCTestCase {
     }
     
     func testMessageWithName() {
-        
         //BorrowingModel have var iBorrowed that is plays a role of State of borrowings, if iBorrowed is true it means I borrowed money to Someone, if false Someone borrowed me money. Initially iBorrowed is false. Each time you call switchedMessageWithName method, it should change iBorrowed to change state of who is borrowing money to whom.
-         
         // First call
         let name = "Mark"
         let firstExpectedMessage = "I borrowed Mark"
