@@ -64,10 +64,7 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         // set buttons.
-        setBorderAndColorsForButton(submitButton)
-        setBorderAndColorsForButton(splitButton)
-        setBorderAndColorsForButton(doubleButton)
-        setBorderAndColorsForButton(switchButton)
+        setBorderAndColorsForButtons(submitButton, splitButton, doubleButton, switchButton)
     }
     
     private func showKeyboard() {
@@ -153,15 +150,17 @@ class BorrowingViewController: CoreDataTableViewController {
         button.setImage(tintedImage, forState: .Normal)
         button.tintColor = BorrowingConstants.DarkBlueColor
     }
-    
-    private func setBorderAndColorsForButton(button: UIButton) {
-        if button == switchButton {
-            self.setImageForSwitchButton(button)
+
+    private func setBorderAndColorsForButtons(buttons: UIButton...) {
+        for button in buttons {
+            if button == switchButton {
+                self.setImageForSwitchButton(button)
+            }
+            button.layer.borderWidth = 1
+            button.layer.borderColor = BorrowingConstants.DarkBlueColor.CGColor
+            button.setTitleColor(BorrowingConstants.DarkBlueColor, forState: .Normal)
+            button.layer.cornerRadius = button.layer.frame.height/2
         }
-        button.layer.borderWidth = 1
-        button.layer.borderColor = BorrowingConstants.DarkBlueColor.CGColor
-        button.setTitleColor(BorrowingConstants.DarkBlueColor, forState: .Normal)
-        button.layer.cornerRadius = button.layer.frame.height/2
     }
     
     private func clean() {
