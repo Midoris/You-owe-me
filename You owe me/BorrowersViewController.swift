@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelegate {
+
     
     // MARK: - Variabels
     var managedObjectContext: NSManagedObjectContext? =

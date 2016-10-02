@@ -44,7 +44,7 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
             andCurrencySelected: selectedCurrency != nil
         )
     }
-    
+
     // MARK: - Text Field delegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
