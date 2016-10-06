@@ -15,7 +15,7 @@ import CoreData
 extension Borrower {
 
     @NSManaged var name: String?
-    @NSManaged var modified: NSDate?
+    @NSManaged var modified: Date?
     @NSManaged var currency: String?
     @NSManaged var borrowings: NSSet?
 

@@ -16,16 +16,16 @@ class BorrowingModel {
     
     // MARK: - Methods
     // Get String from date.
-    internal func dateStringFromDate(date: NSDate) -> String {
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = .ShortStyle
-        formatter.dateStyle = .ShortStyle
-        let dateString = formatter.stringFromDate(date)
+    internal func dateStringFromDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .short
+        let dateString = formatter.string(from: date)
         return dateString
     }
     
     // Switch borrowing state
-    private func switchState() {
+    fileprivate func switchState() {
         switch iBorrowed {
         case true:
             iBorrowed = false
@@ -35,14 +35,14 @@ class BorrowingModel {
     }
     
     // Switch state and return message.
-    internal func switchedMessageWithName(name: String) -> String {
+    internal func switchedMessageWithName(_ name: String) -> String {
         // switch state before decide which message we should return.
         switchState()
         return messageWithBorrowingState(iBorrowed, andName: name)
     }
     
     // Return message depending on borrowing state and name.
-    internal func messageWithBorrowingState(state: Bool, andName name: String) -> String {
+    internal func messageWithBorrowingState(_ state: Bool, andName name: String) -> String {
         switch state {
         case true:
             return "I borrowed \(name)"
@@ -52,7 +52,7 @@ class BorrowingModel {
     }
 
     // Calculate amount and return in String with all required transformations.
-    func calculatedAmount(ammount: Double, dependingOnTag tag: Int) -> String {
+    func calculatedAmount(_ ammount: Double, dependingOnTag tag: Int) -> String {
         let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double.
         return SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(resoult)
     }

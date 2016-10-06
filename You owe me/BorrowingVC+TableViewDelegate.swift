@@ -12,15 +12,15 @@ import CoreData
 
 extension BorrowingViewController {
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingConstants.BorrowingHistoryCellID, forIndexPath: indexPath)
-        if let borrowed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BorrowingConstants.BorrowingHistoryCellID, for: indexPath)
+        if let borrowed = fetchedResultsController?.object(at: indexPath) as? Borrowed {
             var name: String?
-            var date: NSDate?
+            var date: Date?
             var amount: Double?
             var currency: String?
             var iBorrowed: Bool?
-            borrowed.managedObjectContext?.performBlockAndWait {
+            borrowed.managedObjectContext?.performAndWait {
                 name = borrowed.borrower!.name
                 date = borrowed.date
                 amount = Double(borrowed.amount!)
@@ -33,16 +33,16 @@ extension BorrowingViewController {
             cell.detailTextLabel?.text = borrowingModel.dateStringFromDate(date!)
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
         }
-        cell.selectionStyle = .None
-        cell.backgroundColor = UIColor.clearColor()
+        cell.selectionStyle = .none
+        cell.backgroundColor = UIColor.clear
         return cell
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-            if let borrowed = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrowed {
-                borrowed.managedObjectContext?.performBlockAndWait {
-                    borrowed.managedObjectContext?.deleteObject(borrowed)
+    func tableView(_ tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            if let borrowed = self.fetchedResultsController?.object(at: indexPath) as? Borrowed {
+                borrowed.managedObjectContext?.performAndWait {
+                    borrowed.managedObjectContext?.delete(borrowed)
                     do {
                         try self.managedObjectContext!.save()
                     } catch let error {
@@ -51,7 +51,7 @@ extension BorrowingViewController {
                         SharedFunctions.showErrorAlert(self)
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.updateBalanceLabel()
                 })
                 self.updateModifiedDateForBorrowerName(self.name!)

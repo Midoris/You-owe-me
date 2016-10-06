@@ -7,19 +7,39 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 protocol AddNewBorrowerDelegate: class {
-    func saveNewBorrowerWithName(name: String, currency: String)
+    func saveNewBorrowerWithName(_ name: String, currency: String)
 }
 
 class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: - Variabels
     internal weak var addBorrowerDelegate: AddNewBorrowerDelegate?
-    @IBOutlet weak private var borrowerNameTextField: UITextField! {
+    @IBOutlet weak fileprivate var borrowerNameTextField: UITextField! {
         didSet {
             self.borrowerNameTextField.delegate = self
-            self.borrowerNameTextField.addTarget(self, action: #selector(AddBorrowerViewController.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+            self.borrowerNameTextField.addTarget(self, action: #selector(AddBorrowerViewController.textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     @IBOutlet weak var currencyPicker: UIPickerView!{
@@ -30,90 +50,90 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var selectedCurrencyLabel: UILabel!
-    private let limitLength = 9
-    private var currencyNames = [String]()
-    private var selectedCurrency: String?
+    fileprivate let limitLength = 9
+    fileprivate var currencyNames = [String]()
+    fileprivate var selectedCurrency: String?
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         showKeyboard()
         self.currencyNames = parsedCurrencyNames()
-        saveButton.enabled = canSaveWhen(
+        saveButton.isEnabled = canSaveWhen(
             self.borrowerNameTextField.text?.characters.count > 0,
             andCurrencySelected: selectedCurrency != nil
         )
     }
 
     // MARK: - Text Field delegate
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
         return newLength <= limitLength
     }
     
-    func textFieldDidChange(textField: UITextField) {
-        saveButton.enabled = canSaveWhen(self.borrowerNameTextField.text?.characters.count > 0, andCurrencySelected: selectedCurrency != nil)
+    func textFieldDidChange(_ textField: UITextField) {
+        saveButton.isEnabled = canSaveWhen(self.borrowerNameTextField.text?.characters.count > 0, andCurrencySelected: selectedCurrency != nil)
     }
     
     // MARK: - Picker delegate and data source
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return currencyNames.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return currencyNames[row]
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCurrency = BorrowingConstants.Currencies[currencyNames[row]]!
         selectedCurrencyLabel.text = selectedCurrency
-        saveButton.enabled = canSaveWhen(
+        saveButton.isEnabled = canSaveWhen(
             self.borrowerNameTextField.text?.characters.count > 0,
             andCurrencySelected: selectedCurrency != nil
         )
     }
     
     // MARK: - Methods
-    private func showKeyboard() {
+    fileprivate func showKeyboard() {
         self.borrowerNameTextField.becomeFirstResponder()
     }
     
-    private func dismissKeyboard() {
+    fileprivate func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    private func canSaveWhen(textFieldIsNotEmpty: Bool, andCurrencySelected selected: Bool) -> Bool {
+    fileprivate func canSaveWhen(_ textFieldIsNotEmpty: Bool, andCurrencySelected selected: Bool) -> Bool {
         guard textFieldIsNotEmpty && selected else { return false }
         return true
     }
     
-    private func parsedCurrencyNames() -> [String] {
+    fileprivate func parsedCurrencyNames() -> [String] {
         var currencyNames = [String]()
         for (currencyName,_) in BorrowingConstants.Currencies {
             currencyNames.append(currencyName)
         }
-        return currencyNames.sort()
+        return currencyNames.sorted()
     }
     
-    private func dismissVC() {
+    fileprivate func dismissVC() {
         dismissKeyboard()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - StoryBoard Methods
-    @IBAction private func cancelButtonPressed(sender: UIBarButtonItem) {
+    @IBAction fileprivate func cancelButtonPressed(_ sender: UIBarButtonItem) {
         dismissVC()
     }
     
-    @IBAction private func saveButtonPressed(sender: UIBarButtonItem) {
+    @IBAction fileprivate func saveButtonPressed(_ sender: UIBarButtonItem) {
         // Trim spaces from the name.
-        let name = borrowerNameTextField.text!.stringByTrimmingCharactersInSet(
-            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        let name = borrowerNameTextField.text!.trimmingCharacters(
+            in: CharacterSet.whitespacesAndNewlines
         )
         addBorrowerDelegate?.saveNewBorrowerWithName(name, currency: selectedCurrency!)
         dismissVC()

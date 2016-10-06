@@ -11,13 +11,13 @@ import UIKit
 
 extension BorrowersViewController {
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BorrowingConstants.BorrowerCellID, forIndexPath: indexPath)
-        if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BorrowingConstants.BorrowerCellID, for: indexPath)
+        if let borrower = fetchedResultsController?.object(at: indexPath) as? Borrower {
             var name: String?
             var currncy: String?
             var borrowings = [Borrowed]()
-            borrower.managedObjectContext?.performBlockAndWait {
+            borrower.managedObjectContext?.performAndWait {
                 name = borrower.name
                 currncy = borrower.currency
                 borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
@@ -30,16 +30,16 @@ extension BorrowersViewController {
             cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(13.5))
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
         }
-        cell.selectionStyle = .None
-        cell.backgroundColor = UIColor.clearColor()
+        cell.selectionStyle = .none
+        cell.backgroundColor = UIColor.clear
         return cell
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-            if let borrower = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
-                borrower.managedObjectContext?.performBlockAndWait {
-                    borrower.managedObjectContext?.deleteObject(borrower)
+    func tableView(_ tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            if let borrower = self.fetchedResultsController?.object(at: indexPath) as? Borrower {
+                borrower.managedObjectContext?.performAndWait {
+                    borrower.managedObjectContext?.delete(borrower)
                     do {
                         try self.managedObjectContext!.save()
                     } catch let error {
@@ -55,21 +55,21 @@ extension BorrowersViewController {
     }
 
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let borrower = fetchedResultsController?.objectAtIndexPath(indexPath) as? Borrower {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        if let borrower = fetchedResultsController?.object(at: indexPath) as? Borrower {
             var name: String?
             var currency: String?
-            borrower.managedObjectContext?.performBlockAndWait {
+            borrower.managedObjectContext?.performAndWait {
                 name = borrower.name
                 currency = borrower.currency
             }
             selectedBorrowerName = name!
             borrowerCurrncy = currency!
-            self.performSegueWithIdentifier(BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: self)
+            self.performSegue(withIdentifier: BorrowingConstants.FromBorrowerToBorrowingsSegueID, sender: self)
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 70
     }
     

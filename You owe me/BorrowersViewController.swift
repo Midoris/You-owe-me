@@ -15,7 +15,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     
     // MARK: - Variabels
     var managedObjectContext: NSManagedObjectContext? =
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+        (UIApplication.shared.delegate as? AppDelegate)?.managedObjectContext
     var selectedBorrowerName: String?
     var borrowerCurrncy: String?
     var openedFrom3dTouch: Bool?
@@ -30,10 +30,10 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setNeedsDisplay()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BorrowersViewController.saveBorrowersFor3DTouch), name:BorrowingConstants.SaveBorrowersFor3DTouch, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BorrowersViewController.saveBorrowersFor3DTouch), name:NSNotification.Name(rawValue: BorrowingConstants.SaveBorrowersFor3DTouch), object: nil)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.saveBorrowersFor3DTouch()
         // Set to nil so keyboard in Borrowing VC will be shown only if the app is opened from 3d Touch quick action.
@@ -41,35 +41,35 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Methods
-    private func setNeedsDisplay() {
+    fileprivate func setNeedsDisplay() {
         self.view.backgroundColor = BorrowingConstants.BackgroundColor
         self.borrowersTableView.backgroundColor = BorrowingConstants.BackgroundColor
-        self.borrowersTableView.separatorStyle = .None
+        self.borrowersTableView.separatorStyle = .none
         updateUI()
     }
     
-    private func addShortcutItemsFromBorrowers(borrowers: [[String: String]]) {
+    fileprivate func addShortcutItemsFromBorrowers(_ borrowers: [[String: String]]) {
         var quickItems = [UIApplicationShortcutItem]()
-        for (index, borrower) in borrowers.enumerate() {
+        for (index, borrower) in borrowers.enumerated() {
             if index < BorrowingConstants.QuickItemLimit {
                 let title = borrower["name"]
                 let subtitle = borrower["balanceMessage"]
-                let shortcut = UIApplicationShortcutItem(type: "com.midori.s.You-owe-me", localizedTitle: title!, localizedSubtitle: subtitle, icon: UIApplicationShortcutIcon(type: .Add), userInfo: nil)
+                let shortcut = UIApplicationShortcutItem(type: "com.midori.s.You-owe-me", localizedTitle: title!, localizedSubtitle: subtitle, icon: UIApplicationShortcutIcon(type: .add), userInfo: nil)
                 quickItems.append(shortcut)
             }
         }
         defer {
             // reverse sort and then save.
-            quickItems = quickItems.reverse()
-            UIApplication.sharedApplication().shortcutItems = quickItems
+            quickItems = quickItems.reversed()
+            UIApplication.shared.shortcutItems = quickItems
         }
     }
     
-    @objc private func updateUI(){
+    @objc fileprivate func updateUI(){
         if let context = managedObjectContext  {
             let request = NSFetchRequest(entityName: "Borrower")
             request.sortDescriptors = [NSSortDescriptor(key: "modified", ascending:  false)]
@@ -84,14 +84,14 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         }
     }
     
-    private func borrowersFromCoreData() -> [[String: String]]? {
+    fileprivate func borrowersFromCoreData() -> [[String: String]]? {
         if let borrowers = fetchedResultsController?.fetchedObjects as? [Borrower] {
             var borrowersFor3DTouch = [[String: String]]()
             for borrower in borrowers {
                 var name: String?
                 var currncy: String?
                 var borrowings = [Borrowed]()
-                borrower.managedObjectContext?.performBlockAndWait {
+                borrower.managedObjectContext?.performAndWait {
                     name = borrower.name
                     currncy = borrower.currency
                     borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
@@ -104,22 +104,22 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         return nil
     }
     
-    @objc private func saveBorrowersFor3DTouch() {
+    @objc fileprivate func saveBorrowersFor3DTouch() {
         let borrowers = borrowersFromCoreData()
         if borrowers != nil {
             // add borrowers to quick items and save.
             addShortcutItemsFromBorrowers(borrowers!)
         } else {
             // remove all quick items.
-            UIApplication.sharedApplication().shortcutItems = []
+            UIApplication.shared.shortcutItems = []
         }
     }
     
     // MARK: - Add New Borrower Delegate
-    internal func saveNewBorrowerWithName(name: String, currency: String) {
-        managedObjectContext?.performBlock {
+    internal func saveNewBorrowerWithName(_ name: String, currency: String) {
+        managedObjectContext?.perform {
             // create a new borrower.
-            let date = NSDate()
+            let date = Date()
             _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectContext!, date: date, currency: currency)
             do {
                 try self.managedObjectContext?.save()
@@ -132,14 +132,14 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // MARK: - StoryBoard methods
-    @IBAction private func addButtonPressed(sender: UIBarButtonItem) {
-        performSegueWithIdentifier(BorrowingConstants.AddBorrowerSegueId, sender: self)
+    @IBAction fileprivate func addButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: BorrowingConstants.AddBorrowerSegueId, sender: self)
     }
     
     // MARK: - Segues
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == BorrowingConstants.FromBorrowerToBorrowingsSegueID {
-            if let borrowingVC = segue.destinationViewController as? BorrowingViewController {
+            if let borrowingVC = segue.destination as? BorrowingViewController {
                 borrowingVC.managedObjectContext = self.managedObjectContext
                 borrowingVC.name = self.selectedBorrowerName!
                 borrowingVC.currency = self.borrowerCurrncy
@@ -147,7 +147,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                 borrowingVC.comeFrom3DTouch = self.openedFrom3dTouch ?? false
             }
         } else if segue.identifier == BorrowingConstants.AddBorrowerSegueId {
-            if let addBorrowerVC = segue.destinationViewController as? AddBorrowerViewController {
+            if let addBorrowerVC = segue.destination as? AddBorrowerViewController {
                 addBorrowerVC.addBorrowerDelegate = self
             }
         }

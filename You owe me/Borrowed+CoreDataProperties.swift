@@ -16,7 +16,7 @@ extension Borrowed {
 
     @NSManaged var amount: NSNumber?
     @NSManaged var currency: String?
-    @NSManaged var date: NSDate?
+    @NSManaged var date: Date?
     @NSManaged var iBorrowed: NSNumber?
     @NSManaged var borrower: Borrower?
 

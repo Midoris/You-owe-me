@@ -12,14 +12,15 @@ import CoreData
 
 class Borrower: NSManagedObject {
 
-    class func borrowerWithInfo(name: String, inManagedObgectContext context: NSManagedObjectContext, date: NSDate, currency: String) -> Borrower? {
-        let request = NSFetchRequest(entityName: "Borrower")
+    class func borrowerWithInfo(_ name: String, inManagedObgectContext context: NSManagedObjectContext, date: Date, currency: String) -> Borrower? {
+        //let request = NSFetchRequest(entityName: "Borrower")
+        let request: NSFetchRequest<Borrower> = Borrower.fetchRequest()
         request.predicate = NSPredicate(format: "name = %@", name)
-        if let borrower = (try? context.executeFetchRequest(request))?.first as? Borrower {
+        if let borrower = (try? context.fetch(request))?.first as Borrower? {
             // return existing borrower.
             borrower.modified = date
             return borrower
-        } else if let borrower = NSEntityDescription.insertNewObjectForEntityForName("Borrower", inManagedObjectContext: context) as? Borrower {
+        } else if let borrower = NSEntityDescription.insertNewObject(forEntityName: "Borrower", into: context) as? Borrower {
             // create new borrower.
             borrower.modified = date
             borrower.name = name
@@ -31,3 +32,12 @@ class Borrower: NSManagedObject {
 
     
 }
+
+extension Borrower {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Borrower> {
+        return NSFetchRequest<Borrower>(entityName: "Borrower");
+    }
+
+    @NSManaged var timeStamp: NSDate?
+}
+
