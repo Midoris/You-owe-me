@@ -17,7 +17,7 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
     */
     
     // MARK: - Variabels
-    var fetchedResultsController : NSFetchedResultsController<NSManagedObject>? {
+    var fetchedResultsController : NSFetchedResultsController<Borrowed>? {
         didSet {
             do {
                 if let frc = fetchedResultsController {
@@ -30,6 +30,21 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
     }
+
+    var borrowerFetchedResultsController : NSFetchedResultsController<Borrower>? {
+        didSet {
+            do {
+                if let frc = borrowerFetchedResultsController {
+                    frc.delegate = self
+                    try frc.performFetch()
+                }
+                tableView!.reloadData()
+            } catch let error {
+                print("NSFetchedResultsController.performFetch() faild: \(error)")
+            }
+        }
+    }
+
     
     var tableView: UITableView? {
         didSet {
@@ -40,11 +55,11 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController?.sections?.count ?? 1
+        return borrowerFetchedResultsController?.sections?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = fetchedResultsController?.sections , sections.count > 0 {
+        if let sections = borrowerFetchedResultsController?.sections , sections.count > 0 {
             return sections[section].numberOfObjects
         } else {
             return 0
@@ -57,7 +72,7 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
 
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let sections = fetchedResultsController?.sections , sections.count > 0 {
+        if let sections = borrowerFetchedResultsController?.sections , sections.count > 0 {
             return sections[section].name
         } else {
             return nil
@@ -65,11 +80,11 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return fetchedResultsController?.sectionIndexTitles
+        return borrowerFetchedResultsController?.sectionIndexTitles
     }
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return fetchedResultsController?.section(forSectionIndexTitle: title, at: index) ?? 0
+        return borrowerFetchedResultsController?.section(forSectionIndexTitle: title, at: index) ?? 0
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

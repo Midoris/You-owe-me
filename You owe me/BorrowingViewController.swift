@@ -77,17 +77,18 @@ class BorrowingViewController: CoreDataTableViewController {
     
     fileprivate func updateUI(){
         if let context = managedObjectContext , self.name!.characters.count > 0 {
-            let request = NSFetchRequest(entityName: "Borrowed")
+            //let request: NSFetchRequest<Borrower> = NSFetchRequest(entityName: "Borrowed")
+            let request: NSFetchRequest<Borrower> = Borrower.fetchRequest()
             request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
             request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
-            self.fetchedResultsController = NSFetchedResultsController(
+            self.borrowerFetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
                 managedObjectContext: context,
                 sectionNameKeyPath: nil,
                 cacheName: nil
             )
         } else {
-            fetchedResultsController = nil
+            borrowerFetchedResultsController = nil
         }
         DispatchQueue.main.async(execute: {
             self.updateBalanceLabel()
@@ -140,7 +141,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     internal func updateBalanceLabel() {
-        if let borrowings = fetchedResultsController?.fetchedObjects as? [Borrowed] {
+        if let borrowings = fetchedResultsController?.fetchedObjects as [Borrowed]? {
             self.balanceLabel.text = SharedFunctions.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
         }
     }
