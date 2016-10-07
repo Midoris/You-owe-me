@@ -51,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		060793FB1D6ACEEA00033D93 /* SheredFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheredFunctions.swift; sourceTree = "<group>"; };
+		061D038C1DA7929000855A18 /* You owe me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "You owe me-Bridging-Header.h"; sourceTree = "<group>"; };
 		0628083F1D50B118008B967C /* You owe me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "You owe me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		062808421D50B118008B967C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		062808441D50B118008B967C /* BorrowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowingViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +178,7 @@
 				062808921D589E6C008B967C /* Borrowed+CoreDataProperties.swift */,
 				062808931D589E6C008B967C /* Borrowed.swift */,
 				062808991D58B5B4008B967C /* CoreDataTableViewController.swift */,
+				061D038C1DA7929000855A18 /* You owe me-Bridging-Header.h */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -508,11 +510,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "You owe me/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.midori.s.You-owe-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "You owe me/You owe me-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -522,11 +527,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "You owe me/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.midori.s.You-owe-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "You owe me/You owe me-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

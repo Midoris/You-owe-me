@@ -13,7 +13,7 @@ extension BorrowersViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BorrowingConstants.BorrowerCellID, for: indexPath)
-        if let borrower = fetchedResultsController?.object(at: indexPath) as? Borrower {
+        if let borrower = borrowerFetchedResultsController?.object(at: indexPath) as Borrower? {
             var name: String?
             var currncy: String?
             var borrowings = [Borrowed]()
@@ -37,7 +37,7 @@ extension BorrowersViewController {
     
     func tableView(_ tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            if let borrower = self.fetchedResultsController?.object(at: indexPath) as? Borrower {
+            if let borrower = self.borrowerFetchedResultsController?.object(at: indexPath) as Borrower? {
                 borrower.managedObjectContext?.performAndWait {
                     borrower.managedObjectContext?.delete(borrower)
                     do {
@@ -56,7 +56,7 @@ extension BorrowersViewController {
 
     
     func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
-        if let borrower = fetchedResultsController?.object(at: indexPath) as? Borrower {
+        if let borrower = borrowerFetchedResultsController?.object(at: indexPath) as Borrower? {
             var name: String?
             var currency: String?
             borrower.managedObjectContext?.performAndWait {

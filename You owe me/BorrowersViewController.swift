@@ -81,7 +81,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                 cacheName: nil
             )
         } else {
-            fetchedResultsController = nil
+            borrowerFetchedResultsController = nil
         }
     }
     

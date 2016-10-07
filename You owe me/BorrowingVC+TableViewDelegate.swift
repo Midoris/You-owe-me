@@ -14,7 +14,7 @@ extension BorrowingViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BorrowingConstants.BorrowingHistoryCellID, for: indexPath)
-        if let borrowed = fetchedResultsController?.object(at: indexPath) as Borrowed? {
+        if let borrowed = borrowedFetchedResultsController?.object(at: indexPath) as Borrowed? {
             var name: String?
             var date: Date?
             var amount: Double?
@@ -40,7 +40,7 @@ extension BorrowingViewController {
     
     func tableView(_ tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            if let borrowed = self.fetchedResultsController?.object(at: indexPath) as Borrowed? {
+            if let borrowed = self.borrowedFetchedResultsController?.object(at: indexPath) as Borrowed? {
                 borrowed.managedObjectContext?.performAndWait {
                     borrowed.managedObjectContext?.delete(borrowed)
                     do {

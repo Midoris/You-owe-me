@@ -79,8 +79,8 @@ class BorrowingViewController: CoreDataTableViewController {
         if let context = managedObjectContext , self.name!.characters.count > 0 {
             //let request: NSFetchRequest<Borrower> = NSFetchRequest(entityName: "Borrowed")
             let request: NSFetchRequest<Borrower> = Borrower.fetchRequest()
-            request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
-            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
+            //request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
+            //request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
             self.borrowerFetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
                 managedObjectContext: context,
@@ -141,7 +141,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     internal func updateBalanceLabel() {
-        if let borrowings = fetchedResultsController?.fetchedObjects as [Borrowed]? {
+        if let borrowings = borrowedFetchedResultsController?.fetchedObjects as [Borrowed]? {
             self.balanceLabel.text = SharedFunctions.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
         }
     }
@@ -182,7 +182,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     @IBAction fileprivate func clearAllButtonPressed(_ sender: UIButton) {
-        if let results = fetchedResultsController?.fetchedObjects {
+        if let results = borrowedFetchedResultsController?.fetchedObjects {
             for result in results {
                 if let borrowed = result as? Borrowed {
                     borrowed.managedObjectContext?.perform {
