@@ -71,7 +71,6 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     
     @objc fileprivate func updateUI(){
         if let context = managedObjectContext  {
-            //let request = NSFetchRequest(entityName: "Borrower")
             let request: NSFetchRequest<Borrower> = Borrower.fetchRequest()
             request.sortDescriptors = [NSSortDescriptor(key: "modified", ascending:  false)]
             self.borrowerFetchedResultsController = NSFetchedResultsController(

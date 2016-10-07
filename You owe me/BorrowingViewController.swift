@@ -77,11 +77,10 @@ class BorrowingViewController: CoreDataTableViewController {
     
     fileprivate func updateUI(){
         if let context = managedObjectContext , self.name!.characters.count > 0 {
-            //let request: NSFetchRequest<Borrower> = NSFetchRequest(entityName: "Borrowed")
-            let request: NSFetchRequest<Borrower> = Borrower.fetchRequest()
-            //request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
-            //request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
-            self.borrowerFetchedResultsController = NSFetchedResultsController(
+            let request: NSFetchRequest<Borrowed> = Borrowed.fetchRequest()
+            request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
+            self.borrowedFetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
                 managedObjectContext: context,
                 sectionNameKeyPath: nil,
