@@ -95,7 +95,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
                     currncy = borrower.currency
                     borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
                 }
-                let balanceMessage = SharedFunctions.balanceMessage(with: borrowerName!, borrowings: borrowings, andCurrency: currncy!)
+                let balanceMessage = SharedFunctions.balanceMessage(with: borrowerName!, borrowings: borrowings, and: currncy!)
                 borrowersFor3DTouch.append(["name": borrowerName!, "balanceMessage": balanceMessage])
             }
             return borrowersFor3DTouch

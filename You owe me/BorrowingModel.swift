@@ -11,8 +11,8 @@ import Foundation
 class BorrowingModel {
     
     // MARK: - Variabels
-    /// State of borrowings, if iBorrowed is true it means I borrowed money to Someone, if false Someone borrowed me money.
-    internal var iBorrowed = false
+    /// State of borrowings, if iBorrowedState is true it means I borrowed money to Someone, if it is false Someone borrowed me money.
+    internal var iBorrowedState = false
     
     // MARK: - Methods
     // Get String from date.
@@ -26,11 +26,11 @@ class BorrowingModel {
     
     // Switch borrowing state
     fileprivate func switchState() {
-        switch iBorrowed {
+        switch iBorrowedState {
         case true:
-            iBorrowed = false
+            iBorrowedState = false
         case false:
-            iBorrowed = true
+            iBorrowedState = true
         }
     }
     
@@ -38,16 +38,16 @@ class BorrowingModel {
     internal func switchedMessage(with borrowerName: String) -> String {
         // switch state before decide which message we should return.
         switchState()
-        return messageWithBorrowingState(iBorrowed, andName: borrowerName)
+        return message(with: iBorrowedState, and: borrowerName)
     }
     
     // Return message depending on borrowing state and name.
-    internal func messageWithBorrowingState(_ state: Bool, andName name: String) -> String {
-        switch state {
+    internal func message(with borrowingState: Bool, and borrowerName: String) -> String {
+        switch borrowingState {
         case true:
-            return "I borrowed \(name)"
+            return "I borrowed \(borrowerName)"
         case false:
-            return "\(name) borrowed me"
+            return "\(borrowerName) borrowed me"
         }
     }
 

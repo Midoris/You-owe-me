@@ -20,7 +20,7 @@ struct SharedFunctions {
     }
     
     // Get calculated balance and return it in message depending on is it negative or positive.
-    static func balanceMessage(with borrowerName: String, borrowings: [Borrowed], andCurrency currency: String) -> String {
+    static func balanceMessage(with borrowerName: String, borrowings: [Borrowed], and currency: String) -> String {
         let balance = SharedFunctions.countedBalance(for: borrowings)
         switch balance {
         case let x where x > 0 :

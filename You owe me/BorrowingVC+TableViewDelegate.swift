@@ -15,19 +15,19 @@ extension BorrowingViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BorrowingConstants.BorrowingHistoryCellID, for: indexPath)
         if let borrowed = borrowedFetchedResultsController?.object(at: indexPath) as Borrowed? {
-            var name: String?
+            var borrowerName: String?
             var date: Date?
             var amount: Double?
             var currency: String?
-            var iBorrowed: Bool?
+            var iBorrowedState: Bool?
             borrowed.managedObjectContext?.performAndWait {
-                name = borrowed.borrower!.name
+                borrowerName = borrowed.borrower!.name
                 date = borrowed.date
                 amount = Double(borrowed.amount!)
                 currency = borrowed.currency!
-                iBorrowed = Bool(borrowed.iBorrowed!)
+                iBorrowedState = Bool(borrowed.iBorrowed!)
             }
-            let message = borrowingModel.messageWithBorrowingState(iBorrowed!, andName: name!)
+            let message = borrowingModel.message(with: iBorrowedState!, and: borrowerName!)
             cell.textLabel?.text = "\(message) \(SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(amount!)) \(currency!)"
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
             cell.detailTextLabel?.text = borrowingModel.dateString(from: date!)

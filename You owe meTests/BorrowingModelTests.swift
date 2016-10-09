@@ -38,11 +38,13 @@ class BorrowingModelTests: XCTestCase {
     func testMessageWithBorrowingState() {
         // cCse 1: If state is false it means Someone borrowed me money.
         let expectedMessage = "Mark borrowed me"
-        let result = borrowingModel?.messageWithBorrowingState(false, andName: "Mark")
+        let iBorrowedState = false
+        let result = borrowingModel?.message(with: iBorrowedState, andName: "Mark")
         XCTAssertTrue(expectedMessage == result, "Created message is wrong")
         // Case 2: If state is true it means I borrowed money to Someone.
         let expectedMessage2 = "I borrowed John"
-        let result2 = borrowingModel?.messageWithBorrowingState(true, andName: "John")
+        let iBorrowedState2 = true
+        let result2 = borrowingModel?.message(with: iBorrowedState2, andName: "John")
         XCTAssertTrue(expectedMessage2 == result2, "Created message is wrong")
     }
 

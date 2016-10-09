@@ -12,10 +12,10 @@ import CoreData
 
 class Borrowed: NSManagedObject {
 
-    class func borrowedWithInfo(_ name: String, iBorrowed: Bool, currency: String, amount: Double, date: Date, inManagedObgectContext context: NSManagedObjectContext) -> Borrowed? {
+    class func borrowedWithInfo(_ name: String, iBorrowedState: Bool, currency: String, amount: Double, date: Date, inManagedObgectContext context: NSManagedObjectContext) -> Borrowed? {
         // create borrowed.
         if let borrowed = NSEntityDescription.insertNewObject(forEntityName: "Borrowed", into: context) as? Borrowed {
-            borrowed.iBorrowed = iBorrowed as NSNumber?
+            borrowed.iBorrowed = iBorrowedState as NSNumber?
             borrowed.currency = currency
             borrowed.amount = amount as NSNumber?
             borrowed.date = date

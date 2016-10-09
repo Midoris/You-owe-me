@@ -100,7 +100,7 @@ class BorrowingViewController: CoreDataTableViewController {
             if self.amountTextField.text != "" {
                 let amount = Double(self.amountTextField.text!)
                 let date = Date()
-                _ = Borrowed.borrowedWithInfo(self.borrowerName!, iBorrowed: self.borrowingModel.iBorrowed, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectContext!)
+                _ = Borrowed.borrowedWithInfo(self.borrowerName!, iBorrowedState: self.borrowingModel.iBorrowedState, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectContext!)
                 do {
                     try self.managedObjectContext?.save()
                     self.updateBalanceLabel()
@@ -141,7 +141,7 @@ class BorrowingViewController: CoreDataTableViewController {
     
     internal func updateBalanceLabel() {
         if let borrowings = borrowedFetchedResultsController?.fetchedObjects as [Borrowed]? {
-            self.balanceLabel.text = SharedFunctions.balanceMessage(with: self.borrowerName!, borrowings: borrowings, andCurrency: self.currency!)
+            self.balanceLabel.text = SharedFunctions.balanceMessage(with: self.borrowerName!, borrowings: borrowings, and: self.currency!)
         }
     }
     
