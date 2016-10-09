@@ -145,16 +145,16 @@ class BorrowingViewController: CoreDataTableViewController {
         }
     }
     
-    private func setImage(forSwitchButton button: UIButton) {
+    private func setTintedImage(for switchButton: UIButton) {
         let tintedImage = UIImage(named: "icon_switch")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        button.setImage(tintedImage, for: UIControlState())
-        button.tintColor = BorrowingConstants.DarkBlueColor
+        switchButton.setImage(tintedImage, for: UIControlState())
+        switchButton.tintColor = BorrowingConstants.DarkBlueColor
     }
 
     private func setBorderAndColors(for buttons: UIButton...) {
         for button in buttons {
             if button == switchButton {
-                self.setImage(forSwitchButton: button)
+                self.setTintedImage(for: button)
             }
             button.layer.borderWidth = 1
             button.layer.borderColor = BorrowingConstants.DarkBlueColor.cgColor
