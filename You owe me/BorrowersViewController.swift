@@ -87,16 +87,16 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         if let borrowers = borrowerFetchedResultsController?.fetchedObjects as [Borrower]? {
             var borrowersFor3DTouch = [[String: String]]()
             for borrower in borrowers {
-                var name: String?
+                var borrowerName: String?
                 var currncy: String?
                 var borrowings = [Borrowed]()
                 borrower.managedObjectContext?.performAndWait {
-                    name = borrower.name
+                    borrowerName = borrower.name
                     currncy = borrower.currency
                     borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
                 }
-                let balanceMessage = SharedFunctions.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
-                borrowersFor3DTouch.append(["name": name!, "balanceMessage": balanceMessage])
+                let balanceMessage = SharedFunctions.balanceMessage(with: borrowerName!, borrowings: borrowings, andCurrency: currncy!)
+                borrowersFor3DTouch.append(["name": borrowerName!, "balanceMessage": balanceMessage])
             }
             return borrowersFor3DTouch
         }
@@ -125,7 +125,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
             } catch let error {
                 print("Core Data Error: \(error)")
                 // Notify User.
-                SharedFunctions.showErrorAlert(self)
+                SharedFunctions.showErrorAlert(in: self)
             }
         }
     }

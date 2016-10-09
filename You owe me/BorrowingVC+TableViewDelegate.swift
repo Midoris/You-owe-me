@@ -48,7 +48,7 @@ extension BorrowingViewController {
                     } catch let error {
                         print("Core Data Error: \(error)")
                         // Notify User.
-                        SharedFunctions.showErrorAlert(self)
+                        SharedFunctions.showErrorAlert(in: self)
                     }
                 }
                 DispatchQueue.main.async(execute: {

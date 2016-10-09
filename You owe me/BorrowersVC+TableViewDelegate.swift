@@ -14,18 +14,18 @@ extension BorrowersViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BorrowingConstants.BorrowerCellID, for: indexPath)
         if let borrower = borrowerFetchedResultsController?.object(at: indexPath) as Borrower? {
-            var name: String?
+            var borrowerName: String?
             var currncy: String?
             var borrowings = [Borrowed]()
             borrower.managedObjectContext?.performAndWait {
-                name = borrower.name
+                borrowerName = borrower.name
                 currncy = borrower.currency
                 borrowings = (borrower.borrowings?.allObjects as? [Borrowed])!
             }
-            cell.textLabel?.text = "\(name!)"
+            cell.textLabel?.text = "\(borrowerName!)"
             cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(22))
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
-            let balanceMessage = SharedFunctions.balanceMessageWithBorrowerName(name!, borrowings: borrowings, andCurrency: currncy!)
+            let balanceMessage = SharedFunctions.balanceMessage(with: borrowerName!, borrowings: borrowings, andCurrency: currncy!)
             cell.detailTextLabel?.text = balanceMessage
             cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: CGFloat(13.5))
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
@@ -45,7 +45,7 @@ extension BorrowersViewController {
                     } catch let error {
                         print("Core Data Error: \(error)")
                         // Notify User.
-                        SharedFunctions.showErrorAlert(self)
+                        SharedFunctions.showErrorAlert(in: self)
                     }
                 }
             }
