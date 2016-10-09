@@ -67,6 +67,7 @@ class CoreDataTableViewController: UIViewController, UITableViewDelegate, UITabl
             return 0
         }
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
              let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
           return cell

@@ -30,7 +30,7 @@ class Borrowed: NSManagedObject {
 
 extension Borrowed {
     @nonobjc class func fetchRequest() -> NSFetchRequest<Borrowed> {
-        return NSFetchRequest<Borrowed>(entityName: "Borrowed");
+        return NSFetchRequest<Borrowed>(entityName: "Borrowed")
     }
 
     @NSManaged var timeStamp: NSDate?
