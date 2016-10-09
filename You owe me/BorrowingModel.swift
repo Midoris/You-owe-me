@@ -16,7 +16,7 @@ class BorrowingModel {
     
     // MARK: - Methods
     // Get String from date.
-    internal func dateStringFromDate(_ date: Date) -> String {
+    internal func dateString(from date: Date) -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .short
@@ -35,10 +35,10 @@ class BorrowingModel {
     }
     
     // Switch state and return message.
-    internal func switchedMessageWithName(_ name: String) -> String {
+    internal func switchedMessage(with borrowerName: String) -> String {
         // switch state before decide which message we should return.
         switchState()
-        return messageWithBorrowingState(iBorrowed, andName: name)
+        return messageWithBorrowingState(iBorrowed, andName: borrowerName)
     }
     
     // Return message depending on borrowing state and name.
@@ -52,8 +52,8 @@ class BorrowingModel {
     }
 
     // Calculate amount and return in String with all required transformations.
-    func calculatedAmount(_ ammount: Double, dependingOnTag tag: Int) -> String {
-        let resoult = tag == 0 ? ammount / 2 : ammount * 2 // if tag is 0 split it, else : double.
+    func calculatedAmount(_ amount: Double, dependingOnTag tag: Int) -> String {
+        let resoult = tag == 0 ? amount / 2 : amount * 2 // if tag is 0 split it, else : double.
         return SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(resoult)
     }
     

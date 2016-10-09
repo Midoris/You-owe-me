@@ -30,7 +30,7 @@ extension BorrowingViewController {
             let message = borrowingModel.messageWithBorrowingState(iBorrowed!, andName: name!)
             cell.textLabel?.text = "\(message) \(SharedFunctions.stringFromDoubleWithTailingZeroAndRounding(amount!)) \(currency!)"
             cell.textLabel?.textColor = BorrowingConstants.LargeTextColor
-            cell.detailTextLabel?.text = borrowingModel.dateStringFromDate(date!)
+            cell.detailTextLabel?.text = borrowingModel.dateString(from: date!)
             cell.detailTextLabel?.textColor = BorrowingConstants.SmallTextColor
         }
         cell.selectionStyle = .none
@@ -54,7 +54,7 @@ extension BorrowingViewController {
                 DispatchQueue.main.async(execute: {
                     self.updateBalanceLabel()
                 })
-                self.updateModifiedDateForBorrowerName(self.name!)
+                self.updateModifiedDate(for: self.borrowerName!)
             }
         }
         delete.backgroundColor = BorrowingConstants.DarkRedColor

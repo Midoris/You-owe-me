@@ -12,7 +12,7 @@ import CoreData
 class BorrowingViewController: CoreDataTableViewController {
     
     // MARK: - Variabels
-    internal var name: String?
+    internal var borrowerName: String?
     internal var currency: String?
     internal var comeFrom3DTouch = false
     internal var managedObjectContext: NSManagedObjectContext?
@@ -25,7 +25,7 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     @IBOutlet weak fileprivate var borrowMessageLabel: UILabel! {
         didSet {
-            borrowMessageLabel.text = borrowingModel.switchedMessageWithName(self.name!)
+            borrowMessageLabel.text = borrowingModel.switchedMessage(with: self.borrowerName!)
         }
     }
     @IBOutlet weak fileprivate var currencyLabel: UILabel! {
@@ -64,7 +64,7 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         // set buttons.
-        setBorderAndColorsForButtons(submitButton, splitButton, doubleButton, switchButton)
+        setBorderAndColors(forButtons: submitButton, splitButton, doubleButton, switchButton)
     }
     
     fileprivate func showKeyboard() {
@@ -76,9 +76,9 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     fileprivate func updateUI(){
-        if let context = managedObjectContext , self.name!.characters.count > 0 {
+        if let context = managedObjectContext , self.borrowerName!.characters.count > 0 {
             let request: NSFetchRequest<Borrowed> = Borrowed.fetchRequest()
-            request.predicate = NSPredicate(format: "borrower.name = %@", self.name!)
+            request.predicate = NSPredicate(format: "borrower.name = %@", self.borrowerName!)
             request.sortDescriptors = [NSSortDescriptor(key: "date", ascending:  false)]
             self.borrowedFetchedResultsController = NSFetchedResultsController(
                 fetchRequest: request,
@@ -94,13 +94,13 @@ class BorrowingViewController: CoreDataTableViewController {
         })
     }
     
-    fileprivate func updateDatabase() {
+    private func updateDatabase() {
         managedObjectContext?.perform {
             // create a new borrowed.
             if self.amountTextField.text != "" {
                 let amount = Double(self.amountTextField.text!)
                 let date = Date()
-                _ = Borrowed.borrowedWithInfo(self.name!, iBorrowed: self.borrowingModel.iBorrowed, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectContext!)
+                _ = Borrowed.borrowedWithInfo(self.borrowerName!, iBorrowed: self.borrowingModel.iBorrowed, currency: self.currency!, amount: amount!, date: date,  inManagedObgectContext: self.managedObjectContext!)
                 do {
                     try self.managedObjectContext?.save()
                     self.updateBalanceLabel()
@@ -116,7 +116,7 @@ class BorrowingViewController: CoreDataTableViewController {
         //printDatabaseStatistics()
     }
     
-    fileprivate func printDatabaseStatistics() {
+    private func printDatabaseStatistics() {
         managedObjectContext?.perform {
             let borrowersCount = try? self.managedObjectContext!.count(for: NSFetchRequest(entityName: "Borrower"))
             print("\(borrowersCount) borrowers")
@@ -125,10 +125,10 @@ class BorrowingViewController: CoreDataTableViewController {
         }
     }
     
-    func updateModifiedDateForBorrowerName(_ name: String) {
+    func updateModifiedDate(for borrowerName: String) {
         managedObjectContext?.perform {
             let date = Date()
-            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectContext!, date: date, currency: self.currency!)
+            _ = Borrower.borrowerWithInfo(borrowerName, inManagedObgectContext: self.managedObjectContext!, date: date, currency: self.currency!)
             do {
                 try self.managedObjectContext?.save()
             } catch let error {
@@ -141,20 +141,20 @@ class BorrowingViewController: CoreDataTableViewController {
     
     internal func updateBalanceLabel() {
         if let borrowings = borrowedFetchedResultsController?.fetchedObjects as [Borrowed]? {
-            self.balanceLabel.text = SharedFunctions.balanceMessageWithBorrowerName(self.name!, borrowings: borrowings, andCurrency: self.currency!)
+            self.balanceLabel.text = SharedFunctions.balanceMessageWithBorrowerName(self.borrowerName!, borrowings: borrowings, andCurrency: self.currency!)
         }
     }
     
-    fileprivate func setImageForSwitchButton(_ button: UIButton) {
+    private func setImage(forSwitchButton button: UIButton) {
         let tintedImage = UIImage(named: "icon_switch")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         button.setImage(tintedImage, for: UIControlState())
         button.tintColor = BorrowingConstants.DarkBlueColor
     }
 
-    fileprivate func setBorderAndColorsForButtons(_ buttons: UIButton...) {
+    private func setBorderAndColors(forButtons buttons: UIButton...) {
         for button in buttons {
             if button == switchButton {
-                self.setImageForSwitchButton(button)
+                self.setImage(forSwitchButton: button)
             }
             button.layer.borderWidth = 1
             button.layer.borderColor = BorrowingConstants.DarkBlueColor.cgColor
@@ -163,7 +163,7 @@ class BorrowingViewController: CoreDataTableViewController {
         }
     }
     
-    fileprivate func clean() {
+    private func clean() {
         DispatchQueue.main.async {
             self.dismissKeyboard()
             self.amountTextField.text = nil
@@ -171,19 +171,18 @@ class BorrowingViewController: CoreDataTableViewController {
     }
     
     // MARK: - Actions from storyBoard
-    // Submit button
-    @IBAction fileprivate func submittPressed(_ sender: UIButton) {
+    @IBAction private func submittPressed(_ sender: UIButton) {
         updateDatabase()
     }
     
-    @IBAction fileprivate func switchButtonPressed(_ sender: UIButton) {
-        borrowMessageLabel.text = borrowingModel.switchedMessageWithName(self.name!)
+    @IBAction private func switchButtonPressed(_ sender: UIButton) {
+        borrowMessageLabel.text = borrowingModel.switchedMessage(with: self.borrowerName!)
     }
     
-    @IBAction fileprivate func clearAllButtonPressed(_ sender: UIButton) {
+    @IBAction private func clearAllButtonPressed(_ sender: UIButton) {
         if let results = borrowedFetchedResultsController?.fetchedObjects {
             for result in results {
-                if let borrowed = result as? Borrowed {
+                if let borrowed = result as Borrowed? {
                     borrowed.managedObjectContext?.perform {
                         borrowed.managedObjectContext?.delete(borrowed)
                         do {
@@ -202,10 +201,10 @@ class BorrowingViewController: CoreDataTableViewController {
         }
     }
     
-    @IBAction fileprivate func splitBillButtonPressed(_ sender: UIButton) {
+    @IBAction private func calculateAmountButtonPressed(_ sender: UIButton) {
         if self.amountTextField.text != "" {
-            if let ammount = Double(amountTextField.text!) {
-                self.amountTextField.text = borrowingModel.calculatedAmount(ammount, dependingOnTag: sender.tag)
+            if let amount = Double(amountTextField.text!) {
+                self.amountTextField.text = borrowingModel.calculatedAmount(amount, dependingOnTag: sender.tag)
             }
         }
     }

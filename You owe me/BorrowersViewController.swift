@@ -140,7 +140,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         if segue.identifier == BorrowingConstants.FromBorrowerToBorrowingsSegueID {
             if let borrowingVC = segue.destination as? BorrowingViewController {
                 borrowingVC.managedObjectContext = self.managedObjectContext
-                borrowingVC.name = self.selectedBorrowerName!
+                borrowingVC.borrowerName = self.selectedBorrowerName!
                 borrowingVC.currency = self.borrowerCurrncy
                 // decide to show or not keyboard in Borrowing VC.
                 borrowingVC.comeFrom3DTouch = self.openedFrom3dTouch ?? false
