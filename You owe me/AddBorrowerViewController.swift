@@ -29,14 +29,14 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 protocol AddNewBorrowerDelegate: class {
-    func saveNewBorrower(with name: String, currency: String)
+    func saveNewBorrower(with borrowerName: String, currency: String)
 }
 
 class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: - Variabels
     internal weak var addBorrowerDelegate: AddNewBorrowerDelegate?
-    @IBOutlet weak fileprivate var borrowerNameTextField: UITextField! {
+    @IBOutlet weak private var borrowerNameTextField: UITextField! {
         didSet {
             self.borrowerNameTextField.delegate = self
             self.borrowerNameTextField.addTarget(self, action: #selector(AddBorrowerViewController.textFieldDidChange(_:)), for: .editingChanged)
@@ -50,9 +50,9 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var selectedCurrencyLabel: UILabel!
-    fileprivate let limitLength = 9
-    fileprivate var currencyNames = [String]()
-    fileprivate var selectedCurrency: String?
+    private let limitLength = 9
+    private var currencyNames = [String]()
+    private var selectedCurrency: String?
     
     // MARK: - ViewController Life cycle
     override func viewDidLoad() {

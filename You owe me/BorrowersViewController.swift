@@ -115,11 +115,11 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // MARK: - Add New Borrower Delegate
-    internal func saveNewBorrower(with name: String, currency: String) {
+    internal func saveNewBorrower(with borrowerName: String, currency: String) {
         managedObjectContext?.perform {
             // create a new borrower.
             let date = Date()
-            _ = Borrower.borrowerWithInfo(name, inManagedObgectContext: self.managedObjectContext!, date: date, currency: currency)
+            _ = Borrower.borrowerWithInfo(borrowerName, inManagedObgectContext: self.managedObjectContext!, date: date, currency: currency)
             do {
                 try self.managedObjectContext?.save()
             } catch let error {

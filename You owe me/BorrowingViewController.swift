@@ -18,27 +18,27 @@ class BorrowingViewController: CoreDataTableViewController {
     internal var managedObjectContext: NSManagedObjectContext?
     
     // Outlets
-    @IBOutlet weak fileprivate var borrowingHistoryTableView: UITableView! {
+    @IBOutlet weak private var borrowingHistoryTableView: UITableView! {
         didSet {
             self.tableView = borrowingHistoryTableView
         }
     }
-    @IBOutlet weak fileprivate var borrowMessageLabel: UILabel! {
+    @IBOutlet weak private var borrowMessageLabel: UILabel! {
         didSet {
             borrowMessageLabel.text = borrowingModel.switchedMessage(with: self.borrowerName!)
         }
     }
-    @IBOutlet weak fileprivate var currencyLabel: UILabel! {
+    @IBOutlet weak private var currencyLabel: UILabel! {
         didSet {
             currencyLabel.text = self.currency
         }
     }
-    @IBOutlet weak fileprivate var balanceLabel: UILabel!
-    @IBOutlet weak fileprivate var amountTextField: UITextField!
-    @IBOutlet weak fileprivate var submitButton: UIButton!
-    @IBOutlet weak fileprivate var switchButton: UIButton!
-    @IBOutlet weak fileprivate var splitButton: UIButton!
-    @IBOutlet weak fileprivate var doubleButton: UIButton!
+    @IBOutlet weak private var balanceLabel: UILabel!
+    @IBOutlet weak private var amountTextField: UITextField!
+    @IBOutlet weak private var submitButton: UIButton!
+    @IBOutlet weak private var switchButton: UIButton!
+    @IBOutlet weak private var splitButton: UIButton!
+    @IBOutlet weak private var doubleButton: UIButton!
     
     
     // Model
@@ -64,7 +64,7 @@ class BorrowingViewController: CoreDataTableViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BorrowingViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         // set buttons.
-        setBorderAndColors(forButtons: submitButton, splitButton, doubleButton, switchButton)
+        setBorderAndColors(for: submitButton, splitButton, doubleButton, switchButton)
     }
     
     fileprivate func showKeyboard() {
@@ -151,7 +151,7 @@ class BorrowingViewController: CoreDataTableViewController {
         button.tintColor = BorrowingConstants.DarkBlueColor
     }
 
-    private func setBorderAndColors(forButtons buttons: UIButton...) {
+    private func setBorderAndColors(for buttons: UIButton...) {
         for button in buttons {
             if button == switchButton {
                 self.setImage(forSwitchButton: button)
