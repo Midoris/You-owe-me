@@ -12,7 +12,6 @@ import CoreData
 
 class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelegate {
 
-    
     // MARK: - Variabels
     var managedObjectContext: NSManagedObjectContext? =
         (UIApplication.shared.delegate as? AppDelegate)?.managedObjectContext
@@ -45,14 +44,14 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // MARK: - Methods
-    fileprivate func setNeedsDisplay() {
+    private func setNeedsDisplay() {
         self.view.backgroundColor = BorrowingConstants.BackgroundColor
         self.borrowersTableView.backgroundColor = BorrowingConstants.BackgroundColor
         self.borrowersTableView.separatorStyle = .none
         updateUI()
     }
     
-    fileprivate func addShortcutItemsFromBorrowers(_ borrowers: [[String: String]]) {
+    private func addShortcutItems(from borrowers: [[String: String]]) {
         var quickItems = [UIApplicationShortcutItem]()
         for (index, borrower) in borrowers.enumerated() {
             if index < BorrowingConstants.QuickItemLimit {
@@ -69,7 +68,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         }
     }
     
-    @objc fileprivate func updateUI(){
+    @objc private func updateUI(){
         if let context = managedObjectContext  {
             let request: NSFetchRequest<Borrower> = Borrower.fetchRequest()
             request.sortDescriptors = [NSSortDescriptor(key: "modified", ascending:  false)]
@@ -84,7 +83,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         }
     }
     
-    fileprivate func borrowersFromCoreData() -> [[String: String]]? {
+    private func borrowersFromCoreData() -> [[String: String]]? {
         if let borrowers = borrowerFetchedResultsController?.fetchedObjects as [Borrower]? {
             var borrowersFor3DTouch = [[String: String]]()
             for borrower in borrowers {
@@ -104,11 +103,11 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
         return nil
     }
     
-    @objc fileprivate func saveBorrowersFor3DTouch() {
+    @objc private func saveBorrowersFor3DTouch() {
         let borrowers = borrowersFromCoreData()
         if borrowers != nil {
             // add borrowers to quick items and save.
-            addShortcutItemsFromBorrowers(borrowers!)
+            addShortcutItems(from: borrowers!)
         } else {
             // remove all quick items.
             UIApplication.shared.shortcutItems = []
@@ -116,7 +115,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // MARK: - Add New Borrower Delegate
-    internal func saveNewBorrowerWithName(_ name: String, currency: String) {
+    internal func saveNewBorrower(with name: String, currency: String) {
         managedObjectContext?.perform {
             // create a new borrower.
             let date = Date()
@@ -132,7 +131,7 @@ class BorrowersViewController: CoreDataTableViewController, AddNewBorrowerDelega
     }
     
     // MARK: - StoryBoard methods
-    @IBAction fileprivate func addButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction private func addButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: BorrowingConstants.AddBorrowerSegueId, sender: self)
     }
     

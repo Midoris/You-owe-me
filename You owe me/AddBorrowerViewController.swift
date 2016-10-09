@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -27,9 +28,8 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 protocol AddNewBorrowerDelegate: class {
-    func saveNewBorrowerWithName(_ name: String, currency: String)
+    func saveNewBorrower(with name: String, currency: String)
 }
 
 class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -99,20 +99,20 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     
     // MARK: - Methods
-    fileprivate func showKeyboard() {
+    private func showKeyboard() {
         self.borrowerNameTextField.becomeFirstResponder()
     }
     
-    fileprivate func dismissKeyboard() {
+    private func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    fileprivate func canSaveWhen(_ textFieldIsNotEmpty: Bool, andCurrencySelected selected: Bool) -> Bool {
+    private func canSaveWhen(_ textFieldIsNotEmpty: Bool, andCurrencySelected selected: Bool) -> Bool {
         guard textFieldIsNotEmpty && selected else { return false }
         return true
     }
     
-    fileprivate func parsedCurrencyNames() -> [String] {
+    private func parsedCurrencyNames() -> [String] {
         var currencyNames = [String]()
         for (currencyName,_) in BorrowingConstants.Currencies {
             currencyNames.append(currencyName)
@@ -120,22 +120,22 @@ class AddBorrowerViewController: UIViewController, UITextFieldDelegate, UIPicker
         return currencyNames.sorted()
     }
     
-    fileprivate func dismissVC() {
+    private func dismissVC() {
         dismissKeyboard()
         self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - StoryBoard Methods
-    @IBAction fileprivate func cancelButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction private func cancelButtonPressed(_ sender: UIBarButtonItem) {
         dismissVC()
     }
     
-    @IBAction fileprivate func saveButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction private func saveButtonPressed(_ sender: UIBarButtonItem) {
         // Trim spaces from the name.
         let name = borrowerNameTextField.text!.trimmingCharacters(
             in: CharacterSet.whitespacesAndNewlines
         )
-        addBorrowerDelegate?.saveNewBorrowerWithName(name, currency: selectedCurrency!)
+        addBorrowerDelegate?.saveNewBorrower(with: name, currency: selectedCurrency!)
         dismissVC()
     }
     
